@@ -1,0 +1,268 @@
+{
+  "main": {
+    "id": "a0f1392fb5be2812",
+    "type": "split",
+    "children": [
+      {
+        "id": "9d4322726d8dc37c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4ea942265a27f1a1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00-SHARED/MCP-Usage-Guide.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "MCP-Usage-Guide"
+            }
+          },
+          {
+            "id": "db61d4ac9d957547",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "98-USER-ONLY/Quick-Reference.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Quick-Reference"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a7db7483ce45215c",
+    "type": "split",
+    "children": [
+      {
+        "id": "0ce88bd8dc416ad7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "883a31b0b0cae5ef",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          },
+          {
+            "id": "2bea82a172fc2201",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "북마크"
+            }
+          },
+          {
+            "id": "95e144f03190390b",
+            "type": "leaf",
+            "state": {
+              "type": "gemini-view",
+              "state": {},
+              "icon": "sparkles",
+              "title": "Gemini Scribe"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 394.5
+  },
+  "right": {
+    "id": "78a336d91a059223",
+    "type": "split",
+    "children": [
+      {
+        "id": "5104b321cb496201",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1dc9ecadf51c85a4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "b40a6c819ae58416",
+            "type": "leaf",
+            "state": {
+              "type": "smart-chat-view",
+              "state": {},
+              "icon": "message-square",
+              "title": "Smart Chat"
+            }
+          }
+        ]
+      },
+      {
+        "id": "acff947883c3ae90",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f6a3f2e2d07aca7a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "98-USER-ONLY/Quick-Reference.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Quick-Reference 의 백링크"
+            }
+          },
+          {
+            "id": "fda2207d4af33b2e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "98-USER-ONLY/Quick-Reference.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Quick-Reference 의 나가는 링크"
+            }
+          },
+          {
+            "id": "19890ac23103584b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          },
+          {
+            "id": "c802aa3bcbc7341e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "98-USER-ONLY/Quick-Reference.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Quick-Reference 의 개요"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 313.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:빠른 전환기 열기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "gemini-scribe:Open Gemini Chat": false,
+      "remotely-save:Remotely Save": false,
+      "smart-connections:Open: View Smart Connections": false,
+      "smart-connections:Open: Smart Chat Conversation": false
+    }
+  },
+  "active": "db61d4ac9d957547",
+  "lastOpenFiles": [
+    "00-SHARED/MCP-Usage-Guide.md",
+    "00-SHARED/Project-Overview.md",
+    "gemini-scribe/00-SHARED_MCP-Usage-Guide.md",
+    "무제.canvas",
+    "gemini-scribe/root_무제.canvas.md",
+    "gemini-scribe",
+    "00-SHARED/Coding-Standards.md",
+    "GameDev-Project-Structure.md",
+    "98-USER-ONLY/LEAD-Agent-Prompts.md",
+    "98-USER-ONLY/SERVER-Agent-Prompts.md",
+    "98-USER-ONLY/Quick-Reference.md",
+    "98-USER-ONLY/DESIGN-Agent-Prompts.md",
+    "98-USER-ONLY/CLIENT-Agent-Prompts.md",
+    "98-USER-ONLY",
+    "04-LEAD-AGENT/_INDEX.md",
+    "04-LEAD-AGENT",
+    "03-CLIENT-AGENT/_INDEX.md",
+    "03-CLIENT-AGENT",
+    "02-SERVER-AGENT/_INDEX.md",
+    "02-SERVER-AGENT",
+    "01-DESIGN-AGENT/Game-Design-Documents/Main-GDD.md",
+    "01-DESIGN-AGENT/_INDEX.md",
+    "01-DESIGN-AGENT/Game-Design-Documents",
+    "01-DESIGN-AGENT",
+    "00-SHARED/Token-Optimization-Guide.md",
+    "00-SHARED",
+    "gemini-scribe/Projects_RaidMaster_01-DESIGN-AGENT_Game-Design-Documents_Main-GDD.md",
+    "Projects/RaidMaster/00-SHARED/Project-Overview.md",
+    "Projects/RaidMaster/01-DESIGN-AGENT/Game-Design-Documents/Main-GDD.md",
+    "Projects/RaidMaster/01-DESIGN-AGENT/Game-Design-Documents",
+    "Projects/RaidMaster/00-SHARED/MCP-Usage-Guide.md",
+    "Projects/RaidMaster/98-USER-ONLY/LEAD-Agent-Prompts.md",
+    "Projects/RaidMaster/98-USER-ONLY/SERVER-Agent-Prompts.md",
+    "Projects/RaidMaster/98-USER-ONLY/Quick-Reference.md",
+    "Projects/RaidMaster/04-LEAD-AGENT/_INDEX.md",
+    "Projects/RaidMaster/01-DESIGN-AGENT/_INDEX.md",
+    "Projects/RaidMaster/98-USER-ONLY",
+    "Pasted image 20241202102020.png",
+    "Pasted image 20241219134714.png",
+    "Pasted image 20241219134649.png",
+    "Pasted image 20241219134519.png",
+    "public/static/og-image.png",
+    "public/static/icon.png",
+    "public/images/quartz-layout-tablet.png",
+    "public/images/social-image-preview-light.png",
+    "public/images/social-image-preview-dark.png",
+    "public/images/quartz-transform-pipeline.png",
+    "무제 파일.canvas"
+  ]
+}
