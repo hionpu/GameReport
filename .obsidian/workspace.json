@@ -11,14 +11,10 @@
             "id": "4ea942265a27f1a1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01-기획/Day2-라우터구조설계.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Day2-라우터구조설계"
+              "title": "새 탭"
             }
           }
         ]
@@ -214,24 +210,24 @@
   },
   "active": "1dc9ecadf51c85a4",
   "lastOpenFiles": [
+    "README.md",
+    "_mcp/02-General Compression Rules (GenCompRules).md",
+    "_mcp",
+    "01-기획/Day2-라우터구조설계.md",
+    "01-기획/Day2-라우터구조설계.aicomp",
+    "01-기획/003-Phase 2 - DataSync MVP 개발 상세 계획.md.aicomp",
+    "01-기획/003-Phase 2 - DataSync MVP 개발 상세 계획.md",
+    "01-기획/002-Phase 1 - 프로토타입 상세 계획.md",
+    "01-기획/002-Phase 1 - 프로토타입 상세 계획.aicomp",
+    "01-기획/001-🎮 발로란트 AI 분석 플랫폼 개발 로드맵.md",
+    "01-기획/001-🎮 발로란트 AI 분석 플랫폼 개발 로드맵.aicomp",
+    "01-기획",
     "새 폴더",
     "새 텍스트 문서.txt",
     "stat-ai/cmd/server/main.go",
     "stat-ai/internal/handlers/health.go",
-    "stat-ai/internal/handlers/response.go",
-    "stat-ai/pkg/utils",
-    "stat-ai/cmd/server",
-    "stat-ai/internal/models",
-    "stat-ai/internal/services",
-    "stat-ai/internal/handlers",
-    "stat-ai/pkg",
-    "01-기획/002-Phase 1 - 프로토타입 상세 계획.md",
-    "01-기획/Day2-라우터구조설계.md",
     "2025-06-16.md",
-    "01-기획/003-Phase 2 - DataSync MVP 개발 상세 계획.md",
     "obsidian-mcp-test-results.md",
-    "01-기획/001-🎮 발로란트 AI 분석 플랫폼 개발 로드맵.md",
-    "_mcp/02-General Compression Rules (GenCompRules).md",
     "01-기획/003-Phase 2 - MVP 개발 상세 계획.md",
     "02-General Compression Rules (GenCompRules).md",
     "무제.md",
@@ -249,7 +245,6 @@
     "001-Human/01-DESIGN-AGENT/02-Feature-Specifications/01-Party-Recruitment-System.md",
     "001-Human/00-SHARED/04-Coding-Standards.md",
     "001-Human/00-SHARED/02-General Compression Rules (GenCompRules).md",
-    "001-Human/01-DESIGN-AGENT/01-Game-Design-Documents/01-Main-GDD.md",
     "무제.canvas",
     "Pasted image 20241202102020.png",
     "Pasted image 20241219134714.png",
