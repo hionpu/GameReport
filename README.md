@@ -1,2 +1,1 @@
-# RaidMaster
-RaidMaster
+# InsightGG
