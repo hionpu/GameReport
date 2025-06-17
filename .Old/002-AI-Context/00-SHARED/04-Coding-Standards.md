@@ -1,0 +1,15 @@
+---
+tags:
+  - agent/all
+  - system/config
+  - phase/planning
+  - doc/guide
+  - tech/cpp
+  - tech/unity
+  - priority/high
+  - status/complete
+references:
+  - "[[01-Project-Overview]]"
+---
+
+GenPrin:1.Naming:File:PascalCase(PlayerController.cs,DatabaseManager.cpp),Class:PascalCase(GameManager,NetworkClient),Method:PascalCase(C#)&camelCase(C++),Var:camelCase(playerHealth,maxConnections),Const:UPPER_SNAKE_CASE(MAX_PLAYERS,DEFAULT_TIMEOUT) 2.Doc&Comm:All_pub_method=summary_comm,Complex_logic=inline_comm,Use_TODO/FIXME/HACK_tags_active,Upd_changelog_API_chg 3.Err_Handle:All_except=logged,Meaningful_err_msg_users,Impl_retry_logic_transient_err(net,etc)|C#Unity:NS_Struct(RaidMaster(UI:UI_classes,Network:Net_comm,Data:Data_models,Utils:Util_classes));Class_Struct_Order(1.Const:MAX_ITEMS=100,2.SerializeField:[SerializeField]_Button_actionButton,3.Pub_field/prop:Health{get;private_set;},4.Priv_fields:NetworkClient_networkClient,5.Unity_lifecycle:Awake()/Start()/Update(),6.Pub_methods:TakeDamage(damage),7.Priv_methods:Die());Async_Pattern:async_Task<ApiResponse>_CallServerAsync(){try{response=await_networkClient.SendRequestAsync(request);return_response;}catch(ex){Debug.LogError($"API_call_failed:{ex.Message}");throw;}}|C++Server:NS_Struct(raid_master(network:Net_related,database:DB_related,logic:Game_logic,utils:Util_funcs));Header_Struct(#pragma_once,#include<vector><memory>"base_class.h",namespace_raid_master{class_ExampleClass:public_BaseClass{public:Ctor/Dtor,Pub_methods:Initialize()/ProcessRequest(Request&),private:Priv_methods:HandleError(string&),Member_vars:vector<int>_data_,unique_ptr<NetworkManager>_network_manager_;};});Mem_Mgmt:Pref_smart_ptr(unique_ptr<Player>=make_unique<Player>(),shared_ptr<GameSession>=make_shared<GameSession>()),Use_RAII_pattern(class_DatabaseConnection{public:Ctor(){Connect();},Dtor(){Disconnect();},private:Connect()/Disconnect();};)|Git_Commit:Fmt(<type>(<scope>):<subject><body><footer>);Type_Cat(feat:New_feature,fix:Bug_fix,docs:Doc_chg,style:Code_fmt,refactor:Code_refact,test:Add/mod_tests,chore:Build_tasks/pkg_mgr_config);Ex(feat(inventory):add_item_drag_drop_func-Enable_drag_drop_inv_slots-Integrate_server_API_realtime_sync-Include_item_qty_limit_valid Closes#123)|Proj_Struct:Unity(Assets/(Scripts/(UI/,Network/,Data/,Utils/),Prefabs/,Scenes/,Materials/,Resources/));C++Server(server/(src/(network/,database/,logic/,utils/),include/,tests/,config/,CMakeLists.txt))|Perf_Guide:Unity(Use_Obj_Pool_pattern,Min_unnec_Update()_calls,Upd_UI_only_chg_occur,Min_GC),C++Server(Min_mem_alloc,Use_async_I/O_active,Impl_DB_conn_pool,Apply_cache_strat)|Sec_Guide:Always_valid_client_input_server,Prev_SQL_inject(use_Prep_Stmt),Store_pwd_hash,Apply_rate_limit_API_req|DocRef:Related(00-SHARED/01-Project-Overview.md:Tech_stack&dev_prin);Depend(Req:01-Project-Overview.md_tech_stack_def,Blocks:All_code_impl_SERVER&CLIENT_agents);Cross_Agent(DESIGN:Consider_code_constraints_create_spec,SERVER:Impl_all_C++_code_follow_std,CLIENT:Impl_all_Unity/C#_code_follow_std,LEAD:Use_std_code_qual_review&integ)

@@ -1,0 +1,518 @@
+# 003-Phase 2 - DataSync MVP 개발 상세 계획
+
+## 📋 Phase 2 개요
+
+**기간**: 6주 (Week 3-8)
+**목표**: 완전한 기능을 가진 MVP 웹 애플리케이션 완성
+**핵심 결과물**: 데이터베이스 기반의 안정적인 발로란트 AI 분석 플랫폼
+
+## 🎯 주요 목표
+
+### 기술적 목표
+- PostgreSQL 기반 데이터 영속성 구현
+- 고성능 매치 히스토리 수집 시스템 구축
+- AI 분석 고도화 및 캐싱 시스템 구현
+- 사용자 친화적인 React 기반 프론트엔드 완성
+
+### 비즈니스 목표
+- 실제 사용 가능한 웹 애플리케이션 제공
+- 다양한 분석 타입으로 사용자 가치 극대화
+- 확장 가능한 아키텍처 기반 구축
+
+## 📅 주차별 상세 계획
+
+### Week 3-4: 백엔드 인프라 구축
+
+#### Week 3: 데이터베이스 설계 및 구현
+
+**목표**: 안정적인 데이터 저장 및 관리 시스템 구축
+
+##### Day 15-16: 데이터베이스 스키마 설계
+```sql
+-- 주요 테이블 구조
+players (플레이어 기본 정보)
+matches (매치 데이터)
+player_stats (플레이어 통계)
+agents (에이전트 정보)
+maps (맵 정보)
+patches (패치 정보)
+ai_insights (AI 분석 결과)
+```
+
+**세부 작업**:
+- ERD 작성 및 정규화
+- 인덱스 설계 (성능 최적화)
+- 제약 조건 및 트리거 설정
+- 마이그레이션 스크립트 작성
+
+##### Day 17-18: Go 데이터베이스 레이어 구현
+```go
+// 주요 구조체
+type Player struct {
+    ID        int       `json:"id" db:"id"`
+    Puuid     string    `json:"puuid" db:"puuid"`
+    GameName  string    `json:"game_name" db:"game_name"`
+    TagLine   string    `json:"tag_line" db:"tag_line"`
+    CreatedAt time.Time `json:"created_at" db:"created_at"`
+}
+
+type Match struct {
+    ID         string    `json:"id" db:"id"`
+    MapID      string    `json:"map_id" db:"map_id"`
+    GameMode   string    `json:"game_mode" db:"game_mode"`
+    StartTime  time.Time `json:"start_time" db:"start_time"`
+    Duration   int       `json:"duration" db:"duration"`
+}
+```
+
+**세부 작업**:
+- 데이터베이스 커넥션 풀 설정
+- Repository 패턴 구현
+- CRUD 오퍼레이션 구현
+- 트랜잭션 관리 구현
+
+##### Day 19-21: 매치 히스토리 수집 시스템
+```go
+type MatchCollector struct {
+    riotClient *riot.Client
+    db         *sql.DB
+    rateLimit  *RateLimiter
+}
+
+func (mc *MatchCollector) CollectPlayerMatches(puuid string) error {
+    // 고루틴 기반 병렬 수집
+    // Rate limiting 적용
+    // 중복 데이터 방지
+}
+```
+
+**세부 작업**:
+- 비동기 매치 수집 시스템 구현
+- Rate limiting 미들웨어 구현
+- 데이터 중복 제거 로직
+- 에러 처리 및 재시도 메커니즘
+
+#### Week 4: 통계 계산 및 API 확장
+
+##### Day 22-23: 통계 계산 엔진 구현
+```go
+type StatsCalculator struct {
+    db *sql.DB
+}
+
+func (sc *StatsCalculator) CalculatePlayerStats(puuid string, period int) (*PlayerStats, error) {
+    // K/D/A 평균 계산
+    // 승률 계산
+    // 에이전트별 성능 분석
+    // 맵별 성능 분석
+}
+```
+
+**주요 통계 메트릭**:
+- 전체 승률 및 최근 n게임 승률
+- K/D/A 평균 및 변화 추이
+- 에이전트별 승률 및 선호도
+- 맵별 성능 분석
+- 라운드별 퍼포먼스 (경제, 클러치 등)
+
+##### Day 24-25: REST API 확장
+```go
+// 새로운 엔드포인트
+GET /api/v1/players/{puuid}/stats
+GET /api/v1/players/{puuid}/matches
+GET /api/v1/players/{puuid}/agents
+GET /api/v1/players/{puuid}/maps
+POST /api/v1/players/{puuid}/analyze
+```
+
+**세부 작업**:
+- RESTful API 설계 원칙 적용
+- 페이지네이션 구현
+- 필터링 및 정렬 기능
+- API 문서화 (Swagger/OpenAPI)
+
+##### Day 26-28: 백엔드 통합 테스트
+**테스트 케이스**:
+- 플레이어 데이터 수집 및 저장
+- 통계 계산 정확성 검증
+- API 엔드포인트 기능 테스트
+- 동시성 및 성능 테스트
+
+### Week 5-6: AI 분석 시스템 고도화
+
+#### Week 5: AI 분석 타입 다양화
+
+##### Day 29-30: 분석 타입별 프롬프트 엔지니어링
+```go
+type AnalysisType string
+
+const (
+    PerformanceAnalysis AnalysisType = "performance"
+    ImprovementTips     AnalysisType = "improvement"
+    AgentRecommendation AnalysisType = "agent_recommendation"
+    PlaystyleAnalysis   AnalysisType = "playstyle"
+    MetaAnalysis        AnalysisType = "meta"
+)
+```
+
+**분석 타입별 특화 프롬프트**:
+1. **성능 분석**: 최근 경기 트렌드 및 강점/약점 분석
+2. **개선 제안**: 구체적이고 실행 가능한 개선 방안
+3. **에이전트 추천**: 플레이스타일에 맞는 에이전트 추천
+4. **플레이스타일 분석**: 게임 내 역할 및 접근 방식 분석
+5. **메타 적응**: 현재 메타에 대한 적응 전략
+
+##### Day 31-32: AI 응답 최적화
+```go
+type AIInsight struct {
+    ID          int             `json:"id" db:"id"`
+    PlayerPuuid string          `json:"player_puuid" db:"player_puuid"`
+    Type        AnalysisType    `json:"type" db:"type"`
+    Content     string          `json:"content" db:"content"`
+    Confidence  float64         `json:"confidence" db:"confidence"`
+    CreatedAt   time.Time       `json:"created_at" db:"created_at"`
+    ExpiresAt   time.Time       `json:"expires_at" db:"expires_at"`
+}
+```
+
+**최적화 요소**:
+- 프롬프트 토큰 효율성 개선
+- 응답 품질 점수 시스템 구현
+- A/B 테스트를 위한 프롬프트 버전 관리
+- 응답 시간 최적화
+
+##### Day 33-35: 캐싱 시스템 구현
+```go
+type InsightCache struct {
+    redis  *redis.Client
+    db     *sql.DB
+    ttl    time.Duration
+}
+
+func (ic *InsightCache) GetOrGenerate(key string, generator func() (*AIInsight, error)) (*AIInsight, error) {
+    // Redis에서 캐시 조회
+    // 없으면 생성 후 저장
+    // TTL 관리
+}
+```
+
+**캐싱 전략**:
+- 동일 플레이어의 동일 분석 타입은 24시간 캐싱
+- 자주 요청되는 인사이트 pre-warming
+- 메모리 사용량 최적화
+- 캐시 히트율 모니터링
+
+#### Week 6: AI 시스템 고급 기능
+
+##### Day 36-37: 컨텍스트 기반 분석 구현
+```go
+type AnalysisContext struct {
+    RecentMatches    []Match     `json:"recent_matches"`
+    SeasonStats      PlayerStats `json:"season_stats"`
+    CurrentRank      string      `json:"current_rank"`
+    PreferredAgents  []string    `json:"preferred_agents"`
+    PlaytimePattern  string      `json:"playtime_pattern"`
+}
+```
+
+**컨텍스트 요소**:
+- 최근 성과 변화 추이
+- 랭크 변동 패턴
+- 선호 에이전트 및 역할
+- 플레이 시간대 패턴
+- 팀 플레이 vs 솔로 큐 성과
+
+##### Day 38-39: 인사이트 품질 관리 시스템
+```go
+type QualityMetrics struct {
+    Relevance   float64 `json:"relevance"`
+    Accuracy    float64 `json:"accuracy"`
+    Actionability float64 `json:"actionability"`
+    Freshness   float64 `json:"freshness"`
+}
+
+func (ai *AIService) ValidateInsight(insight *AIInsight) (*QualityMetrics, error) {
+    // 인사이트 품질 자동 평가
+    // 사용자 피드백 반영
+    // 개선 제안 생성
+}
+```
+
+##### Day 40-42: AI 시스템 통합 테스트
+**테스트 시나리오**:
+- 다양한 플레이어 프로필에 대한 분석 품질 검증
+- 캐싱 시스템 성능 및 정확성 테스트
+- 동시 다중 분석 요청 처리 테스트
+- AI API 장애 상황 대응 테스트
+
+### Week 7-8: 프론트엔드 개발
+
+#### Week 7: React 애플리케이션 구조 구축
+
+##### Day 43-44: Next.js 프로젝트 설정
+```typescript
+// 프로젝트 구조
+src/
+├── components/
+│   ├── common/
+│   ├── player/
+│   ├── stats/
+│   └── insights/
+├── pages/
+│   ├── api/
+│   ├── player/
+│   └── dashboard/
+├── hooks/
+├── services/
+└── types/
+```
+
+**주요 설정**:
+- TypeScript 설정 및 타입 정의
+- ESLint/Prettier 설정
+- 상태 관리 (Zustand/React Query)
+- 스타일링 (Tailwind CSS)
+
+##### Day 45-46: 공통 컴포넌트 개발
+```typescript
+// 핵심 컴포넌트
+<PlayerSearch />
+<StatCard />
+<ChartContainer />
+<InsightCard />
+<LoadingSpinner />
+<ErrorBoundary />
+```
+
+**재사용 가능한 컴포넌트**:
+- 플레이어 검색 인터페이스
+- 통계 표시 카드 컴포넌트
+- 차트 및 그래프 컨테이너
+- AI 인사이트 표시 카드
+- 로딩 및 에러 상태 처리
+
+##### Day 47-49: 플레이어 대시보드 구현
+```typescript
+interface PlayerDashboard {
+    player: Player;
+    stats: PlayerStats;
+    recentMatches: Match[];
+    insights: AIInsight[];
+}
+
+const PlayerDashboard: React.FC<PlayerDashboardProps> = ({ playerId }) => {
+    // 플레이어 정보 로딩
+    // 통계 데이터 표시
+    // 인사이트 카드 렌더링
+    // 매치 히스토리 표시
+};
+```
+
+#### Week 8: UI/UX 완성 및 최적화
+
+##### Day 50-51: 데이터 시각화 구현
+```typescript
+// 차트 타입별 컴포넌트
+<WinRateChart data={winRateData} />
+<KDAChart data={kdaData} />
+<AgentPerformanceChart data={agentStats} />
+<MapPerformanceChart data={mapStats} />
+<RankProgressChart data={rankHistory} />
+```
+
+**시각화 요소**:
+- 승률 변화 추이 (라인 차트)
+- K/D/A 평균 및 분포 (바 차트)
+- 에이전트별 성능 (레이더 차트)
+- 맵별 승률 (히트맵)
+- 랭크 진행 상황 (타임라인)
+
+##### Day 52-53: 반응형 디자인 구현
+**반응형 브레이크포인트**:
+- Mobile: < 768px
+- Tablet: 768px - 1024px
+- Desktop: > 1024px
+
+**적응형 레이아웃**:
+- 모바일: 세로 스택 레이아웃
+- 태블릿: 2열 그리드 레이아웃
+- 데스크톱: 3열 대시보드 레이아웃
+
+##### Day 54-56: 성능 최적화 및 UX 개선
+```typescript
+// 성능 최적화 기법
+const MemoizedStatCard = React.memo(StatCard);
+const LazyInsightCard = React.lazy(() => import('./InsightCard'));
+
+// 로딩 상태 관리
+const usePlayerData = (playerId: string) => {
+    return useQuery({
+        queryKey: ['player', playerId],
+        queryFn: () => fetchPlayerData(playerId),
+        staleTime: 5 * 60 * 1000, // 5분
+    });
+};
+```
+
+**UX 개선 사항**:
+- 스켈레톤 로딩 구현
+- 무한 스크롤 (매치 히스토리)
+- 즉시 검색 (Debounced search)
+- 오프라인 상태 감지 및 처리
+- 접근성 개선 (ARIA 라벨, 키보드 네비게이션)
+
+## 🎯 Phase 2 완료 기준
+
+### 기능적 요구사항 ✅
+- [ ] 플레이어 검색 및 기본 정보 표시
+- [ ] 상세 통계 계산 및 표시
+- [ ] 5가지 타입의 AI 인사이트 생성
+- [ ] 매치 히스토리 표시 및 필터링
+- [ ] 반응형 웹 디자인
+- [ ] 데이터 캐싱 및 성능 최적화
+
+### 기술적 요구사항 ✅
+- [ ] PostgreSQL 데이터베이스 통합
+- [ ] Redis 캐싱 시스템
+- [ ] RESTful API 완성
+- [ ] React/Next.js 프론트엔드
+- [ ] TypeScript 타입 안정성
+- [ ] 에러 처리 및 로깅
+
+### 성능 요구사항 ✅
+- [ ] API 응답 시간 < 500ms (캐시 히트)
+- [ ] 페이지 로딩 시간 < 3초
+- [ ] 동시 사용자 100명 처리 가능
+- [ ] 캐시 히트율 > 80%
+
+## 🧪 테스트 전략
+
+### 단위 테스트
+```go
+// 백엔드 테스트 예시
+func TestStatsCalculator_CalculateWinRate(t *testing.T) {
+    calculator := &StatsCalculator{db: testDB}
+    winRate, err := calculator.CalculateWinRate("test-puuid", 20)
+
+    assert.NoError(t, err)
+    assert.GreaterOrEqual(t, winRate, 0.0)
+    assert.LessOrEqual(t, winRate, 1.0)
+}
+```
+
+```typescript
+// 프론트엔드 테스트 예시
+describe('PlayerSearch', () => {
+  it('should handle valid player search', async () => {
+    render(<PlayerSearch />);
+    fireEvent.change(screen.getByPlaceholderText('Enter player name'), {
+      target: { value: 'TenZ#NA1' }
+    });
+    fireEvent.click(screen.getByText('Search'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Player found')).toBeInTheDocument();
+    });
+  });
+});
+```
+
+### 통합 테스트
+- API 엔드포인트 전체 플로우 테스트
+- 데이터베이스 CRUD 연산 테스트
+- AI 분석 파이프라인 테스트
+- 프론트엔드-백엔드 통합 테스트
+
+### 성능 테스트
+- Apache Bench를 이용한 부하 테스트
+- 메모리 사용량 프로파일링
+- 데이터베이스 쿼리 성능 측정
+- 캐시 효율성 분석
+
+## 📊 성공 지표
+
+### 개발 진행률
+- 각 주차별 목표 달성률 90% 이상
+- 코드 테스트 커버리지 80% 이상
+- 버그 발견 후 24시간 내 수정
+
+### 성능 지표
+- API 응답 시간 평균 300ms 이하
+- 프론트엔드 First Contentful Paint < 2초
+- 데이터베이스 쿼리 최적화 완료
+
+### 품질 지표
+- AI 인사이트 관련성 점수 4.0/5.0 이상
+- 사용자 인터페이스 직관성 테스트 통과
+- 크로스 브라우저 호환성 확인
+
+## 🔧 개발 도구 및 환경
+
+### 백엔드 개발 환경
+```yaml
+# docker-compose.dev.yml
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: valorant_ai
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgres://dev:password@postgres:5432/valorant_ai
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+```
+
+### 프론트엔드 개발 환경
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "typescript": "^5.0.0",
+    "tailwindcss": "^3.0.0",
+    "recharts": "^2.0.0",
+    "@tanstack/react-query": "^5.0.0"
+  }
+}
+```
+
+## 🚀 Phase 3 준비사항
+
+### 다음 단계 기반 마련
+- 패치 정보 수집을 위한 데이터 모델 설계
+- 대용량 데이터 처리를 위한 아키텍처 검토
+- 실시간 알림을 위한 WebSocket 연결 준비
+- 고급 분석을 위한 머신러닝 모델 연구
+
+### 기술 부채 정리
+- 코드 리팩토링 및 최적화
+- 문서화 업데이트
+- 보안 취약점 점검
+- 성능 병목 지점 식별 및 개선
+
+Phase 2 완료 시, 실제 사용자들이 가치를 느낄 수 있는 완전한 웹 애플리케이션이 완성되며, 이는 향후 고급 기능 개발의 견고한 기반이 될 것입니다.

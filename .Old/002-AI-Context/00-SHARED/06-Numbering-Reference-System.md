@@ -1,0 +1,11 @@
+---
+tags:
+  - agent/all
+  - system/config
+  - doc/guide
+  - priority/critical
+  - status/complete
+references:
+  - "[[01-Project-Overview]]"
+---
+NumRefSys:Purp:Consistent_num_sys_quick_doc_ref_auto_path_resolution|RefFmt:Pattern(XX/YY|XX/YY/ZZ→auto_resolve_numbered_items),Components(XX:Folder_level(00=00-SHARED,01=01-DESIGN-AGENT,etc),YY:Item_num_within_folder(01-,02-,03-,etc),ZZ:Sub_item_num_nested)|AutoResolveRules:BasicPattern(00/01→00-SHARED/01-Project-Overview.md,00/02→00-SHARED/02-General-Compression-Rules.md,00/06→00-SHARED/06-Numbering-Reference-System.md),NestedPattern(01/01→01-DESIGN-AGENT/01-Game-Design-Documents/,01/01/01→01-DESIGN-AGENT/01-Game-Design-Documents/01-Main-GDD.md,01/02/01→01-DESIGN-AGENT/02-Feature-Specifications/01-Party-Recruitment-System.md),FolderVsFileResolution(Sys_auto_determine_ref_pts_folder_or_file,XX/YY_resolve_XX-FOLDER/YY-ITEM_folder_or_file,Context_usage_determine_appropriate_resolution)|CurrentStructMap:00-SHARED(00/01→01-Project-Overview.md,00/02→02-General_Compression_Rules,00/03→03-Human-AI_Parallel_Documentation_System,00/04→04-Coding-Standards.md,00/05→05-MCP-Usage-Guide.md,00/06→06-Numbering-Reference-System.md),01-DESIGN-AGENT(01/01→01-Game-Design-Documents/[01/01/01→01-Main-GDD.md],01/02→02-Feature-Specifications/[01/02/01→01-Party-Recruitment-System.md]),02-SERVER-AGENT(02/XX→structure_TBE),03-CLIENT-AGENT(03/XX→structure_TBE),04-LEAD-AGENT(04/XX→structure_TBE),98-USER-ONLY(98/XX→user_only_docs)|UsagePatterns:QuickRefFmt(ShortForm:XX/YY_quick_verbal/written_ref,ContextAware:Sys_determine_folder_vs_file_context,Hierarchical:XX/YY/ZZ_nested_items),AIAgentRecognition(AI_agents_auto_recognize_XX/YY/ZZ_pattern,Expand_full_path:002-AI-Context/XX-FOLDER/YY-SUBFOLDER/ZZ-FILE.md,Human_agents_same_shorthand_consistency),CrossRefExamples(See_00/01_proj_overview,Ref_01/01/01_main_game_design,Check_00/05_MCP_usage_guidelines,Party_sys_details_01/02/01)|DocRef:Related(00-SHARED/01-Project-Overview.md:Proj_struct_org);Depend(Req:Consistent_num_all_proj_docs,Blocks:Efficient_cross_ref_nav_sys);CrossAgent(ALL_AGENTS:Use_XX/YY/ZZ_fmt_quick_doc_refs,LEAD:Maintains_num_consistency_reorg,AI_AGENTS:Auto_resolve_shorthand_refs_full_paths,HUMAN_USERS:Use_shorthand_quick_comm_doc)

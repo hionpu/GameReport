@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+      ".obsidian/": true,
+      "_mcp" : true,
+      ".Old" : true,
+      ".smart-env" : true,
+      
+    }
+  }

@@ -8,7 +8,7 @@
   "maxContextDepth": 2,
   "searchGrounding": false,
   "summaryFrontmatterKey": "summary",
-  "userName": "승우",
+  "userName": "Pizzaman",
   "rewriteFiles": true,
   "chatHistory": true,
   "historyFolder": "gemini-scribe",
