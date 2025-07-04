@@ -11,12 +11,16 @@ type registry struct {
 }
 
 func NewRegistry(riotAPIKey string) core.GameRegistry {
+	return NewRegistryWithRegion(riotAPIKey, "kr") // Korea as default
+}
+
+func NewRegistryWithRegion(riotAPIKey, region string) core.GameRegistry {
     r := &registry{
         services: make(map[core.GameType]core.GameService),
     }
     
     // Register LoL service
-    r.Register(core.GameTypeLoL, lol.NewService(riotAPIKey))
+    r.Register(core.GameTypeLoL, lol.NewServiceWithRegion(riotAPIKey, region))
     
     // Future: Add other games
     // r.Register(core.GameTypeValorant, valorant.NewService(riotAPIKey))

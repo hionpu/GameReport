@@ -44,7 +44,7 @@ func (a *PerformanceAnalyzer) AnalyzeMatches(matches []MatchDTO, playerPUUID str
 
 	return &core.PerformanceAnalysis{
 		WinRate: a.calculateWinRate(playerPerformances),
-		AvgKDA: a.calculateAverageKDA(playerPerformances),
+		AvgKDA: a.calculateAvgKDA(playerPerformances),
 		BestCharacter: a.findBestChampion(playerPerformances),
 		WeakestArea: a.identifyWeakestArea(playerPerformances),
 		TrendDirection: a.analyzeTrend(playerPerformances),
@@ -188,4 +188,127 @@ func (a *PerformanceAnalyzer) calculateAvgVisionScore(performances []PlayerMatch
         total += float64(p.VisionScore)
     }
     return total / float64(len(performances))
+}
+
+func (a *PerformanceAnalyzer) calculateAvgDamageShare(performances []PlayerMatchPerformance) float64 {
+	total := 0.0
+	for _, p := range performances {
+		total += p.DamageShare
+	}
+	return total / float64(len(performances))
+}
+
+func (a *PerformanceAnalyzer) findPreferredRole(performances []PlayerMatchPerformance) string {
+	roleCounts := make(map[string]int)
+	for _, p := range performances {
+		roleCounts[p.Role]++
+	}
+	
+	var preferredRole string
+	var maxCount int
+	for role, count := range roleCounts {
+		if count > maxCount {
+			maxCount = count
+			preferredRole = role
+		}
+	}
+	
+	return preferredRole
+}
+
+func (a *PerformanceAnalyzer) calculateChampionDiversity(performances []PlayerMatchPerformance) int {
+	champSet := make(map[string]bool)
+	for _, p := range performances {
+		champSet[p.Champion] = true
+	}
+	return len(champSet)
+}
+
+func (a *PerformanceAnalyzer) calculateRankedRatio(performances []PlayerMatchPerformance) float64 {
+	rankedCount := 0
+	for _, p := range performances {
+		if p.IsRanked {
+			rankedCount++
+		}
+	}
+	return float64(rankedCount) / float64(len(performances))
+}
+
+func (a *PerformanceAnalyzer) calculateAvgGameLength(performances []PlayerMatchPerformance) float64 {
+	total := 0.0
+	for _, p := range performances {
+		total += p.GameLength
+	}
+	return total / float64(len(performances))
+}
+
+func (a *PerformanceAnalyzer) calculateMultikillFrequency(performances []PlayerMatchPerformance) float64 {
+	multikillCount := 0
+	for _, p := range performances {
+		if p.Player.DoubleKills > 0 || p.Player.TripleKills > 0 || 
+		   p.Player.QuadraKills > 0 || p.Player.PentaKills > 0 {
+			multikillCount++
+		}
+	}
+	return float64(multikillCount) / float64(len(performances))
+}
+
+func (a *PerformanceAnalyzer) calculateObjectiveParticipation(performances []PlayerMatchPerformance) float64 {
+	total := 0.0
+	for _, p := range performances {
+		participation := float64(p.Player.DragonKills + p.Player.BaronKills + p.Player.TurretKills)
+		total += participation
+	}
+	return total / float64(len(performances))
+}
+
+func (a *PerformanceAnalyzer) analyzeEarlyGamePerformance(performances []PlayerMatchPerformance) string {
+	avgCSAt15 := 0.0
+	for _, p := range performances {
+		// Rough estimate: CS at 15 minutes
+		csAt15 := p.CSPerMin * 15
+		avgCSAt15 += csAt15
+	}
+	avgCSAt15 /= float64(len(performances))
+	
+	if avgCSAt15 > 120 {
+		return "Strong"
+	} else if avgCSAt15 > 80 {
+		return "Average"
+	} else {
+		return "Weak"
+	}
+}
+
+func (a *PerformanceAnalyzer) analyzeTrend(performances []PlayerMatchPerformance) string {
+	if len(performances) < 3 {
+		return "Insufficient data"
+	}
+	
+	// Simple trend analysis: compare last 3 games vs first 3 games
+	recentGames := performances[len(performances)-3:]
+	earlyGames := performances[:3]
+	
+	recentWins := 0
+	earlyWins := 0
+	
+	for _, p := range recentGames {
+		if p.Win {
+			recentWins++
+		}
+	}
+	
+	for _, p := range earlyGames {
+		if p.Win {
+			earlyWins++
+		}
+	}
+	
+	if recentWins > earlyWins {
+		return "Improving"
+	} else if recentWins < earlyWins {
+		return "Declining"
+	} else {
+		return "Stable"
+	}
 }

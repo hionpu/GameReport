@@ -38,7 +38,7 @@ func main() {
 	defer dbConn.Close()
 
 	// initialize game registry
-	gameRegistry := games.NewGameRegistryWithRegion(cfg.RiotAPIKey, cfg.Region)
+	gameRegistry := games.NewRegistryWithRegion(cfg.RiotAPIKey, cfg.Region)
 
 	// Initialize handlers with dependencies
 	handlers.SetDependencies(gameRegistry, dbConn)

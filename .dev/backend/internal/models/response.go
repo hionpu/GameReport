@@ -8,7 +8,7 @@ import (
 type APIResponse struct {
 	Success bool        `json:"success"`
 	Data    interface{} `json:"data"`
-	Error   string      `json:"error,omitempty'`
+	Error   string      `json:"error,omitempty"`
 	Message string      `json:"message,omitempty"`
 }
 

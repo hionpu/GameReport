@@ -3,23 +3,25 @@ package handlers
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"gameReport/internal/models"
-	"gameReport/internal/games"
 	"gameReport/internal/core"
 	
 )
 
-// Global game registry - TODO: Move to dependency injection
-var gameRegistry core.GameRegistry
 
-func init() {
-	// TODO: Get API key from environment variable
-	gameRegistry = games.NewRegistry("RGAPI-a5f98146-386e-443b-a629-61061461d865")
+// Response types
+type PlayerStatsResponse struct {
+	Player     core.Player             `json:"player"`
+	Matches    []core.Match            `json:"matches"`
+	Analysis   core.PerformanceAnalysis `json:"analysis"`
+	MatchCount int                     `json:"match_count"`
 }
 
 func HealthCheck(w http.ResponseWriter, r *http.Request) {
@@ -38,7 +40,7 @@ func GetPlayerStats(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	service, err := gameRegistry.GetService(gameName)
+	service, err := gameRegistry.GetService(core.GameType(gameName))
 	if err != nil {
 		slog.Error("Failed to get game service", "error", err)
 		models.WriteError(w, http.StatusInternalServerError, "Failed to get game service")
@@ -56,7 +58,7 @@ func GetPlayerStats(w http.ResponseWriter, r *http.Request) {
 
 	// Get recent matches
 	matchCount := 5
-	if countStr = r.URL.Query().Get("matches"); countStr != "" {
+	if countStr := r.URL.Query().Get("matches"); countStr != "" {
 		if count, err := strconv.Atoi(countStr); err == nil && count > 0  && count <= 10 {
 			matchCount = count
 		}
@@ -96,11 +98,13 @@ func GetPlayerAnalysis(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	insights := genrateMatchInsights(statsResponse.Analysis)
+	// Generate AI insights (TODO: Replace with real AI service)
+	insights := generateMockInsights(statsResponse.Analysis)
 
 	report := core.DailyReport{
 		Player: statsResponse.Player,
 		Game: core.GameType(gameName),
+		Date: time.Now(),
 		PerformanceData: statsResponse.Analysis,
 		AIInsights: insights,
 		CacheExpiry: core.DefaultCacheExpiry(),
@@ -159,10 +163,9 @@ func PlayerPage(w http.ResponseWriter, r *http.Request) {
 	// For full page requests
 	// TODO: Render full page template with player data
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]interface{}) {
+	json.NewEncoder(w).Encode(map[string]interface{}{
 		"page": "player",
 		"data": statsResponse,
-
 	})
 }
 
@@ -262,10 +265,3 @@ func generateMockInsights(analysis core.PerformanceAnalysis) core.AIInsights {
 	}
 }
 
-// Response types
-type PlayerStatsResponse struct {
-	Player     core.Player             `json:"player"`
-	Matches    []core.Match            `json:"matches"`
-	Analysis   core.PerformanceAnalysis `json:"analysis"`
-	MatchCount int                     `json:"match_count"`
-}
