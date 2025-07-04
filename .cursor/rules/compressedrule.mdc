@@ -1,0 +1,91 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Cursor Go Rules: Context-Driven Development
+
+// Core Philosophy: Context > Convention
+
+Pragmatism First: Prioritize what works for the specific context. Reject universal rules.
+Performance-Aware: Always consider the performance cost of abstractions.
+Boring Code: Choose simple, explicit, predictable code over cleverness.
+Go Idioms: Adhere to Go-specific patterns, not generic or other language (Java/C#) patterns.
+Measure First: Use data and benchmarks to justify architectural decisions. Refactor only when evidence supports it (e.g., duplication > 2 instances).
+
+// Project Structure
+
+/cmd/: Entry points.
+/internal/: Private app code (domain, adapters, handlers, services).
+/pkg/: Public, shareable libraries.
+
+// Interfaces
+
+Define When Needed: Create interfaces only for polymorphism (2+ implementations), not upfront.
+Keep Small: Prefer 1-3 methods.
+Name Descriptively: e.g., Reader, Writer, PlayerStatsRetriever.
+
+// Functions & Code Style
+
+Contextual Length: Function size should match its purpose.
+Short (5-20 lines): Simple operations.
+Long (50-200+ lines): Acceptable for complex, cohesive algorithms, performance-critical paths, data pipelines, or idiomatic error handling chains. Do not decompose if it harms context or performance.
+Performance > "Clean" Abstraction: For critical paths, a single, direct, optimized function is better than a chain of abstracted method calls (validator -> transformer -> aggregator).
+Avoid Micro-Functions: Do not create functions that only wrap another single function.
+
+// Error Handling
+
+Idiomatic Go: Explicit if err != nil is required. Function length is secondary to clear error handling.
+Contextual Wraps: Add context: fmt.Errorf("action failed for user %d: %w", userID, err).
+Return Early: Reduce nesting.
+Handle Where Context Exists: Don't pass errors up needlessly.
+// Dependencies & Config
+
+Pragmatic Injection: Use simple struct injection mainly for testability. Avoid complex DI frameworks.
+Globals OK: Global variables for stable, app-wide values (config, DB pools) are acceptable.
+
+// Naming
+
+Go Standard: camelCase (private), PascalCase (public).
+Clarity > Brevity: playerStats > ps.
+No Stutter: player.Name (not player.PlayerName).
+Packages: Short, descriptive names. Avoid utils, helpers, common.
+Files: Group related functionality (e.g., player_service.go). File size is not a concern.
+
+// Testing
+
+Pragmatic Focus: Test business logic, critical paths, and edge cases. 100% coverage of simple functions is not the goal.
+Behavior > Implementation: Test what the code does, not how.
+Table-Driven Tests: Use for multiple scenarios.
+Minimal Mocking: Mock external systems only when necessary. Prefer integration tests for critical workflows.
+
+// Database & APIs
+
+Direct is Better: Simple CRUD doesn't need a repository pattern.
+Repository Pattern: Use only for managing multiple data sources or complex queries. Keep SQL in the repository; do not abstract it with generic builders.
+API Clients: Create typed clients. Handle retries/timeouts explicitly.
+
+// Key Anti-Patterns to Avoid
+
+Over-Abstraction: Especially premature interfaces.
+Generic Frameworks: Don't build a framework inside your app.
+Excessive Mocking: Leads to brittle tests.
+Blindly Applying "Clean Code": Profile before optimizing for perceived cleanliness.
+
+// AI Usage
+
+Boilerplate Generation: Use AI for standard patterns, tests, and boilerplate.
+Review AI Code: Critically check for Go idioms and performance. AI-generated longer, contextual functions are often preferable to over-decomposed code.
+
+
+
+
+
+
+
+
+
+
+
+
+Trust Go Rules > Generic AI Advice: Validate AI suggestions against these principles.

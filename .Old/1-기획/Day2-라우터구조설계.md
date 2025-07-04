@@ -1,3 +1,12 @@
+---
+day: 2
+title: Day 2 - Router Structure Design & HTMX Integration
+status: today
+created: 2025-06-18
+project: Gaming Analytics Platform
+tech_focus: Chi Router + templ + HTMX
+duration: 1 day
+---
 # Day 2: 라우터 구조 설계 & 미들웨어 설정
 
 ## 🎯 Today's Goals

@@ -2,7 +2,8 @@
   "gemini-scribe",
   "smart-connections",
   "remotely-save",
-  "obsidian-local-rest-api",
   "mcp-tools",
-  "templater-obsidian"
+  "templater-obsidian",
+  "obsidian-local-rest-api",
+  "terminal"
 ]

@@ -1,0 +1,44 @@
+# =============================================================================
+# CONTEXT-AWARE CODE GENERATION RULES
+# =============================================================================
+
+# Rule activation keywords:
+# @explain - 코드 생성 시 상세한 맥락 설명 포함
+# @flow - 프로세스 플로우와 호출 관계 설명
+# @arch - 아키텍처 관점에서 파일/구조 설명
+# @learn - 학습 중심의 상세 설명
+
+## When user types @explain
+When "@explain" is mentioned, include detailed explanations:
+- File's role in overall project architecture
+- Purpose and responsibility of each struct/interface
+- Business logic intent behind each function
+- Integration points with other components
+- Add comprehensive Korean comments above each code block
+
+## When user types @flow  
+When "@flow" is mentioned, show process flow:
+- Execution sequence (A → B → C → D)
+- Data flow through the system
+- Error handling paths
+- Include ASCII diagrams for complex flows
+- Show where each function gets called from
+
+## When user types @arch
+When "@arch" is mentioned, provide architecture context:
+- Layer position (controller/service/repository/model)
+- Dependencies and relationships with other files
+- Design patterns being used
+- Why this structure was chosen
+- Connection to overall system design
+
+## When user types @learn
+When "@learn" is mentioned, focus on educational aspects:
+- Explain Go language patterns and conventions
+- Compare different approaches and why this one was chosen
+- Point out common pitfalls and best practices
+- Include "Big Picture" summary at the top
+- Add learning objectives for each code section
+
+# Default behavior: Clean code generation without extra explanations
+# Only add context when specific keywords are used
