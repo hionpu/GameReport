@@ -16,20 +16,20 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
-const (
-	port = 8080
-)
-
-// PeakPick.gg
+// gameReport.gg
 func main() {
+	ctx := context.Background()
 	
+	// Initialize configuration
 	cfg := config.Load()
+
 	// Initialize structured logger
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
 		Level: slog.LevelInfo,
 	}))
 	slog.SetDefault(logger)
 
+	// initialize database connection
 	dbConn, err := db.New(ctx, cfg.DatabaseURL)
 	if err != nil {
 		slog.Error("Failed to connect to database", "error", err)
@@ -37,8 +37,10 @@ func main() {
 	}
 	defer dbConn.Close()
 
+	// initialize game registry
 	gameRegistry := games.NewGameRegistryWithRegion(cfg.RiotAPIKey, cfg.Region)
 
+	// Initialize handlers with dependencies
 	handlers.SetDependencies(gameRegistry, dbConn)
 
 	r := chi.NewRouter()
