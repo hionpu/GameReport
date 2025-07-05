@@ -33,8 +33,8 @@
                   "iconI18nKey": "asset:generic.documentations.changelog-icon"
                 }
               },
-              "icon": "file-text",
-              "title": "Changelog"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -57,16 +57,58 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-기획/001-Daily Gaming Report Card - Project Overview.md",
+                "file": "01-기획/007-Python Analysis Server Functional Specification.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "001-Daily Gaming Report Card - Project Overview"
+              "title": "007-Python Analysis Server Functional Specification"
+            }
+          },
+          {
+            "id": "7f27d85858e1fb6d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
+          },
+          {
+            "id": "629e13df43f94497",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01-기획/007-Python Analysis Server Functional Specification.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "007-Python Analysis Server Functional Specification"
+            }
+          },
+          {
+            "id": "ec21a7b87736fda7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01-기획/002-Technical Implementation Plan.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "002-Technical Implementation Plan"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -112,8 +154,8 @@
             "state": {
               "type": "gemini-view",
               "state": {},
-              "icon": "sparkles",
-              "title": "Gemini Scribe"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -126,7 +168,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "파일 탐색기"
+              "title": "Files"
             }
           }
         ],
@@ -189,7 +231,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-tags",
-              "title": "태그"
+              "title": "Tags"
             }
           },
           {
@@ -204,7 +246,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "002-Technical Implementation Plan 의 개요"
+              "title": "Outline of 002-Technical Implementation Plan"
             }
           },
           {
@@ -213,25 +255,25 @@
             "state": {
               "type": "smart-chat-view",
               "state": {},
-              "icon": "message-square",
-              "title": "Smart Chat"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 593.5
+    "width": 540.5
   },
   "left-ribbon": {
     "hiddenItems": {
-      "graph:그래프 뷰 열기": false,
-      "switcher:빠른 전환기 열기": false,
-      "daily-notes:오늘의 일일 노트 열기": false,
-      "canvas:새 캔버스 만들기": false,
-      "templates:템플릿 삽입": false,
-      "command-palette:명령어 팔레트 열기": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
       "gemini-scribe:Open Gemini Chat": false,
       "remotely-save:Remotely Save": false,
       "templater-obsidian:Templater": false,
@@ -240,14 +282,31 @@
       "smart-connections:Open: Smart Chat Conversation": false
     }
   },
-  "active": "5b99e4d0b697aea8",
+  "active": "ec21a7b87736fda7",
   "lastOpenFiles": [
+    "01-기획/001-Daily Gaming Report Card - Project Overview.md",
+    "01-기획/006-Go Web Server API Specification.md",
+    "01-기획/005-Go Web Server Functional Specification.md",
     "01-기획/002-Technical Implementation Plan.md",
+    "01-기획/003-Development Timeline & Milestones.md",
+    "01-기획/004-Launch Strategy & Business Model.md",
+    "01-기획/009-Proposed Order of Implementation.md",
+    "01-기획/007-Python Analysis Server Functional Specification.md",
+    "01-기획/008-Python Analysis Server API Specification.md",
+    "Untitled.md",
+    "99-Brainstrom/optimized_prompt.md",
+    "01-기획/006-Go API Specification.md",
+    "01-기획/005-Go Functional Specification.md",
+    "01-기획/008-Python API Specs.md",
+    "01-기획/007-Python Functional Specs.md",
+    "99-Brainstrom/Architecture Guide.md",
+    "99-Brainstrom/Solo Developer's Workflow Guide.md",
+    "99-Brainstrom/Go Chi와 Templ을 사용한 하이브리드 API 예시.md",
+    "99-Brainstrom/figma_uxpressia_workflow.md",
+    "99-Brainstrom/모바일 친화적 HDA API 설계.md",
+    "99-Brainstrom",
     "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
     "01-기획/Brainstorming.md",
-    "01-기획/004-Launch Strategy & Business Model.md",
-    "01-기획/001-Daily Gaming Report Card - Project Overview.md",
-    "01-기획/003-Development Timeline & Milestones.md",
     "README.md",
     "09-Data/001-League of Legends Match Data Structure.md",
     "09-Data/001-League of Legends Match Data Structure.aicomp",
@@ -258,26 +317,9 @@
     "01-기획/002-Technical Implementation Plan.aicomp",
     "01-기획/001-Daily Gaming Report Card - Project Overview.aicomp",
     "01-기획/003-Phase 2 - DataSync MVP 개발 상세 계획.md",
-    "01-기획/004-멀티게임-백엔드-아키텍처-구현가이드.md",
-    "01-기획/Day2-라우터구조설계.md",
-    "01-기획/002-Phase 1-Prototype Detailed Plan (2 Weeks).md",
     "dfdfa.templ",
     "vim-config-fixed.lua",
-    "_mcp/General Compression Rules(GenCompRule) - Algorithmic Approach.md",
-    "_mcp/02-General Compression Rules (GenCompRules).md",
     "01-기획/002-Phase 1-Prototype Detailed Plan (2 Weeks).aicomp",
-    "01-기획/004-멀티게임-백엔드-아키텍처-구현가이드.aicomp",
-    "2025-06-16.md",
-    "obsidian-mcp-test-results.md",
-    "01-기획/003-Phase 2 - MVP 개발 상세 계획.md",
-    "02-General Compression Rules (GenCompRules).md",
-    "무제.md",
-    "002-AI-Context/00-SHARED/01-Project-Overview.md",
-    "002-AI-Context/00-SHARED/02-General Compression Rules (GenCompRules).md",
-    "002-AI-Context/00-SHARED/05-MCP-Usage-Guide.md",
-    "001-Human/00-SHARED/05-MCP-Usage-Guide.md",
-    "001-Human/00-SHARED/06-Numbering-Reference-System.md",
-    "001-Human/00-SHARED/03-Human-AI Parallel Documentation System (HAPDS).md",
     "무제.canvas",
     "Pasted image 20241202102020.png",
     "Pasted image 20241219134714.png",
