@@ -1,0 +1,215 @@
+<!-- Analysis Result Component -->
+<div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto mb-8" hx-swap-oob="true">
+    <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Analysis Results for {{.SummonerName}}</h2>
+        <div class="text-sm text-gray-500">Generated on {{.Timestamp.Format "January 2, 2006 at 3:04 PM"}}</div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+        <!-- Left Column - Performance Insights -->
+        <div class="space-y-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">📊 Performance Insights</h3>
+            
+            <!-- KDA Improvement -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                            <span class="text-green-600 font-bold">📈</span>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="font-semibold text-green-800 mb-2">KDA Progress</h4>
+                        <p class="text-sm text-blue-700">{{.Improvement}}</p>
+                        <div class="mt-2">
+                            <div class="flex items-center">
+                                <div class="flex-1 bg-blue-200 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <span class="ml-2 text-xs text-blue-600 font-medium">+12%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Focus Area -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
+                            <span class="text-yellow-600 font-bold">⚠️</span>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="font-semibold text-yellow-800 mb-2">Focus Area</h4>
+                        <p class="text-sm text-yellow-700">{{.FocusArea}}</p>
+                        <div class="mt-3">
+                            <button 
+                                class="text-yellow-800 hover:text-yellow-900 text-sm font-medium underline"
+                                hx-get="/api/improvement-tips?area={{.FocusArea}}"
+                                hx-target="#improvement-tips"
+                            >
+                                Get improvement tips →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Match History & Actions -->
+        <div class="space-y-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">🎮 Recent Matches</h3>
+            
+            <!-- Match List -->
+            <div class="space-y-3">
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-medium text-gray-900">Ranked Solo/Duo</span>
+                        <span class="text-sm text-green-600 font-medium">Victory</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span>Jinx • 12/4/8 • 25 min</span>
+                        <button 
+                            class="text-purple-primary hover:text-purple-600 font-medium"
+                            hx-get="/api/match-details?match=1"
+                            hx-target="#match-details"
+                        >
+                            Deep Dive
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-medium text-gray-900">Ranked Solo/Duo</span>
+                        <span class="text-sm text-red-600 font-medium">Defeat</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span>Caitlyn • 8/7/12 • 32 min</span>
+                        <button 
+                            class="text-purple-primary hover:text-purple-600 font-medium"
+                            hx-get="/api/match-details?match=2"
+                            hx-target="#match-details"
+                        >
+                            Deep Dive
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-medium text-gray-900">Normal Draft</span>
+                        <span class="text-sm text-green-600 font-medium">Victory</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span>Ezreal • 15/2/6 • 28 min</span>
+                        <button 
+                            class="text-purple-primary hover:text-purple-600 font-medium"
+                            hx-get="/api/match-details?match=3"
+                            hx-target="#match-details"
+                        >
+                            Deep Dive
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-3 pt-4 border-t border-gray-200">
+                <button 
+                    class="w-full bg-purple-primary text-white px-4 py-3 rounded-lg font-medium hover:bg-purple-600 transition-colors"
+                    hx-get="/api/detailed-report?summoner={{.SummonerName}}"
+                    hx-target="#analysis-result"
+                >
+                    Get Detailed Analysis
+                </button>
+                
+                <button 
+                    class="w-full bg-gray-100 text-gray-700 px-4 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                    hx-get="/api/share-report?summoner={{.SummonerName}}"
+                    hx-target="#share-modal"
+                >
+                    Share Report
+                </button>
+            </div>
+
+            <!-- Achievement Badge -->
+            <div class="bg-gradient-to-r from-purple-100 to-blue-100 border border-purple-200 rounded-lg p-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-purple-primary rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold">🏆</span>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="font-semibold text-purple-800">New Achievement!</h4>
+                        <p class="text-sm text-purple-700">Consistency Champion - 3 days in a row</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Improvement Tips Section (HTMX Target) -->
+    <div id="improvement-tips" class="mt-8 pt-6 border-t border-gray-200">
+        <!-- Tips will be loaded here when user clicks "Get improvement tips" -->
+    </div>
+
+    <!-- Match Details Section (HTMX Target) -->
+    <div id="match-details" class="mt-8">
+        <!-- Match details will be loaded here when user clicks "Deep Dive" -->
+    </div>
+
+    <!-- Share Modal (HTMX Target) -->
+    <div id="share-modal">
+        <!-- Share modal will be loaded here -->
+    </div>
+
+    <!-- Call to Action -->
+    <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+        <div class="mb-4">
+            <p class="text-gray-600 mb-2">Want more detailed insights?</p>
+            <p class="text-sm text-gray-500">Upgrade to Premium for unlimited analyses and detailed growth tracking</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <button 
+                class="bg-purple-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-purple-600 transition-colors"
+                hx-get="/upgrade?from=analysis"
+                hx-target="main"
+            >
+                Upgrade to Premium
+            </button>
+            <button 
+                class="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                hx-get="/api/analyze" 
+                hx-target="#analysis-result"
+                hx-include="closest form"
+            >
+                Analyze Another Player
+            </button>
+        </div>
+    </div>
+</div> class="text-sm text-green-700">{{.KDA}}</p>
+                        <div class="mt-2">
+                            <div class="flex items-center">
+                                <div class="flex-1 bg-green-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="ml-2 text-xs text-green-600 font-medium">75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Improvement Area -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-600 font-bold">🎯</span>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="font-semibold text-blue-800 mb-2">Key Improvement</h4>
+                        <p

@@ -11,6 +11,46 @@
 **External APIs:** Riot Games API
 **Deployment:** Railway (backend) + Vercel (web assets)
 
+### Project Structure
+
+```
+
+gaming-report-card/
+├── main.go                          # 메인 서버 파일
+├── go.mod                           # Go 모듈 파일
+├── go.sum                           # Go 종속성 체크섬
+├── static/                          # 정적 파일들
+│   ├── css/
+│   │   └── custom.css              # 커스텀 CSS 스타일
+│   ├── js/
+│   │   └── app.js                  # 추가 JavaScript (필요시)
+│   └── images/
+│       └── logo.png                # 로고 이미지
+├── templates/                       # Go HTML 템플릿들
+│   ├── layout.html                 # 기본 레이아웃
+│   ├── home.html                   # 홈페이지 콘텐츠
+│   └── components/                 # 재사용 가능한 컴포넌트들
+│       ├── header.html             # 헤더 컴포넌트
+│       ├── footer.html             # 푸터 컴포넌트
+│       ├── analysis-result.html    # 분석 결과 컴포넌트
+│       └── sample-report.html      # 샘플 리포트 컴포넌트
+├── handlers/                        # HTTP 핸들러들 (확장시)
+│   ├── home.go
+│   ├── analysis.go
+│   └── api.go
+├── models/                          # 데이터 모델들 (확장시)
+│   ├── user.go
+│   ├── analysis.go
+│   └── match.go
+├── services/                        # 비즈니스 로직 (확장시)
+│   ├── riot_api.go
+│   ├── analysis.go
+│   └── ai_service.go
+└── config/                          # 설정 파일들 (확장시)
+    ├── config.go
+    └── database.go
+```
+
 ### System Architecture
 ```
 User Browser/Mobile App
@@ -19,10 +59,10 @@ HTMX Frontend (Vercel) / Flutter App
 ↓
 Golang + Chi API (Railway)
 ↓
-┌─ Riot API ─┐ ┌─ Google AI API ─┐
-│            │ │                │
-└─ Match Data ┘ └─ AI Insights  ┘
-↓                ↓
+┌─ Riot API  ─┐ ┌─ Google AI API ─┐
+│             │ │                 │
+└─ Match Data ┘ └─  AI Insights   ┘
+↓                       ↓
 Supabase Database + Auth + Storage
 ↓
 MCP Server (optional for advanced features)

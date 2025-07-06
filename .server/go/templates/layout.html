@@ -1,0 +1,32 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="/static/css/custom.css">
+</head>
+<body class="bg-purple-bg min-h-screen" hx-boost="true">
+    {{template "header" .}}
+    
+    <main>
+        {{template "content" .}}
+    </main>
+    
+    {{template "footer" .}}
+    
+    <!-- HTMX Extensions -->
+    <script>
+        // HTMX 설정
+        htmx.config.responseHandling = [
+            {code:"204", swap: false},
+            {code:"[23]..", swap: true},
+            {code:"[45]..", swap: false, error:true}
+        ];
+    </script>
+</body>
+</html>
+{{end}}

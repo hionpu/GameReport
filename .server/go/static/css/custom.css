@@ -1,0 +1,235 @@
+/* Custom Purple Theme Colors */
+.bg-purple-bg { 
+    background-color: #FAFBFF; 
+}
+
+.bg-purple-primary { 
+    background-color: #8B5CF6; 
+}
+
+.bg-purple-secondary { 
+    background-color: #A78BFA; 
+}
+
+.bg-purple-accent { 
+    background-color: #DDD6FE; 
+}
+
+.text-purple-primary { 
+    color: #8B5CF6; 
+}
+
+.text-purple-secondary { 
+    color: #A78BFA; 
+}
+
+.border-purple-primary { 
+    border-color: #8B5CF6; 
+}
+
+.border-purple-200 { 
+    border-color: #E9D5FF; 
+}
+
+.border-purple-100 { 
+    border-color: #F3E8FF; 
+}
+
+.hover\:bg-purple-600:hover { 
+    background-color: #7C3AED; 
+}
+
+.hover\:text-purple-600:hover { 
+    color: #7C3AED; 
+}
+
+.hover\:text-purple-primary:hover { 
+    color: #8B5CF6; 
+}
+
+.focus\:ring-purple-primary:focus { 
+    --tw-ring-color: #8B5CF6; 
+}
+
+.from-purple-50 { 
+    --tw-gradient-from: #FAF5FF; 
+    --tw-gradient-to: rgb(250 245 255 / 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-purple-100 { 
+    --tw-gradient-to: #F3E8FF; 
+}
+
+.from-purple-600 { 
+    --tw-gradient-from: #9333EA; 
+    --tw-gradient-to: rgb(147 51 234 / 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-purple-700 { 
+    --tw-gradient-to: #7C2D12; 
+}
+
+/* HTMX Loading States */
+.htmx-indicator {
+    display: none;
+}
+
+.htmx-request .htmx-indicator {
+    display: block;
+}
+
+.htmx-request.htmx-indicator {
+    display: block;
+}
+
+/* Loading Spinner Animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Smooth Transitions */
+.transition-colors {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Custom Focus Ring */
+.focus\:ring-2:focus {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+/* Progress Bar Animations */
+.progress-bar {
+    transition: width 0.5s ease-in-out;
+}
+
+/* Card Hover Effects */
+.card-hover {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Mobile Menu Animation */
+#mobile-menu {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Button Loading State */
+.btn-loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 1s ease infinite;
+}
+
+/* HTMX Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.htmx-settling {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Error State Styles */
+.error-message {
+    background-color: #FEF2F2;
+    border-color: #FECACA;
+    color: #DC2626;
+}
+
+/* Success State Styles */
+.success-message {
+    background-color: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #16A34A;
+}
+
+/* Achievement Badge Glow */
+.achievement-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px -1px #8B5CF6;
+    }
+    to {
+        box-shadow: 0 0 20px -1px #8B5CF6;
+    }
+}
+
+/* Responsive Design Helpers */
+@media (max-width: 768px) {
+    .mobile-stack {
+        flex-direction: column;
+    }
+    
+    .mobile-full {
+        width: 100%;
+    }
+    
+    .mobile-text-center {
+        text-align: center;
+    }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #8B5CF6 #F3E8FF;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #F3E8FF;
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #8B5CF6;
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7C3AED;
+}
