@@ -99,12 +99,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-기획/002-Technical Implementation Plan.md",
+                "file": "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "002-Technical Implementation Plan"
+              "title": "Phase 1-MVP 통계 파이프라인 구축 개요"
             }
           }
         ],
@@ -168,7 +168,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "파일 탐색기"
             }
           }
         ],
@@ -240,13 +240,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-기획/002-Technical Implementation Plan.md",
+                "file": "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 002-Technical Implementation Plan"
+              "title": "Phase 1-MVP 통계 파이프라인 구축 개요 의 개요"
             }
           },
           {
@@ -256,7 +256,7 @@
               "type": "smart-chat-view",
               "state": {},
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "플러그인이 더 이상 활성화돼있지 않음"
             }
           }
         ],
@@ -268,12 +268,12 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
       "gemini-scribe:Open Gemini Chat": false,
       "remotely-save:Remotely Save": false,
       "templater-obsidian:Templater": false,
@@ -284,9 +284,16 @@
   },
   "active": "ec21a7b87736fda7",
   "lastOpenFiles": [
+    "cmd/server/main.go",
+    "cmd/server",
+    "cmd",
+    "09-Data/Phase 3.md",
+    "09-Data/Phase 2.md",
+    "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
+    "01-기획/002-Technical Implementation Plan.md",
+    "09-Data/001-League of Legends Match Data Structure.md",
     "01-기획/003-Development Timeline & Milestones.md",
     "01-기획/001-Daily Gaming Report Card - Project Overview.md",
-    "01-기획/002-Technical Implementation Plan.md",
     "01-기획/006-Go Web Server API Specification.md",
     "01-기획/005-Go Web Server Functional Specification.md",
     "01-기획/004-Launch Strategy & Business Model.md",
@@ -305,21 +312,14 @@
     "99-Brainstrom/figma_uxpressia_workflow.md",
     "99-Brainstrom/모바일 친화적 HDA API 설계.md",
     "99-Brainstrom",
-    "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
     "01-기획/Brainstorming.md",
-    "README.md",
-    "09-Data/001-League of Legends Match Data Structure.md",
     "09-Data/001-League of Legends Match Data Structure.aicomp",
     "09-Data",
-    "01-기획/001-🎮 발로란트 AI 분석 플랫폼 개발 로드맵.md",
     "01-기획/004-Launch Strategy & Business Model.aicomp",
     "01-기획/003-Development Timeline & Milestones.aicomp",
     "01-기획/002-Technical Implementation Plan.aicomp",
     "01-기획/001-Daily Gaming Report Card - Project Overview.aicomp",
-    "01-기획/003-Phase 2 - DataSync MVP 개발 상세 계획.md",
     "dfdfa.templ",
-    "vim-config-fixed.lua",
-    "01-기획/002-Phase 1-Prototype Detailed Plan (2 Weeks).aicomp",
     "무제.canvas",
     "Pasted image 20241202102020.png",
     "Pasted image 20241219134714.png",
