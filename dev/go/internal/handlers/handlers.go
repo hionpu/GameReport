@@ -20,6 +20,8 @@ type Handler struct {
 	template *template.Template
 }
 
+var webFolderPath = "../../web"
+
 func NewHandler(cfg *config.Config, db *db.DB) (*Handler, error) {
 	templates, err := loadTemplates()
 	if err != nil {
@@ -34,15 +36,14 @@ func NewHandler(cfg *config.Config, db *db.DB) (*Handler, error) {
 }
 
 func loadTemplates() (*template.Template, error) {
-	// baseTemplates := filepath.Join("web", "templates", "base.html")
 
-	templatePattern := filepath.Join("web", "templates", "*.html")
+	templatePattern := filepath.Join(webFolderPath, "templates", "*.html")
 	templates, err := template.ParseGlob(templatePattern)
 	if err != nil {
 		return nil, err
 	}
 
-	componentPattern := filepath.Join("web", "templates", "components", "*.html")
+	componentPattern := filepath.Join(webFolderPath, "templates", "components", "*.html")
 	if componentTemplates, err := filepath.Glob(componentPattern); err == nil && len(componentTemplates) > 0 {
 		templates, err = templates.ParseGlob(componentPattern)
 		if err != nil {
@@ -117,7 +118,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	if err := h.template.ExecuteTemplate(w, "layout.html", pageData); err != nil {
+	if err := h.template.ExecuteTemplate(w, "layout", pageData); err != nil {
 		log.Printf("Error executing template: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return

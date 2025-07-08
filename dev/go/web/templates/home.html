@@ -77,7 +77,7 @@
                 <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm mx-auto">
                     <div class="text-center mb-6">
                         <h3 class="text-lg font-bold text-gray-900 mb-2">Today's Report</h3>
-                        <div class="text-sm text-gray-500">{{.CurrentDate | default "July 6, 2025"}}</div>
+                        <div class="text-sm text-gray-500">{{if .CurrentDate}}{{.CurrentDate}}{{else}}July 6, 2025{{end}}</div>
                     </div>
                     
                     <!-- Sample Report Content -->
