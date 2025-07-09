@@ -19,7 +19,8 @@
 
 1. **ML 데이터셋 구축:**
     
-    - Phase 1, 2에서 축적한 데이터를 모델 학습에 적합한 형태(피처 스케일링, 원-핫 인코딩 등)로 가공하여 별도의 학습용 데이터셋을 생성한다.
+    - Build the training dataset using the clean, aggregated statistics produced by the **high-performance C++ engine from Phase 2**.
+    - This ensures the ML models are trained on a robust, large-scale, and efficiently processed dataset. The data will be further refined (feature scaling, one-hot encoding) using Python scripts.
         
 2. **모델 선택, 학습 및 평가:**
     

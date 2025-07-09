@@ -37,6 +37,8 @@
 
 ### Python Analysis Server Functional Specifications
 
+**Note:** The following Python functions represent the initial implementation for the **Phase 1 MVP**. The core aggregation logic (e.g., `update_aggregated_stats` and parts of `run_daily_pipeline`) is designed to be replaced by a more robust, high-performance **C++ batch processing tool in Phase 2** to ensure long-term scalability and efficiency.
+
 1. **`main.py` (FastAPI Application Entry Point)**
     
     - **Justification**: This is the very first piece of the Python server that needs to be functional. It sets up the FastAPI application and defines how other modules are integrated.

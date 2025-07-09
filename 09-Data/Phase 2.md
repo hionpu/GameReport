@@ -17,23 +17,23 @@
 
 ## 3. 주요 구현 과업 (Key Implementation Tasks)
 
-1. **타임라인 데이터 수집 추가:** 데이터 수집기에 `MatchTimelineDTO`를 요청하고 저장하는 로직을 추가한다. (필요시 Raw Data 저장)
+1. **Develop High-Performance C++ Engine:**
+
+    - Develop the C++ batch processing tool to perform heavy data aggregation from the raw `matches` and `match_events` tables collected in Phase 1.
+    - This engine will be responsible for parsing raw data and calculating complex, large-scale statistics efficiently.
+
+2. **Python for Higher-Level Analysis:**
+
+    - Use Python with `Pandas`, `SciPy`, and `Statsmodels` on the **pre-aggregated data** produced by the C++ engine.
+    - This allows for rapid development of the final correlation analysis, feature engineering, and pattern discovery logic without being bottlenecked by raw data processing.
+
+3. **패턴 DB 스키마 설계:**
     
-2. **피처 엔지니어링 (Feature Engineering):**
-    
-    - 타임라인 데이터를 기반으로 '첫 코어 아이템', '두 번째 코어 아이템', '스킬 마스터 순서' 등 새로운 분석용 피처(변수)를 생성하는 모듈을 개발한다.
+    - 아이템 빌드별 통계를 위한 `item_build_stats` 테이블, 발견된 패턴을 저장할 `discovered_patterns` 테이블 등을 새롭게 설계한다. The C++ engine will populate these tables.
         
-3. **통계 분석 모듈 개발:**
+4. **분석 파이프라인 통합:**
     
-    - `Pandas`를 사용하여 데이터를 그룹화하고, `SciPy`, `Statsmodels` 라이브러리를 사용하여 상관계수, p-value 등을 계산하는 분석 스크립트를 작성한다.
-        
-4. **패턴 DB 스키마 설계:**
-    
-    - 아이템 빌드별 통계를 위한 `item_build_stats` 테이블, 발견된 패턴을 저장할 `discovered_patterns` 테이블 등을 새롭게 설계한다.
-        
-5. **분석 파이프라인 통합:**
-    
-    - 매일 수집된 데이터를 바탕으로 통계 분석 및 패턴 추출 스크립트가 자동으로 실행되도록 일일 파이프라인(`run_daily_pipeline.py`)에 통합한다.
+    - The daily pipeline (`run_daily_pipeline.py`) will be updated to orchestrate the execution of the C++ engine first, and then run subsequent Python scripts for higher-level analysis.
         
 
 ## 4. 분석할 패턴 예시

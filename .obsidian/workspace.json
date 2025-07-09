@@ -99,12 +99,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
+                "file": "09-Data/Phase 2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Phase 1-MVP 통계 파이프라인 구축 개요"
+              "title": "Phase 2"
             }
           }
         ],
@@ -240,13 +240,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
+                "file": "09-Data/Phase 2.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Phase 1-MVP 통계 파이프라인 구축 개요 의 개요"
+              "title": "Phase 2 의 개요"
             }
           },
           {
@@ -284,12 +284,16 @@
   },
   "active": "ec21a7b87736fda7",
   "lastOpenFiles": [
+    "dev/python/analyzers/lol_analyzer.py",
+    "dev/python/analyzers/base.py",
+    "dev/python/analyzers/__init__.py",
+    "dev/python/analyzers",
+    "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
     "cmd/server/main.go",
     "cmd/server",
     "cmd",
     "09-Data/Phase 3.md",
     "09-Data/Phase 2.md",
-    "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
     "01-기획/002-Technical Implementation Plan.md",
     "09-Data/001-League of Legends Match Data Structure.md",
     "01-기획/003-Development Timeline & Milestones.md",
@@ -316,10 +320,6 @@
     "09-Data/001-League of Legends Match Data Structure.aicomp",
     "09-Data",
     "01-기획/004-Launch Strategy & Business Model.aicomp",
-    "01-기획/003-Development Timeline & Milestones.aicomp",
-    "01-기획/002-Technical Implementation Plan.aicomp",
-    "01-기획/001-Daily Gaming Report Card - Project Overview.aicomp",
-    "dfdfa.templ",
     "무제.canvas",
     "Pasted image 20241202102020.png",
     "Pasted image 20241219134714.png",

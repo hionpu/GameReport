@@ -104,6 +104,8 @@ This table is periodically updated from the `matches` table to serve data to the
 
 ## 5. Python Script Structure & Key Functions
 
+**Note:** The following Python-based structure is for the initial **Phase 1 MVP** to ensure a rapid launch. The core data processing and aggregation logic will be migrated to a high-performance **C++ engine in Phase 2** to ensure scalability.
+
 A modular structure is recommended for maintainability.
 
 

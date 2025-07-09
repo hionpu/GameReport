@@ -76,13 +76,13 @@ Transform gaming data into actionable daily insights, similar to a "fitness trac
 
 #### **Architecture**
 
-- **Dual Server Model:** Adopt a microservice architecture to separate stable API handling from complex data analysis.
+- **Hybrid Dual Server Model:** Adopt a microservice architecture to separate stable API handling from complex data analysis, leveraging the strengths of multiple languages.
     
     - **Go + Chi (Main Server):** Acts as the user-facing orchestrator. It handles user authentication, API requests, and serving web pages.
         
-    - **Python (Analysis/ML Server):** Acts as the specialized brain. It handles all analytical tasks, including data collection, statistical calculation, pattern analysis, ML inference, and AI prompt generation.
+    - **Python + C++ (Analysis/ML Server):** A dual-language analysis engine. Python handles high-level orchestration, API communication, and AI integration. A high-performance C++ component (introduced in Phase 2) handles large-scale, offline batch processing of match data for maximum efficiency and scalability.
         
-- **Internal Communication:** The two servers communicate over an internal network via a REST API or gRPC.
+- **Internal Communication:** The Go and Python servers communicate over an internal network via a REST API or gRPC.
     
 
 #### **Data Flow**
@@ -93,11 +93,11 @@ User → Go API → Python API → (Riot API + Internal DB + AI API) → Python 
 
 #### **Data Analysis Strategy**
 
-- **Phase 1: Statistical Aggregation:** The system will pre-calculate key benchmark metrics from top-tier player data (e.g., average KDA by champion, item win rates) and store them in a database. This forms the foundation of the MVP's analysis.
+- **Phase 1: Statistical Aggregation:** The system will pre-calculate key benchmark metrics from top-tier player data (e.g., average KDA by champion, item win rates) and store them in a database. This forms the foundation of the MVP's analysis. **This will be initially implemented using a simple Python script to ensure a rapid MVP launch.**
     
-- **Phase 2: Correlation & Pattern Analysis:** The system will automatically discover meaningful relationships within the data (e.g., "this rune choice correlates with higher DPM") and save them as "discovered patterns." This provides deeper, more nuanced insights.
+- **Phase 2: Correlation & Pattern Analysis:** The system will automatically discover meaningful relationships within the data (e.g., "this rune choice correlates with higher DPM") and save them as "discovered patterns." **This phase will be enabled by developing and integrating a high-performance C++ batch processing engine, which will replace the initial Python script to handle large-scale data aggregation and pattern discovery.**
     
-- **Phase 3: Machine Learning Integration:** As a long-term goal, the system will incorporate ML models (e.g., win prediction, playstyle clustering) to unearth exclusive insights that other services cannot provide.
+- **Phase 3: Machine Learning Integration:** As a long-term goal, the system will incorporate ML models (e.g., win prediction, playstyle clustering) to unearth exclusive insights. **The ML models will be trained on the rich, aggregated data produced by the C++ engine.**
     
 
 ### Monetization Strategy
