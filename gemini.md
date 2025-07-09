@@ -182,3 +182,19 @@ When a prompt begins with `!review`, it signifies that the user has completed th
 - **Praise:** Provide compliments only for specific, noteworthy technical achievements or insights. Avoid generic or conversational filler praise.
 - **Guidance:** Maintain a detailed and instructive approach in all explanations, as defined by the `!all` and `!learn` keywords. The peer-to-peer tone should not reduce the depth of the technical guidance.
 - **Style:** Maintain a respectful but straightforward and objective communication style, focusing on the technical substance of the request and response.
+
+---
+# Keyword: !status
+
+### Utility Command: Project Status Report
+
+**Purpose:** To generate a comprehensive summary of the project's current state. This is intended to re-orient the AI assistant in a new session or provide a snapshot of progress.
+
+**Execution Protocol:** When `!status` is called, the AI must perform the following actions:
+
+1.  **Analyze Project Structure:** Use tools like `list_directory` to show the current file and directory structure, focusing on key development folders.
+2.  **Review Project Plan:** Read the primary planning documents (e.g., `01-기획/001-*.md`) to summarize the current development phase, objectives, and recent strategic changes.
+3.  **Examine Recent Code:** Use tools like `git log -n 1 --name-status` to identify the most recently modified files and read the most significant one.
+4.  **Synthesize and Report:** Present the gathered information in a structured report with the headings: `Project Structure`, `Current Plan`, `Recent Changes`, and `Next Suggested Step`.
+5.  **Generate Status File:** Create a markdown file in the `00-context history/` directory with the filename format `yy-mm-dd-time-{recent-file-name}.md` where `{recent-file-name}` is derived from the most recently modified file during pair programming (e.g., `24-12-20-1430-lol-analyzer.md`, `24-12-20-1430-handlers.md`). The file should contain the complete structured report from step 4.
+6.  **Propose Next Step:** Based on the synthesis, propose the most logical next action according to the project plan.
