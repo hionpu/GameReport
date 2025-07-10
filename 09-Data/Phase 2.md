@@ -45,3 +45,98 @@
 - **첫 오브젝트 선택 vs 승률:** 첫 용과 첫 전령 중 무엇을 획득했는지가 게임 승패에 미치는 영향.
     
 - **시야 점수와 생존율의 관계:** 포지션별로 분당 시야 점수와 평균 데스 수의 상관관계.
+
+
+## 4. C++ Engine Detailed Specifications
+
+### Core C++ Engine Architecture
+
+```cpp
+// High-level C++ engine structure
+namespace gaming_analytics {
+    
+class BatchProcessor {
+public:
+    // Main batch processing functions
+    void ProcessMatchDataBatch(const std::vector<MatchData>& matches);
+    void ProcessTimelineEventsBatch(const std::vector<TimelineEvent>& events);
+    void CalculateCorrelations(const std::string& analysis_type);
+    
+    // Pattern discovery functions
+    std::vector<Pattern> DiscoverItemBuildPatterns();
+    std::vector<Pattern> DiscoverSkillOrderPatterns();
+    std::vector<Pattern> DiscoverObjectivePatterns();
+    
+private:
+    std::unordered_map<std::string, StatisticalData> aggregated_stats_;
+    std::vector<Pattern> discovered_patterns_;
+};
+
+class PerformanceOptimizer {
+public:
+    // Memory-efficient data structures
+    void OptimizeMemoryLayout();
+    void BuildLookupTables();
+    void CacheFrequentQueries();
+    
+private:
+    std::unordered_map<int, ChampionBenchmark> champion_cache_;
+    std::unordered_map<std::string, ItemBuildStats> item_build_cache_;
+};
+
+}
+```
+
+### C++ Engine Responsibilities in Phase 2
+
+**1. Timeline Data Processing:**
+- Parse `MatchTimelineDTO` events at scale
+- Extract item purchase sequences and timing
+- Analyze skill level-up patterns
+- Process objective acquisition timing and team coordination
+
+**2. Statistical Correlation Engine:**
+- Calculate Pearson/Spearman correlations between game variables
+- Identify statistically significant patterns (p-value < 0.05)
+- Build multi-dimensional correlation matrices
+- Perform regression analysis for predictive modeling
+
+**3. Pattern Discovery Algorithms:**
+- **Item Build Analysis:** Sequence mining for optimal item paths
+- **Skill Order Analysis:** N-gram analysis of skill leveling patterns
+- **Objective Priority Analysis:** Decision tree analysis for objective choices
+- **Team Coordination Analysis:** Synchronization analysis of team actions
+
+### Performance Benchmarks & Specifications
+
+**Processing Capacity:**
+- Timeline Events: 50,000+ events per second
+- Match Data: 10,000+ matches per batch
+- Correlation Analysis: 1,000+ variable pairs per minute
+- Pattern Discovery: Complete analysis of 100K+ matches in under 10 minutes
+
+**Memory Optimization:**
+- Custom memory pools for frequent allocations
+- SIMD instructions for vectorized calculations
+- Cache-friendly data structures (Structure of Arrays)
+- Streaming algorithms for large dataset processing
+
+### Integration with Python Analysis Layer
+
+```python
+# Python orchestration layer
+class AnalysisPipeline:
+    def __init__(self):
+        self.cpp_engine = CppBatchProcessor()
+        
+    def run_phase2_analysis(self):
+        # Step 1: C++ engine processes raw data
+        self.cpp_engine.process_raw_matches()
+        
+        # Step 2: Python performs high-level analysis
+        aggregated_data = self.cpp_engine.get_aggregated_stats()
+        patterns = self.analyze_patterns_with_scipy(aggregated_data)
+        
+        # Step 3: Store results in database
+        self.store_discovered_patterns(patterns)
+```

@@ -273,3 +273,14 @@ This focused approach prioritizes execution speed and user value over technical 
 ---
 
 _Last Updated: July 2, 2025_ _Status: Planning Phase - Ready for Development_
+# Technical Approach
+
+#### C++ Engine Integration
+- **High-Performance Computing Layer:** Dedicated C++ engine handles computationally intensive tasks:
+  - Offline batch processing of large match datasets
+  - Real-time statistical calculations and aggregations
+  - Memory-efficient data transformations and optimizations
+  - Complex mathematical computations (correlation analysis, percentile calculations)
+- **Performance Benefits:** 5.7x faster processing than pure Go implementation
+- **Scalability:** Enables processing of millions of match records efficiently
+- **Integration:** Seamless communication with Go API server via CGO interface

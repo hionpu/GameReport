@@ -9,7 +9,7 @@
 **Database:** Supabase (PostgreSQL + real-time + auth + MCP integration)
 **AI API:** Google AI API (Gemini models)
 **External APIs:** Riot Games API
-**Deployment:** Railway (backend) + Vercel (web assets)
+**Deployment:** Railway (backend) + FE TBD
 
 ### Project Structure
 
