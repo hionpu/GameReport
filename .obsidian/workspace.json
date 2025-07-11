@@ -83,10 +83,14 @@
             "id": "629e13df43f94497",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "새 탭"
+              "title": "Phase 1-MVP 통계 파이프라인 구축 개요"
             }
           }
         ],
@@ -158,7 +162,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 285.5
+    "width": 200
   },
   "right": {
     "id": "78a336d91a059223",
@@ -266,6 +270,9 @@
   },
   "active": "629e13df43f94497",
   "lastOpenFiles": [
+    "dev/tags",
+    "tags",
+    "09-Data/001-League of Legends Match Data Structure.md",
     "gemini.md",
     "01-기획/002-Technical Implementation Plan.md",
     "00-context_history/25-07-09-1744-lol_analyzer.md",
@@ -277,7 +284,6 @@
     "01-기획/002-Technical Implementation Plan - Updated.md",
     "01-기획/001-Daily Gaming Report Card - Project Overview.md",
     "09-Data/Phase 2.md",
-    "09-Data/001-League of Legends Match Data Structure.md",
     "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
     "01-기획/003-Development Timeline & Milestones.md",
     "00-context history/25-07-09-1744-lol_analyzer.md",
@@ -285,7 +291,6 @@
     "dev/python/analyzers/lol_analyzer.py",
     "dev/python/analyzers/base.py",
     "dev/python/analyzers/__init__.py",
-    "dev/python/analyzers",
     "09-Data/Phase 3.md",
     "01-기획/006-Go Web Server API Specification.md",
     "01-기획/005-Go Web Server Functional Specification.md",
@@ -301,7 +306,6 @@
     "01-기획/007-Python Functional Specs.md",
     "99-Brainstrom/Architecture Guide.md",
     "99-Brainstrom/Solo Developer's Workflow Guide.md",
-    "99-Brainstrom/Go Chi와 Templ을 사용한 하이브리드 API 예시.md",
     "무제.canvas",
     "Pasted image 20241202102020.png",
     "Pasted image 20241219134714.png",

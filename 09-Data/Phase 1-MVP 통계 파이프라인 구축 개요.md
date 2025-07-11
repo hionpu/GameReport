@@ -47,7 +47,6 @@ Stores the final end-game stats for each player in a match. (10 rows generated p
 | `game_version`         | `VARCHAR(32)`  | Game version (e.g., "14.1.555")                      |
 | `game_duration`        | `INT`          | Game length in seconds                               |
 | `champion_id`          | `INT`          | Champion played                                      |
-| `champion_name`        | `VARCHAR(32)`  | Champion name (for readability)                      |
 | `team_position`        | `VARCHAR(16)`  | Player's role (TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY) |
 | `win`                  | `BOOLEAN`      | True if the player's team won                        |
 | `kills`                | `INT`          | Number of kills                                      |

@@ -10,17 +10,23 @@ class LolAnalyzer(BaseAnalyzer):
     def fetch_data(self, puuid):
         """
         Fetches match data for a given user.
-        For MVP, this returns mock data.
+        For MVP, this returns mock data with a structure that includes
+        all necessary fields for processing.
         """
         print(f"Fetching data for user: {puuid}")
         # Mock structure based on Riot API Match-v5
         return {
+            "metadata": {
+                "matchId": "NA1_1234567890" # Added match_id
+            },
             "info": {
+                "gameVersion": "14.1.555", # Added game_version
                 "gameDuration": 1820,
                 "participants": [
                     {
                         "puuid": f"puuid_{i}",
-                        "championName": f"Champion_{i}",
+                        "championId": 103 + i, # Added champion_id
+                        # "championName" is removed to align with normalized schema
                         "teamPosition": "MIDDLE",
                         "win": i % 2 == 0,
                         "kills": i + 2,
@@ -40,12 +46,14 @@ class LolAnalyzer(BaseAnalyzer):
     def process_data(self, raw_data):
         """
         Processes raw match data to calculate and structure key performance indicators.
-        This transforms the API response into a format that is ready for database insertion.
+        This transforms the API response into a format that is ready for database insertion,
+        ensuring all keys match the 'matches' table schema.
         """
         processed_matches = []
-
-        # Extract game duration and convert to minits for calculations
-        # This is shared values for all participants in the match
+        
+        # Extract shared data points for the match
+        match_id = raw_data['metadata']['matchId']
+        game_version = raw_data['info']['gameVersion']
         duration_minutes = raw_data["info"]["gameDuration"] / 60.0
         if duration_minutes == 0:
             duration_minutes = 1.0
@@ -53,22 +61,26 @@ class LolAnalyzer(BaseAnalyzer):
         for participant in raw_data['info']['participants']:
             # --- KDA ---
             if participant['deaths'] == 0:
-                kda = participant['kills'] + participant['assists']
+                kda = float(participant['kills'] + participant['assists'])
             else: 
-                kda = (participant['kills'] + participant['assists']) / participant['deaths']
+                kda = (participant['kills'] + participant['assists']) / float(participant['deaths'])
             
             # --- Per-Minute Stats ---
-            # should be normalized by game duration
             total_cs = participant['totalMinionsKilled'] + participant['neutralMinionsKilled']
             cs_per_minute = total_cs / duration_minutes
             damage_per_minute = participant['totalDamageDealtToChampions'] / duration_minutes
             gold_per_minute = participant['goldEarned'] / duration_minutes
             vision_score_per_minute = participant['visionScore'] / duration_minutes
 
+            # --- Corrected dictionary structure ---
+            # This now perfectly aligns with the 'matches' table schema.
+            # 'champion_name' has been removed.
             structured_match = {
-                'puuid': participant['puuid'],
+                'match_id': match_id,
+                'user_puuid': participant['puuid'],
+                'game_version': game_version,
                 'game_duration': raw_data['info']['gameDuration'],
-                'champion_name': participant['championName'],
+                'champion_id': participant['championId'],
                 'team_position': participant['teamPosition'],
                 'win': participant['win'],
                 'kills': participant['kills'],
@@ -93,9 +105,8 @@ class LolAnalyzer(BaseAnalyzer):
         """            
         print("Saving data to database...")
         for match in processed_data:
-            print(f"Saving match: {match['puuid']}")
-            print("Data saved")
+            print(f"Saving match: {match['user_puuid']} in match {match['match_id']}")
+        print("Data saved")
             
     def generate_insights(self, processed_data):
         pass
-
