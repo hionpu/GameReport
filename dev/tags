@@ -4,174 +4,29 @@
 !_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
 !_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
-!_TAG_PROC_CWD	/mnt/d/PortableGit/GameReport/dev/	//
+!_TAG_PROC_CWD	/mnt/e/Projects/GameReport/dev/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	//
-#mobile-menu	go/web/static/css/custom.css	/^#mobile-menu {$/;"	i
-.achievement-glow	go/web/static/css/custom.css	/^.achievement-glow {$/;"	c
-.animate-spin	go/web/static/css/custom.css	/^.animate-spin {$/;"	c
-.bg-purple-accent	go/web/static/css/custom.css	/^.bg-purple-accent { $/;"	c
-.bg-purple-bg	go/web/static/css/custom.css	/^.bg-purple-bg { $/;"	c
-.bg-purple-primary	go/web/static/css/custom.css	/^.bg-purple-primary { $/;"	c
-.bg-purple-secondary	go/web/static/css/custom.css	/^.bg-purple-secondary { $/;"	c
-.border-purple-100	go/web/static/css/custom.css	/^.border-purple-100 { $/;"	c
-.border-purple-200	go/web/static/css/custom.css	/^.border-purple-200 { $/;"	c
-.border-purple-primary	go/web/static/css/custom.css	/^.border-purple-primary { $/;"	c
-.btn-loading	go/web/static/css/custom.css	/^.btn-loading {$/;"	c
-.btn-loading::after	go/web/static/css/custom.css	/^.btn-loading::after {$/;"	c
-.card-hover	go/web/static/css/custom.css	/^.card-hover {$/;"	c
-.card-hover:hover	go/web/static/css/custom.css	/^.card-hover:hover {$/;"	c
-.custom-scrollbar	go/web/static/css/custom.css	/^.custom-scrollbar {$/;"	c
-.custom-scrollbar::-webkit-scrollbar	go/web/static/css/custom.css	/^.custom-scrollbar::-webkit-scrollbar {$/;"	c
-.custom-scrollbar::-webkit-scrollbar-thumb	go/web/static/css/custom.css	/^.custom-scrollbar::-webkit-scrollbar-thumb {$/;"	c
-.custom-scrollbar::-webkit-scrollbar-thumb:hover	go/web/static/css/custom.css	/^.custom-scrollbar::-webkit-scrollbar-thumb:hover {$/;"	c
-.custom-scrollbar::-webkit-scrollbar-track	go/web/static/css/custom.css	/^.custom-scrollbar::-webkit-scrollbar-track {$/;"	c
-.error-message	go/web/static/css/custom.css	/^.error-message {$/;"	c
-.focus	go/web/static/css/custom.css	/^.focus\\:ring-2:focus {$/;"	c
-.focus	go/web/static/css/custom.css	/^.focus\\:ring-purple-primary:focus { $/;"	c
-.from-purple-50	go/web/static/css/custom.css	/^.from-purple-50 { $/;"	c
-.from-purple-600	go/web/static/css/custom.css	/^.from-purple-600 { $/;"	c
-.hover	go/web/static/css/custom.css	/^.hover\\:bg-purple-600:hover { $/;"	c
-.hover	go/web/static/css/custom.css	/^.hover\\:text-purple-600:hover { $/;"	c
-.hover	go/web/static/css/custom.css	/^.hover\\:text-purple-primary:hover { $/;"	c
-.htmx-indicator	go/web/static/css/custom.css	/^.htmx-indicator {$/;"	c
-.htmx-request .htmx-indicator	go/web/static/css/custom.css	/^.htmx-request .htmx-indicator {$/;"	c
-.htmx-request.htmx-indicator	go/web/static/css/custom.css	/^.htmx-request.htmx-indicator {$/;"	c
-.htmx-settling	go/web/static/css/custom.css	/^.htmx-settling {$/;"	c
-.mobile-full	go/web/static/css/custom.css	/^    .mobile-full {$/;"	c
-.mobile-stack	go/web/static/css/custom.css	/^    .mobile-stack {$/;"	c
-.mobile-text-center	go/web/static/css/custom.css	/^    .mobile-text-center {$/;"	c
-.progress-bar	go/web/static/css/custom.css	/^.progress-bar {$/;"	c
-.success-message	go/web/static/css/custom.css	/^.success-message {$/;"	c
-.text-purple-primary	go/web/static/css/custom.css	/^.text-purple-primary { $/;"	c
-.text-purple-secondary	go/web/static/css/custom.css	/^.text-purple-secondary { $/;"	c
-.to-purple-100	go/web/static/css/custom.css	/^.to-purple-100 { $/;"	c
-.to-purple-700	go/web/static/css/custom.css	/^.to-purple-700 { $/;"	c
-.transition-colors	go/web/static/css/custom.css	/^.transition-colors {$/;"	c
-:bg-purple-600:hover	go/web/static/css/custom.css	/^.hover\\:bg-purple-600:hover { $/;"	s
-:ring-2:focus	go/web/static/css/custom.css	/^.focus\\:ring-2:focus {$/;"	s
-:ring-purple-primary:focus	go/web/static/css/custom.css	/^.focus\\:ring-purple-primary:focus { $/;"	s
-:text-purple-600:hover	go/web/static/css/custom.css	/^.hover\\:text-purple-600:hover { $/;"	s
-:text-purple-primary:hover	go/web/static/css/custom.css	/^.hover\\:text-purple-primary:hover { $/;"	s
-AI Analyzes Your Data	go/web/templates/home.html	/^                <h3 class="text-xl font-bold text-gray-900 mb-4">AI Analyzes Your Data<\/h3>$/;"	j
-APIResponse	go/internal/models/models.go	/^type APIResponse struct {$/;"	s	package:models
-Achievement System	go/web/templates/home.html	/^                <h3 class="text-xl font-bold text-gray-900 mb-4">Achievement System<\/h3>$/;"	j
-Analysis Results for {{.SummonerName}}	go/web/templates/components/analysis-result.html	/^        <h2 class="text-2xl font-bold text-gray-900 mb-2">Analysis Results for {{.SummonerName}}/;"	i
-BaseAnalyzer	python/analyzers/base.py	/^class BaseAnalyzer(ABC):$/;"	c
-CORS	go/internal/middleware/middleware.go	/^func CORS() func(next http.Handler) http.Handler {$/;"	f	package:middleware	typeref:typename:func(next http.Handler) http.Handler
-Config	go/internal/config/config.go	/^type Config struct {$/;"	s	package:config
-ConnMaxLifetime	go/internal/db/supabase.go	/^	ConnMaxLifetime time.Duration$/;"	m	struct:db.DBConfig	typeref:typename:time.Duration
-Connected	go/internal/models/models.go	/^	Connected bool   `json:"connected"`$/;"	m	struct:models.SupabaseHealth	typeref:typename:bool
-Connections	go/internal/models/models.go	/^	Connections map[string]interface{} `json:"connections"`$/;"	m	struct:models.DatabaseHealth	typeref:typename:map[string]interface{}
-CurrentDate	go/internal/models/models.go	/^	CurrentDate string                 `json:"current_date"`$/;"	m	struct:models.PageData	typeref:typename:string
-DB	go/internal/db/supabase.go	/^	*sql.DB$/;"	M	struct:db.DB	typeref:typename:*sql.DB
-DB	go/internal/db/supabase.go	/^type DB struct {$/;"	s	package:db
-DBConfig	go/internal/db/supabase.go	/^type DBConfig struct {$/;"	s	package:db
-DBHandler	python/database/db_handler.py	/^class DBHandler:$/;"	c
-Daily Performance Analysis	go/web/templates/home.html	/^                <h3 class="text-xl font-bold text-gray-900 mb-4">Daily Performance Analysis<\/h3/;"	j
-Data	go/internal/models/models.go	/^	Data        map[string]interface{} `json:"data,omitempty"`$/;"	m	struct:models.PageData	typeref:typename:map[string]interface{}
-Data	go/internal/models/models.go	/^	Data    interface{} `json:"data,omitempty"`$/;"	m	struct:models.APIResponse	typeref:typename:interface{}
-Database	go/internal/models/models.go	/^	Database  DatabaseHealth         `json:"database"`$/;"	m	struct:models.HealthStatus	typeref:typename:DatabaseHealth
-DatabaseHealth	go/internal/models/models.go	/^type DatabaseHealth struct {$/;"	s	package:models
-DatabaseURL	go/internal/config/config.go	/^	DatabaseURL string$/;"	m	struct:config.Config	typeref:typename:string
-Details	go/internal/models/models.go	/^	Details   map[string]interface{} `json:"details,omitempty"`$/;"	m	struct:models.HealthStatus	typeref:typename:map[string]interface{}
-Enter Your Summoner Name	go/web/templates/home.html	/^                <h3 class="text-xl font-bold text-gray-900 mb-4">Enter Your Summoner Name<\/h3>$/;"	j
-Environment	go/internal/config/config.go	/^	Environment string$/;"	m	struct:config.Config	typeref:typename:string
-Error	go/internal/models/models.go	/^	Error   string      `json:"error,omitempty"`$/;"	m	struct:models.APIResponse	typeref:typename:string
-Free	go/web/templates/home.html	/^                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Free<\/h3>$/;"	j
-Get Your Daily Report	go/web/templates/home.html	/^                <h3 class="text-xl font-bold text-gray-900 mb-4">Get Your Daily Report<\/h3>$/;"	j
-GetDatabaseStatistics	go/internal/db/supabase.go	/^func (d *DB) GetDatabaseStatistics() map[string]interface{} {$/;"	f	struct:db.DB	typeref:typename:map[string]interface{}
-Handler	go/internal/handlers/handlers.go	/^type Handler struct {$/;"	s	package:handlers
-HealthCheck	go/internal/db/supabase.go	/^func (d *DB) HealthCheck() error {$/;"	f	struct:db.DB	typeref:typename:error
-HealthCheck	go/internal/handlers/handlers.go	/^func (h *Handler) HealthCheck(w http.ResponseWriter, r *http.Request) {$/;"	f	struct:handlers.Handler
-HealthStatus	go/internal/models/models.go	/^type HealthStatus struct {$/;"	s	package:models
-Home	go/internal/handlers/handlers.go	/^func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {$/;"	f	struct:handlers.Handler
-How It Works	go/web/templates/home.html	/^            <h2 class="text-4xl font-bold text-gray-900 mb-4">How It Works<\/h2>$/;"	i
-Latency	go/internal/models/models.go	/^	Latency     string                 `json:"latency"`$/;"	m	struct:models.DatabaseHealth	typeref:typename:string
-LoadConfig	go/internal/config/config.go	/^func LoadConfig() (*Config) {$/;"	f	package:config	typeref:typename:(*Config)
-Logger	go/internal/middleware/middleware.go	/^func Logger() func(next http.Handler) http.Handler {$/;"	f	package:middleware	typeref:typename:func(next http.Handler) http.Handler
-LolAnalyzer	python/analyzers/lol_analyzer.py	/^class LolAnalyzer(BaseAnalyzer):$/;"	c
-MaxIdleConns	go/internal/db/supabase.go	/^	MaxIdleConns    int$/;"	m	struct:db.DBConfig	typeref:typename:int
-MaxOpenConns	go/internal/db/supabase.go	/^	MaxOpenConns    int$/;"	m	struct:db.DBConfig	typeref:typename:int
-Message	go/internal/models/models.go	/^	Message string      `json:"message"`$/;"	m	struct:models.APIResponse	typeref:typename:string
-NewDB	go/internal/db/supabase.go	/^func NewDB(config DBConfig) (*DB, error) {$/;"	f	package:db	typeref:typename:(*DB, error)
-NewHandler	go/internal/handlers/handlers.go	/^func NewHandler(cfg *config.Config, db *db.DB) (*Handler, error) {$/;"	f	package:handlers	typeref:typename:(*Handler, error)
-NotFound	go/internal/handlers/handlers.go	/^func (h *Handler) NotFound(w http.ResponseWriter, r *http.Request) {$/;"	f	struct:handlers.Handler
-PageData	go/internal/models/models.go	/^type PageData struct {$/;"	s	package:models
-Port	go/internal/config/config.go	/^	Port string$/;"	m	struct:config.Config	typeref:typename:string
-Powerful Features for Better Gaming	go/web/templates/home.html	/^            <h2 class="text-4xl font-bold text-gray-900 mb-4">Powerful Features for Better Gamin/;"	i
-Premium	go/web/templates/home.html	/^                    <h3 class="text-2xl font-bold mb-2">Premium<\/h3>$/;"	j
-Ready to Level Up Your Gaming?	go/web/templates/home.html	/^        <h2 class="text-4xl font-bold text-white mb-4">Ready to Level Up Your Gaming?<\/h2>$/;"	i
-Ready to get your personalized report?	go/web/templates/components/sample-report.html	/^            <h3 class="text-lg font-semibold text-gray-900 mb-2">Ready to get your personalized /;"	j
-Recovery	go/internal/middleware/middleware.go	/^func Recovery() func(next http.Handler) http.Handler {$/;"	f	package:middleware	typeref:typename:func(next http.Handler) http.Handler
-Sample Analysis Report	go/web/templates/components/sample-report.html	/^        <h2 class="text-2xl font-bold text-gray-900 mb-2">Sample Analysis Report<\/h2>$/;"	i
-Simple Pricing	go/web/templates/home.html	/^            <h2 class="text-4xl font-bold text-gray-900 mb-4">Simple Pricing<\/h2>$/;"	i
-Single Match Deep Dive	go/web/templates/home.html	/^                <h3 class="text-xl font-bold text-gray-900 mb-4">Single Match Deep Dive<\/h3>$/;"	j
-Status	go/internal/models/models.go	/^	Status      string                 `json:"status"`$/;"	m	struct:models.DatabaseHealth	typeref:typename:string
-Status	go/internal/models/models.go	/^	Status    string                 `json:"status"`$/;"	m	struct:models.HealthStatus	typeref:typename:string
-Status	go/internal/models/models.go	/^	Status    string `json:"status"`$/;"	m	struct:models.SupabaseHealth	typeref:typename:string
-Success	go/internal/models/models.go	/^	Success bool        `json:"success"`$/;"	m	struct:models.APIResponse	typeref:typename:bool
-Supabase	go/internal/models/models.go	/^	Supabase  SupabaseHealth         `json:"supabase"`$/;"	m	struct:models.HealthStatus	typeref:typename:SupabaseHealth
-SupabaseAnonKey	go/internal/config/config.go	/^	SupabaseAnonKey string$/;"	m	struct:config.Config	typeref:typename:string
-SupabaseHealth	go/internal/models/models.go	/^type SupabaseHealth struct {$/;"	s	package:models
-SupabaseServiceRoleKey	go/internal/config/config.go	/^	SupabaseServiceRoleKey string$/;"	m	struct:config.Config	typeref:typename:string
-SupabaseURL	go/internal/config/config.go	/^	SupabaseURL string$/;"	m	struct:config.Config	typeref:typename:string
-Timeout	go/internal/middleware/middleware.go	/^func Timeout(duration time.Duration) func(next http.Handler) http.Handler {$/;"	f	package:middleware	typeref:typename:func(next http.Handler) http.Handler
-Timestamp	go/internal/models/models.go	/^	Timestamp time.Time              `json:"timestamp"`$/;"	m	struct:models.HealthStatus	typeref:typename:time.Time
-Title	go/internal/models/models.go	/^	Title       string                 `json:"title"`$/;"	m	struct:models.PageData	typeref:typename:string
-Today's Report	go/web/templates/home.html	/^                        <h3 class="text-lg font-bold text-gray-900 mb-2">Today's Report<\/h3>$/;"	j
-URL	go/internal/db/supabase.go	/^	URL             string$/;"	m	struct:db.DBConfig	typeref:typename:string
-URL	go/internal/models/models.go	/^	URL       string `json:"url"`$/;"	m	struct:models.SupabaseHealth	typeref:typename:string
-Validate	go/internal/config/config.go	/^func (c *Config) Validate() error {$/;"	f	struct:config.Config	typeref:typename:error
-Version	go/internal/models/models.go	/^	Version     string                 `json:"version"`$/;"	m	struct:models.PageData	typeref:typename:string
-Version	go/internal/models/models.go	/^	Version   string                 `json:"version"`$/;"	m	struct:models.HealthStatus	typeref:typename:string
-Your Daily Gaming Report Card	go/web/templates/home.html	/^                <\/h1>$/;"	h
-__init__	python/analyzers/base.py	/^    def __init__(self, puuid: str):$/;"	m	class:BaseAnalyzer
-__init__	python/analyzers/lol_analyzer.py	/^    def __init__(self, api_key):$/;"	m	class:LolAnalyzer
-__init__	python/database/db_handler.py	/^    def __init__(self):$/;"	m	class:DBHandler
-analysis-result	go/web/templates/home.html	/^<div id="analysis-result" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">$/;"	I
-app	python/main.py	/^app = FastAPI($/;"	v
-back-to-top	go/web/templates/components/footer.html	/^    id="back-to-top"$/;"	I
-bulk_insert_matches	python/database/db_handler.py	/^    def bulk_insert_matches(self, matches: list):$/;"	m	class:DBHandler
-chimiddleware	go/cmd/server/main.go	/^	chimiddleware "github.com\/go-chi\/chi\/v5\/middleware"$/;"	P	package:github.com/go-chi/chi/v5/middleware
-config	go/internal/config/config.go	/^package config$/;"	p
-config	go/internal/handlers/handlers.go	/^	config   *config.Config$/;"	m	struct:handlers.Handler	typeref:typename:*config.Config
-db	go/internal/db/supabase.go	/^package db$/;"	p
-db	go/internal/handlers/handlers.go	/^	db       *db.DB$/;"	m	struct:handlers.Handler	typeref:typename:*db.DB
-db_handler	python/database/db_handler.py	/^    db_handler = DBHandler()$/;"	v
-features	go/web/templates/home.html	/^<section id="features" class="py-20 bg-white">$/;"	I
-fetch_data	python/analyzers/base.py	/^    def fetch_data(self):$/;"	m	class:BaseAnalyzer
-fetch_data	python/analyzers/lol_analyzer.py	/^    def fetch_data(self, puuid):$/;"	m	class:LolAnalyzer
-generate_insights	python/analyzers/base.py	/^    def generate_insights(self, processed_data):$/;"	m	class:BaseAnalyzer
-generate_insights	python/analyzers/lol_analyzer.py	/^    def generate_insights(self, processed_data):$/;"	m	class:LolAnalyzer
-getEnv	go/internal/config/config.go	/^func getEnv(key, fallback string) string {$/;"	f	package:config	typeref:typename:string
-get_client	python/database/db_handler.py	/^    def get_client(self):$/;"	m	class:DBHandler
-get_user_report	python/analyzers/base.py	/^    def get_user_report(self):$/;"	m	class:BaseAnalyzer
-get_user_report	python/analyzers/lol_analyzer.py	/^    def get_user_report(self):$/;"	m	class:LolAnalyzer
-handlers	go/internal/handlers/handlers.go	/^package handlers$/;"	p
-health_check	python/main.py	/^async def health_check():$/;"	f
-how-it-works	go/web/templates/home.html	/^<section id="how-it-works" class="py-20 bg-purple-50">$/;"	I
-improvement-tips	go/web/templates/components/analysis-result.html	/^    <div id="improvement-tips" class="mt-8 pt-6 border-t border-gray-200">$/;"	I
-loadTemplates	go/internal/handlers/handlers.go	/^func loadTemplates() (*template.Template, error) {$/;"	f	package:handlers	typeref:typename:(*template.Template, error)
-loading	go/web/templates/home.html	/^                    <div id="loading" class="htmx-indicator mt-2">$/;"	I
-main	go/cmd/server/main.go	/^func main() {$/;"	f	package:main
-main	go/cmd/server/main.go	/^package main$/;"	p
-match-details	go/web/templates/components/analysis-result.html	/^    <div id="match-details" class="mt-8">$/;"	I
-middleware	go/internal/middleware/middleware.go	/^package middleware$/;"	p
-mobile-menu	go/web/templates/components/header.html	/^        <div id="mobile-menu" class="md:hidden hidden pb-4">$/;"	I
-models	go/internal/models/models.go	/^package models$/;"	p
-newsletter-result	go/web/templates/components/footer.html	/^                <div id="newsletter-result" class="mt-2">$/;"	I
-port	python/main.py	/^    port = int(os.getenv("PORT", "8001"))$/;"	v
-pricing	go/web/templates/home.html	/^<section id="pricing" class="py-20 bg-white">$/;"	I
-process_data	python/analyzers/base.py	/^    def process_data(self, raw_data):$/;"	m	class:BaseAnalyzer
-process_data	python/analyzers/lol_analyzer.py	/^    def process_data(self, raw_data):$/;"	m	class:LolAnalyzer
-save_data	python/analyzers/lol_analyzer.py	/^    def save_data(self, processed_data):$/;"	m	class:LolAnalyzer
-share-modal	go/web/templates/components/analysis-result.html	/^    <div id="share-modal">$/;"	I
-template	go/internal/handlers/handlers.go	/^	template *template.Template$/;"	m	struct:handlers.Handler	typeref:typename:*template.Template
-webFolderPath	go/internal/handlers/handlers.go	/^var webFolderPath = "..\/..\/web"$/;"	v	package:handlers
-🎮 Recent Match Analysis	go/web/templates/components/sample-report.html	/^            <h3 class="text-lg font-semibold text-gray-900 mb-4">🎮 Recent Match Analysis<\/h3/;"	j
-🎮 Recent Matches	go/web/templates/components/analysis-result.html	/^            <h3 class="text-lg font-semibold text-gray-900 mb-4">🎮 Recent Matches<\/h3>$/;"	j
-📊 Performance Insights	go/web/templates/components/analysis-result.html	/^            <h3 class="text-lg font-semibold text-gray-900 mb-4">📊 Performance Insights<\/h3>$/;"	j
-📊 Performance Overview	go/web/templates/components/sample-report.html	/^            <h3 class="text-lg font-semibold text-gray-900 mb-4">📊 Performance Overview<\/h3>$/;"	j
+BaseAnalyzer	./python/analyzers/base.py	/^class BaseAnalyzer(ABC):$/;"	c
+DBHandler	./python/database/db_handler.py	/^class DBHandler:$/;"	c
+LolAnalyzer	./python/analyzers/lol_analyzer.py	/^class LolAnalyzer(BaseAnalyzer):$/;"	c
+__init__	./python/analyzers/base.py	/^    def __init__(self, puuid: str):$/;"	m	class:BaseAnalyzer
+__init__	./python/analyzers/lol_analyzer.py	/^    def __init__(self, api_key):$/;"	m	class:LolAnalyzer
+__init__	./python/database/db_handler.py	/^    def __init__(self):$/;"	m	class:DBHandler
+app	./python/main.py	/^app = FastAPI($/;"	v
+bulk_insert_matches	./python/database/db_handler.py	/^    def bulk_insert_matches(self, matches: list):$/;"	m	class:DBHandler
+db_handler	./python/database/db_handler.py	/^    db_handler = DBHandler()$/;"	v
+fetch_data	./python/analyzers/base.py	/^    def fetch_data(self):$/;"	m	class:BaseAnalyzer
+fetch_data	./python/analyzers/lol_analyzer.py	/^    def fetch_data(self, puuid):$/;"	m	class:LolAnalyzer
+generate_insights	./python/analyzers/base.py	/^    def generate_insights(self, processed_data):$/;"	m	class:BaseAnalyzer
+generate_insights	./python/analyzers/lol_analyzer.py	/^    def generate_insights(self, processed_data):$/;"	m	class:LolAnalyzer
+get_client	./python/database/db_handler.py	/^    def get_client(self):$/;"	m	class:DBHandler
+get_user_report	./python/analyzers/base.py	/^    def get_user_report(self):$/;"	m	class:BaseAnalyzer
+get_user_report	./python/analyzers/lol_analyzer.py	/^    def get_user_report(self):$/;"	m	class:LolAnalyzer
+health_check	./python/main.py	/^async def health_check():$/;"	f
+port	./python/main.py	/^    port = int(os.getenv("PORT", "8001"))$/;"	v
+process_data	./python/analyzers/base.py	/^    def process_data(self, raw_data):$/;"	m	class:BaseAnalyzer
+process_data	./python/analyzers/lol_analyzer.py	/^    def process_data(self, raw_data):$/;"	m	class:LolAnalyzer
+save_data	./python/analyzers/lol_analyzer.py	/^    def save_data(self, processed_data):$/;"	m	class:LolAnalyzer
