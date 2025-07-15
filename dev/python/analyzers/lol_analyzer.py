@@ -1,8 +1,10 @@
 from .base import BaseAnalyzer
+from database.db_handler import DBHandler
 
 class LolAnalyzer(BaseAnalyzer):
-    def __init__(self, api_key):
+    def __init__(self, api_key: str, db_handler: DBHandler):
         self.api_key = api_key
+        self.db_handler = db_handler
 
     def get_user_report(self):
         pass
@@ -101,12 +103,21 @@ class LolAnalyzer(BaseAnalyzer):
     def save_data(self, processed_data):
         """
         Saves the processed data to the database
-        TODO: Implement this
         """            
         print("Saving data to database...")
-        for match in processed_data:
-            print(f"Saving match: {match['user_puuid']} in match {match['match_id']}")
+        self.db_handler.bulk_insert_matches(processed_data)
         print("Data saved")
             
     def generate_insights(self, processed_data):
         pass
+
+    def run_analysis(self, puuid: str):
+        """
+        Orchestrates the full analysis pipeline for a given user.
+        """
+        print(f"--- Starting analysis for user: {puuid} ---")
+        raw_data = self.fetch_data(puuid)
+        processed_data = self.process_data(raw_data)
+        self.save_data(processed_data)
+        print(f"--- Analysis completed ---")
+        return processed_data

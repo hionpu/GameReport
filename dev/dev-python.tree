@@ -1,0 +1,52 @@
+# Code Tree Structure
+
+Generated from ctags analysis of the codebase.
+
+**Filtered for subpath:** `dev/python`
+
+## Symbol Legend
+
+| Symbol | Type | Description |
+|--------|------|-------------|
+| D | Folder | Directory |
+| F | File/Header | Source file or header file |
+| f | Function/Macro | Standalone function or macro |
+| m | Method | Class/struct method |
+| v | Field/Variable | Struct field or variable |
+| C | Constant | Constant value |
+| c | Class/Namespace | Class, namespace, or wrapper |
+| s | Struct | Struct definition |
+| i | Interface/Heading | Interface or heading |
+| t | Type/Typedef | Type definition or typedef |
+| e | Enum | Enumeration |
+| E | Enum Member | Enumeration member |
+| a | Alias/Property | Type alias, property, or binding |
+| l | Local Variable | Local variable |
+| p | Parameter | Function parameter |
+| o | Object | Object definition |
+| x | External/Zone | External reference or zone |
+| r | Reference | Reference |
+| b | Block | Code block |
+| k | Keyword/Key | Keyword, key, or JSON key |
+| w | Widget | Widget |
+| u | Union | Union type |
+| A | Array | Array |
+| . | CSS Class | CSS class selector |
+| S | CSS Selector | CSS selector |
+| R | CSS Rule | CSS rule |
+| # | CSS/HTML ID | CSS or HTML ID selector |
+| ! | Event | Event |
+| g | Getter | Getter method |
+| h | Heading | Heading |
+| M | Macro | Macro definition |
+| P | Property | Property |
+| T | Typedef | Type definition |
+| L | Label | Label |
+| H | Header | Header file |
+| n | Namespace | Namespace |
+| d | Define | Define/macro |
+| ? | Unknown | Unknown or unrecognized type |
+
+**Compact Format:** `symbol:name{children}` where `->` indicates return type
+
+D:dev{D:python{D:analyzers{F:base.py{c:BaseAnalyzer(ABC){m:__init__(self, puuid: str) m:fetch_data(self) m:generate_insights(self, processed_data) m:get_user_report(self) m:process_data(self, raw_data)}} F:lol_analyzer.py{c:LolAnalyzer(BaseAnalyzer){m:__init__(self, api_key) m:fetch_data(self, puuid) m:generate_insights(self, processed_data) m:get_user_report(self) m:process_data(self, raw_data) m:save_data(self, processed_data)}}} D:database{F:db_handler.py{c:DBHandler{m:__init__(self) m:bulk_insert_matches(self, matches: list) m:get_client(self)} v:db_handler}} F:main.py{v:app f:health_check v:port(os.getenv("PORT", "8001")}}}

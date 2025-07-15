@@ -4,7 +4,7 @@
 !_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
 !_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
-!_TAG_PROC_CWD	/mnt/e/Projects/GameReport/	//
+!_TAG_PROC_CWD	/mnt/d/PortableGit/GameReport/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
@@ -129,7 +129,7 @@ Version	./dev/go/internal/models/models.go	/^	Version     string                
 Version	./dev/go/internal/models/models.go	/^	Version   string                 `json:"version"`$/;"	m	struct:models.HealthStatus	typeref:typename:string
 Your Daily Gaming Report Card	./dev/go/web/templates/home.html	/^                <\/h1>$/;"	h
 __init__	./dev/python/analyzers/base.py	/^    def __init__(self, puuid: str):$/;"	m	class:BaseAnalyzer
-__init__	./dev/python/analyzers/lol_analyzer.py	/^    def __init__(self, api_key):$/;"	m	class:LolAnalyzer
+__init__	./dev/python/analyzers/lol_analyzer.py	/^    def __init__(self, api_key: str, db_handler: DBHandler):$/;"	m	class:LolAnalyzer
 __init__	./dev/python/database/db_handler.py	/^    def __init__(self):$/;"	m	class:DBHandler
 analysis-result	./dev/go/web/templates/home.html	/^<div id="analysis-result" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">$/;"	I
 app	./dev/python/main.py	/^app = FastAPI($/;"	v
@@ -158,6 +158,7 @@ loadTemplates	./dev/go/internal/handlers/handlers.go	/^func loadTemplates() (*te
 loading	./dev/go/web/templates/home.html	/^                    <div id="loading" class="htmx-indicator mt-2">$/;"	I
 main	./dev/go/cmd/server/main.go	/^func main() {$/;"	f	package:main
 main	./dev/go/cmd/server/main.go	/^package main$/;"	p
+main	./dev/python/main.py	/^def main():$/;"	f
 match-details	./dev/go/web/templates/components/analysis-result.html	/^    <div id="match-details" class="mt-8">$/;"	I
 middleware	./dev/go/internal/middleware/middleware.go	/^package middleware$/;"	p
 mobile-menu	./dev/go/web/templates/components/header.html	/^        <div id="mobile-menu" class="md:hidden hidden pb-4">$/;"	I
@@ -167,6 +168,7 @@ port	./dev/python/main.py	/^    port = int(os.getenv("PORT", "8001"))$/;"	v
 pricing	./dev/go/web/templates/home.html	/^<section id="pricing" class="py-20 bg-white">$/;"	I
 process_data	./dev/python/analyzers/base.py	/^    def process_data(self, raw_data):$/;"	m	class:BaseAnalyzer
 process_data	./dev/python/analyzers/lol_analyzer.py	/^    def process_data(self, raw_data):$/;"	m	class:LolAnalyzer
+run_analysis	./dev/python/analyzers/lol_analyzer.py	/^    def run_analysis(self, puuid: str):$/;"	m	class:LolAnalyzer
 save_data	./dev/python/analyzers/lol_analyzer.py	/^    def save_data(self, processed_data):$/;"	m	class:LolAnalyzer
 share-modal	./dev/go/web/templates/components/analysis-result.html	/^    <div id="share-modal">$/;"	I
 template	./dev/go/internal/handlers/handlers.go	/^	template *template.Template$/;"	m	struct:handlers.Handler	typeref:typename:*template.Template
