@@ -1,4 +1,5 @@
-from .base import BaseAnalyzer
+from time import time
+from ..shared.base import BaseAnalyzer
 from database.db_handler import DBHandler
 
 class LolAnalyzer(BaseAnalyzer):
@@ -44,6 +45,20 @@ class LolAnalyzer(BaseAnalyzer):
                 ]
             }
         }
+        
+    def _fetch_match_ids(self, puuid: str) -> list[str] | None:
+        last_match = self.db_handler.get_last_match(puuid)
+        if last_match is None:
+            print(f"No previous matches found for user {puuid}")
+            return None
+        
+        last_match_id, last_match_timestamp = last_match
+
+        
+        
+        
+        
+            
 
     def process_data(self, raw_data):
         """

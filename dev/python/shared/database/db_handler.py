@@ -28,6 +28,26 @@ class DBHandler:
             print(f"✅ {len(matches)} matches inserted successfully")
         except Exception as e:
             print(f"❌ Failed to insert matches: {e}")
+
+    def get_last_match(self, puuid: str) -> tuple[str, int] | None:
+        try:
+            response = self.client.table("matches").select("match_id", "created_at").eq("puuid", puuid).order("created_at", desc=True).limit(1).execute()
+
+            if not response.data:
+                print(f"❌ No matches found for puuid: {puuid}")
+                return None
+            
+            last_match_data = response.data[0]
+            match_id = last_match_data["match_id"]
+            created_at_dt = last_match_data["created_at"]
+            created_at_timestamp = int(created_at_dt.timestamp())
+
+            return (match_id, created_at_timestamp)
+            
+        except Exception as e:
+            print(f"❌ Failed to get last match: {e}")
+            return None
+
             
 if __name__ == '__main__':
     db_handler = DBHandler()

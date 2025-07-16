@@ -158,7 +158,6 @@ loadTemplates	./dev/go/internal/handlers/handlers.go	/^func loadTemplates() (*te
 loading	./dev/go/web/templates/home.html	/^                    <div id="loading" class="htmx-indicator mt-2">$/;"	I
 main	./dev/go/cmd/server/main.go	/^func main() {$/;"	f	package:main
 main	./dev/go/cmd/server/main.go	/^package main$/;"	p
-main	./dev/python/main.py	/^def main():$/;"	f
 match-details	./dev/go/web/templates/components/analysis-result.html	/^    <div id="match-details" class="mt-8">$/;"	I
 middleware	./dev/go/internal/middleware/middleware.go	/^package middleware$/;"	p
 mobile-menu	./dev/go/web/templates/components/header.html	/^        <div id="mobile-menu" class="md:hidden hidden pb-4">$/;"	I
@@ -169,6 +168,7 @@ pricing	./dev/go/web/templates/home.html	/^<section id="pricing" class="py-20 bg
 process_data	./dev/python/analyzers/base.py	/^    def process_data(self, raw_data):$/;"	m	class:BaseAnalyzer
 process_data	./dev/python/analyzers/lol_analyzer.py	/^    def process_data(self, raw_data):$/;"	m	class:LolAnalyzer
 run_analysis	./dev/python/analyzers/lol_analyzer.py	/^    def run_analysis(self, puuid: str):$/;"	m	class:LolAnalyzer
+run_pipeline	./dev/python/run_pipeline.py	/^def run_pipeline():$/;"	f
 save_data	./dev/python/analyzers/lol_analyzer.py	/^    def save_data(self, processed_data):$/;"	m	class:LolAnalyzer
 share-modal	./dev/go/web/templates/components/analysis-result.html	/^    <div id="share-modal">$/;"	I
 template	./dev/go/internal/handlers/handlers.go	/^	template *template.Template$/;"	m	struct:handlers.Handler	typeref:typename:*template.Template
