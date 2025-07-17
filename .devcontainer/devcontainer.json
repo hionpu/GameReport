@@ -1,0 +1,40 @@
+{
+  "name": "GameReport",
+  "dockerComposeFile": "../docker-compose.dev.yml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+  
+  // 설치할 VS Code 확장들
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.pylint",
+        "elixir-lsp.vscode-elixir-ls",
+        "rust-lang.rust-analyzer",
+        "ms-vscode.vscode-json",
+        "ms-vscode-remote.remote-containers"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true
+      }
+    }
+  },
+  
+  // 컨테이너 시작 후 실행할 명령
+  "postCreateCommand": "pip install --user -U gemini-cli && go install github.com/isaacphi/mcp-language-server@latest && echo 'Dev container is ready!'",
+  
+  // 포트 포워딩
+  "forwardPorts": [3000, 4000, 8000],
+  
+  // 컨테이너 내에서 사용할 사용자
+  "remoteUser": "vscode"
+}

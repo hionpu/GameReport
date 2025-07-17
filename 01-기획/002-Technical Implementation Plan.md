@@ -891,3 +891,90 @@ This updated technical implementation provides a solid foundation using Golang (
 ---
 **Last Updated:** July 1, 2025  
 **Status:** Technical Implementation Updated - Golang/Chi/HTMX/Flutter/Supabase Stack
+# Tech Stack Selection
+### Tech Stack Selection
+**Backend:** Elixir/Phoenix (OTP + LiveView) - highly concurrent, fault-tolerant
+**Frontend:** Phoenix LiveView + Alpine.js (reactive, server-rendered)
+**Mobile:** Flutter (cross-platform for iOS/Android)
+**Database:** PostgreSQL (with Phoenix Ecto) + real-time subscriptions
+**AI API:** Google AI API (Gemini models)
+**External APIs:** Riot Games API
+**Deployment:** Fly.io (backend) + Vercel (web assets)
+# Project Structure
+### Project Structure
+
+```
+gaming-report-card/
+├── mix.exs                          # Mix project file
+├── config/                          # Phoenix configuration
+│   ├── config.exs                   # Base config
+│   ├── dev.exs                      # Development config
+│   └── prod.exs                     # Production config
+├── lib/
+│   ├── gaming_report_card/          # Business logic
+│   │   ├── accounts/                # User management
+│   │   ├── analytics/               # Game analytics
+│   │   ├── riot_api/                # Riot API client
+│   │   └── ai_service/              # Google AI integration
+│   ├── gaming_report_card_web/      # Phoenix web layer
+│   │   ├── controllers/             # HTTP controllers
+│   │   ├── live/                    # LiveView modules
+│   │   ├── templates/               # EEx templates
+│   │   └── router.ex                # URL routing
+│   └── gaming_report_card.ex        # Application entry point
+├── priv/
+│   ├── repo/migrations/             # Database migrations
+│   └── static/                      # Static assets
+├── assets/                          # Frontend assets
+│   ├── css/
+│   ├── js/
+│   └── package.json
+└── test/                            # Test files
+```
+# System Architecture
+### System Architecture
+```
+User Browser/Mobile App
+↓
+HTMX Frontend (Fly.io) / Flutter App
+↓
+Elixir/Phoenix API (OTP Supervision)
+↓
+┌─ Riot API  ─┐ ┌─ Google AI API ─┐
+│             │ │                 │
+└─ Match Data ┘ └─  AI Insights   ┘
+↓
+Supabase Database + Auth + Storage
+↓
+Python ML Service (existing)
+```# Core Endpoints
+### Core Endpoints
+```elixir
+# Player search and basic info
+get "/api/players/:summoner_name/:tag_line", PlayerController, :show
+
+# Daily report generation
+post "/api/reports/:summoner_name/:tag_line", ReportController, :create
+
+# User management (premium features)
+post "/api/auth/register", AuthController, :register
+post "/api/auth/login", AuthController, :login
+get "/api/user/profile", UserController, :profile
+
+# Health check
+get "/health", HealthController, :index
+
+# LiveView routes
+live "/", HomeLive
+live "/player/:summoner_name/:tag_line", PlayerLive
+```
+# Data Flow
+### Data Flow
+1. **User Request:** HTMX frontend/Flutter app sends summoner name + tag
+2. **Data Fetch:** Backend queries Riot API for recent matches using Elixir processes
+3. **Analysis:** Process match data for trends using concurrent GenServers
+4. **AI Generation:** Send analysis to Google AI API for insights
+5. **Response:** Return formatted report card to frontend via HTMX updates
+6. **Caching:** Store results in Supabase for 24 hours
+7. **ML Integration:** Python ML service can access same Supabase data# **Database:** PostgreSQL (with Phoenix Ecto) + real-time subscriptions
+**Database:** Supabase (PostgreSQL + real-time + auth + MCP integration)
