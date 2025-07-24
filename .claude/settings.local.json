@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__python-server__definition",
+      "Bash(find:*)"
+    ],
+    "deny": []
+  }
+}

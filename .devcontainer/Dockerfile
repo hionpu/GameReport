@@ -1,12 +1,16 @@
-# 멀티 언어 개발 환경 - Go 포함
+# Multi-language development environment - Including Go
 FROM ubuntu:22.04
 
-# 기본 환경 설정
+# Basic environment setup
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Seoul
 
-# 기본 패키지 설치
+# Install essential utilities first
 RUN apt-get update && apt-get install -y \
+    bash \
+    coreutils \
+    util-linux \
+    procps \
     curl \
     git \
     build-essential \
@@ -18,9 +22,12 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     gnupg \
     lsb-release \
+    vim \
+    nano \
+    jq \
     && rm -rf /var/lib/apt/lists/*
 
-# Python 설치
+# Python installation
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
@@ -28,47 +35,50 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Python 심볼릭 링크 생성
+# Create Python symbolic link
 RUN ln -s /usr/bin/python3 /usr/local/bin/python
 
-# Go 설치
+# Go installation
 RUN wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz \
     && tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz \
     && rm go1.21.0.linux-amd64.tar.gz
 
-# Go 환경 변수 설정
+# Go environment variables setup
 ENV PATH="/usr/local/go/bin:${PATH}"
 ENV GOPATH="/go"
 ENV GOROOT="/usr/local/go"
 
-# Elixir 설치
+# Elixir installation
 RUN apt-get update && apt-get install -y \
     erlang \
     elixir \
     && rm -rf /var/lib/apt/lists/*
 
-# vscode 사용자 생성
+# Create vscode user with proper setup
 RUN groupadd --gid 1000 vscode \
     && useradd --uid 1000 --gid vscode --shell /bin/bash --create-home vscode \
     && echo 'vscode ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# 사용자 전환 후 환경 설정
+# Create directories and set permissions
+RUN mkdir -p /workspace /home/vscode/go \
+    && chown -R vscode:vscode /workspace /home/vscode/go
+
+# Switch to vscode user for remaining setup
 USER vscode
 WORKDIR /home/vscode
 
-# 사용자 환경에서 Go 경로 설정
-ENV PATH="/usr/local/go/bin:/home/vscode/go/bin:${PATH}"
+# User-specific environment variables
+ENV PATH="/usr/local/go/bin:/home/vscode/go/bin:/home/vscode/.local/bin:${PATH}"
 ENV GOPATH="/home/vscode/go"
+ENV GOROOT="/usr/local/go"
 
-# Rust 설치 (사용자 환경)
+# Rust installation (user environment)
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/home/vscode/.cargo/bin:${PATH}"
 
-# 작업 디렉터리 설정
+# Set working directory
 WORKDIR /workspace
-USER root
-RUN chown -R vscode:vscode /workspace
-USER vscode
 
-# 컨테이너 실행 유지
-CMD ["sleep", "infinity"]
+# Use a simpler, more reliable command to keep container running
+ENTRYPOINT ["/bin/bash"]
+CMD ["-c", "while true; do sleep 10; done"]

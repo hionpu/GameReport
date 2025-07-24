@@ -8,16 +8,21 @@ services:
     volumes:
       - .:/workspace:cached
       - devcontainer-vscode-server:/home/vscode/.vscode-server
-    command: sleep infinity
+      - devcontainer-go-modules:/home/vscode/go
     environment:
       - PYTHONPATH=/workspace
       - MIX_ENV=dev
+      - GOPATH=/home/vscode/go
+      - GOROOT=/usr/local/go
     ports:
       - "3000:3000"  # Python Flask/FastAPI
       - "4000:4000"  # Elixir Phoenix
       - "8000:8000"  # Rust web server
     stdin_open: true
     tty: true
+    # Let the Dockerfile handle the command
+    user: vscode
 
 volumes:
   devcontainer-vscode-server:
+  devcontainer-go-modules:

@@ -3,17 +3,17 @@
   "dockerComposeFile": "../docker-compose.dev.yml",
   "service": "devcontainer",
   "workspaceFolder": "/workspace",
-  
+
+  // Add this 'features' block to install Node.js and npm
   "features": {
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.11"
-    }
+    "ghcr.io/devcontainers/features/node:1": {}
   },
   
-  // 설치할 VS Code 확장들
+  // VScode extensions to install
   "customizations": {
     "vscode": {
       "extensions": [
+        "golang.go",
         "ms-python.python",
         "ms-python.pylint",
         "elixir-lsp.vscode-elixir-ls",
@@ -24,17 +24,24 @@
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
         "python.linting.enabled": true,
-        "python.linting.pylintEnabled": true
+        "python.linting.pylintEnabled": true,
+        "go.gopath": "/home/vscode/go",
+        "go.goroot": "/usr/local/go"
       }
     }
   },
+
+  "containerEnv": {
+    "GOPATH": "/home/vscode/go",
+    "GOROOT": "/usr/local/go"
+  },
   
-  // 컨테이너 시작 후 실행할 명령
-  "postCreateCommand": "pip install --user -U gemini-cli && go install github.com/isaacphi/mcp-language-server@latest && echo 'Dev container is ready!'",
+  // Updated command to use npm for gemini-cli
+  "postCreateCommand": "/workspace/.devcontainer/post-create.sh",
   
-  // 포트 포워딩
+  // Port forwarding
   "forwardPorts": [3000, 4000, 8000],
   
-  // 컨테이너 내에서 사용할 사용자
+  // User to use inside the container
   "remoteUser": "vscode"
 }

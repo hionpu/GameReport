@@ -180,25 +180,25 @@ A basic API to serve the aggregated data to the client application.
 # Python Script Structure & Key Functions
 
 
-### C++ Engine Migration Strategy
+### Rust Engine Migration Strategy
 
 **Phase 1 → Phase 2 Migration Plan:**
 - **Phase 1 (MVP):** Use Python scripts for rapid prototyping and MVP launch
-- **Phase 2 (Performance):** Migrate core data processing to high-performance C++ engine
+- **Phase 2 (Performance):** Migrate core data processing to a high-performance Rust engine.
 - **Migration Benefits:** 
-  - 5.7x faster batch processing (Python: ~2.3s, C++: ~0.4s for 10,000 records)
-  - 3.7x memory efficiency (Python: ~45MB, C++: ~12MB peak memory)
-  - 4.2x higher throughput (Python: 500 matches/sec, C++: 2,100 matches/sec)
+  - Significant speed improvements for batch processing.
+  - Memory safety guarantees, reducing bugs and security vulnerabilities.
+  - Excellent concurrency support for parallel data processing.
 
-**C++ Engine Scope for Phase 2:**
-- Statistical calculations and aggregations
-- Correlation analysis between game events
-- Pattern discovery from large datasets
-- Benchmark calculations from professional player data
-- Real-time performance metric calculations
+**Rust Engine Scope for Phase 2:**
+- Statistical calculations and aggregations.
+- Correlation analysis between game events.
+- Pattern discovery from large datasets.
+- Benchmark calculations from professional player data.
+- Real-time performance metric calculations.
 
 **Migration Timeline:**
-- Week 1-2: Design C++ architecture and data structures
-- Week 3-4: Implement core statistical processing engine
-- Week 5-6: Develop Go-C++ integration layer (CGO)
-- Week 7-8: Testing, optimization, and performance validation
+- Week 1-2: Design Rust architecture and data structures using libraries like Polars or Arrow.
+- Week 3-4: Implement core statistical processing engine in Rust.
+- Week 5-6: Develop Elixir-Rust integration layer using a NIF (Native Implemented Function) bridge like Rustler.
+- Week 7-8: Testing, optimization, and performance validation.

@@ -78,7 +78,7 @@ Transform gaming data into actionable daily insights, similar to a "fitness trac
 
 - **Hybrid Dual Server Model:** Adopt a microservice architecture to separate stable API handling from complex data analysis, leveraging the strengths of multiple languages.
     
-    - **Go + Chi (Main Server):** Acts as the user-facing orchestrator. It handles user authentication, API requests, and serving web pages.
+    - **Elixir + Phoenix (Main Server):** Acts as the user-facing orchestrator. It handles user authentication, API requests, and serving web pages.
         
     - **Python + C++ (Analysis/ML Server):** A dual-language analysis engine. Python handles high-level orchestration, API communication, and AI integration. A high-performance C++ component (introduced in Phase 2) handles large-scale, offline batch processing of match data for maximum efficiency and scalability.
         
@@ -88,7 +88,7 @@ Transform gaming data into actionable daily insights, similar to a "fitness trac
 #### **Data Flow**
 
 ```
-User → Go API → Python API → (Riot API + Internal DB + AI API) → Python API → Go API → User
+User → Elixir API → Python API → (Riot API + Internal DB + AI API) → Python API → Elixir API → User
 ```
 
 #### **Data Analysis Strategy**
@@ -255,7 +255,7 @@ User → Go API → Python API → (Riot API + Internal DB + AI API) → Python 
 
 ## 🎯 Next Steps
 
-1. **Technical Planning**: **Define API contracts (request/response specs) between the Go and Python services.**
+1. **Technical Planning**: **Define API contracts (request/response specs) between the Elixir and Python services.**
     
 2. **UI/UX Design**: Create wireframes for the daily report card **and the match deep-dive view.**
     
@@ -263,7 +263,7 @@ User → Go API → Python API → (Riot API + Internal DB + AI API) → Python 
     
 4. **AI Prompt Engineering**: Develop templates for **each analysis type (growth vs. deep-dive).**
     
-5. **Development Setup**: Initialize **separate Go and Python project structures.**
+5. **Development Setup**: Initialize **separate Elixir and Python project structures.**
     
 6. **MVP Development**: Start with the basic prototype.
     
@@ -275,12 +275,12 @@ This focused approach prioritizes execution speed and user value over technical 
 _Last Updated: July 2, 2025_ _Status: Planning Phase - Ready for Development_
 # Technical Approach
 
-#### C++ Engine Integration
-- **High-Performance Computing Layer:** Dedicated C++ engine handles computationally intensive tasks:
+#### Rust Engine Integration
+- **High-Performance Computing Layer:** Dedicated Rust engine handles computationally intensive tasks:
   - Offline batch processing of large match datasets
   - Real-time statistical calculations and aggregations
-  - Memory-efficient data transformations and optimizations
+  - Memory-efficient and safe data transformations and optimizations
   - Complex mathematical computations (correlation analysis, percentile calculations)
-- **Performance Benefits:** 5.7x faster processing than pure Go implementation
-- **Scalability:** Enables processing of millions of match records efficiently
-- **Integration:** Seamless communication with Go API server via CGO interface
+- **Performance Benefits:** Significant performance gains over pure Python, with memory safety guarantees.
+- **Scalability:** Enables processing of millions of match records efficiently.
+- **Integration:** Seamless communication with Elixir API server via a NIF (Native Implemented Function) bridge like Rustler.

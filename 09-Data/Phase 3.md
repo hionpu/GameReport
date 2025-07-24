@@ -19,7 +19,7 @@
 
 1. **ML 데이터셋 구축:**
     
-    - Build the training dataset using the clean, aggregated statistics produced by the **high-performance C++ engine from Phase 2**.
+    - Build the training dataset using the clean, aggregated statistics produced by the **high-performance Rust engine from Phase 2**.
     - This ensures the ML models are trained on a robust, large-scale, and efficiently processed dataset. The data will be further refined (feature scaling, one-hot encoding) using Python scripts.
         
 2. **모델 선택, 학습 및 평가:**
@@ -48,112 +48,97 @@
 - **(핵심 요인 분석):** "AI 모델 분석 결과, 당신의 챔피언은 '첫 전령'을 획득했을 때 승률이 25% 상승하는 가장 중요한 승리 요인으로 나타났습니다."
 
 
-## 4. C++ Engine Integration for ML Pipeline
+## 4. Rust Engine Integration for ML Pipeline
 
-### C++ Engine Role in ML Feature Engineering
+### Rust Engine Role in ML Feature Engineering
 
 **High-Performance Feature Extraction:**
-The C++ engine from Phase 2 becomes crucial for ML model training by providing optimized feature engineering:
+The Rust engine from Phase 2 becomes crucial for ML model training by providing optimized feature engineering:
 
-```cpp
-namespace ml_features {
+```rust
+// Rust code for feature extraction
+mod ml_features {
+    use polars::prelude::*;
 
-class FeatureExtractor {
-public:
-    // Extract features for win prediction models
-    std::vector<float> ExtractMatchFeatures(const MatchData& match);
-    std::vector<float> ExtractTimelineFeatures(const std::vector<TimelineEvent>& events);
-    
-    // Extract features for playstyle clustering
-    PlayerStyleFeatures ExtractPlayerStyleFeatures(const std::string& puuid, int days = 30);
-    
-    // Real-time feature computation for inference
-    std::vector<float> ComputeRealTimeFeatures(const LiveGameData& game_state);
-    
-private:
-    void ComputeStatisticalFeatures(const MatchData& match, std::vector<float>& features);
-    void ComputeTimeseriesFeatures(const std::vector<TimelineEvent>& events, std::vector<float>& features);
-    void ComputePerformanceRatios(const MatchData& match, std::vector<float>& features);
-};
+    pub struct FeatureExtractor;
 
+    impl FeatureExtractor {
+        // Extract features for win prediction models
+        pub fn extract_match_features(match_df: &DataFrame) -> Result<DataFrame>;
+        
+        // Extract features for playstyle clustering
+        pub fn extract_player_style_features(player_matches: &DataFrame) -> Result<DataFrame>;
+        
+        // Real-time feature computation for inference
+        pub fn compute_real_time_features(live_game_state: &Series) -> Result<Series>;
+    }
 }
 ```
 
 ### ML Dataset Preparation Performance
 
-**C++ Engine Benefits for ML:**
-- **Feature Extraction Speed:** 15x faster than Python pandas operations
-- **Memory Efficiency:** 4x less memory usage for large dataset transformations
-- **Parallel Processing:** Multi-threaded feature computation for millions of matches
-- **Real-time Inference:** Sub-millisecond feature extraction for live predictions
+**Rust Engine Benefits for ML:**
+- **Feature Extraction Speed:** Orders of magnitude faster than Python pandas operations.
+- **Memory Efficiency:** 4x-10x less memory usage for large dataset transformations due to zero-copy.
+- **Parallel Processing:** Multi-threaded feature computation for millions of matches out-of-the-box.
+- **Real-time Inference:** Sub-millisecond feature extraction for live predictions.
 
 **Dataset Scale Capabilities:**
-- **Training Data:** Process 10M+ matches for robust model training
-- **Feature Matrix:** Generate 500+ features per match efficiently
-- **Cross-validation:** Rapid k-fold dataset splitting and preprocessing
-- **Online Learning:** Real-time feature updates for adaptive models
+- **Training Data:** Process 10M+ matches for robust model training.
+- **Feature Matrix:** Generate 500+ features per match efficiently.
+- **Cross-validation:** Rapid k-fold dataset splitting and preprocessing.
+- **Online Learning:** Real-time feature updates for adaptive models.
 
-### C++ Engine Enhanced ML Pipeline
+### Rust-Enhanced ML Pipeline
 
 ```python
-# Enhanced ML pipeline with C++ acceleration
+# Enhanced ML pipeline with Rust acceleration
+import rust_feature_extractor as rfe
+import polars as pl
+
 class MLPipeline:
     def __init__(self):
-        self.cpp_feature_extractor = CppFeatureExtractor()
         self.models = {}
         
-    def prepare_training_data(self, match_ids: List[str]):
-        # C++ engine extracts features at high speed
-        features = self.cpp_feature_extractor.extract_batch_features(match_ids)
+    def prepare_training_data(self, match_ids: list[str]):
+        # Rust engine extracts features at high speed
+        feature_df_arrow = rfe.extract_batch_features(match_ids)
+        feature_df = pl.from_arrow(feature_df_arrow)
         
         # Python handles final transformations and model training
-        X_train, y_train = self.preprocess_features(features)
+        X_train, y_train = self.preprocess_features(feature_df)
         return X_train, y_train
         
     def real_time_prediction(self, live_game_data):
-        # C++ engine computes features in real-time
-        features = self.cpp_feature_extractor.compute_realtime_features(live_game_data)
+        # Rust engine computes features in real-time
+        features_arrow = rfe.compute_realtime_features(live_game_data)
+        features = pl.from_arrow(features_arrow)
         
         # Python models make predictions
-        win_probability = self.models['win_predictor'].predict_proba([features])[0][1]
+        win_probability = self.models['win_predictor'].predict_proba(features)[0][1]
         return win_probability
 ```
 
-### Advanced ML Features Enabled by C++ Engine
+### Advanced ML Features Enabled by Rust Engine
 
 **1. Real-time Win Prediction:**
-- Sub-second feature extraction from live game state
-- Continuous model updates as game progresses
-- Memory-efficient sliding window computations
+- Sub-second feature extraction from live game state.
+- Continuous model updates as game progresses.
+- Memory-efficient sliding window computations.
 
 **2. Advanced Playstyle Clustering:**
-- High-dimensional feature spaces (1000+ features)
-- Efficient distance computations for clustering algorithms
-- Real-time player classification based on recent matches
+- High-dimensional feature spaces (1000+ features).
+- Efficient distance computations for clustering algorithms.
+- Real-time player classification based on recent matches.
 
 **3. Anomaly Detection:**
-- Statistical outlier detection in high-dimensional space
-- Real-time performance deviation analysis
-- Pattern-based unusual behavior identification
+- Statistical outlier detection in high-dimensional space.
+- Real-time performance deviation analysis.
+- Pattern-based unusual behavior identification.
 
 **4. Predictive Analytics:**
-- Item build outcome prediction with complex feature interactions
-- Team composition synergy analysis with combinatorial features
-- Meta trend prediction using time-series feature engineering
+- Item build outcome prediction with complex feature interactions.
+- Team composition synergy analysis with combinatorial features.
+- Meta trend prediction using time-series feature engineering.
 
-### Performance Optimization for ML Workloads
-
-**Memory Management:**
-- Custom allocators for ML feature matrices
-- Memory-mapped file access for large training datasets
-- Efficient sparse matrix representations for categorical features
-
-**Compute Optimization:**
-- SIMD vectorization for feature calculations
-- GPU acceleration for large-scale batch processing (via CUDA interop)
-- Parallel pipeline execution for independent feature groups
-
-**Data Pipeline Integration:**
-- Zero-copy data transfer between C++ engine and Python ML frameworks
-- Streaming data processing for continuous model updates
-- Incremental feature computation for online learning scenarios
+This Rust-accelerated ML pipeline provides a significant competitive advantage by enabling more complex models, faster training cycles, and real-time predictive capabilities.

@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "go-server": {
+      "command": "/home/vscode/go/bin/mcp-language-server",
+      "args": [
+        "--workspace", "/workspace/dev/go",
+        "--lsp", "gopls"
+      ],
+      "env": {
+        "PATH": "/home/vscode/go/bin:/usr/local/go/bin:/usr/bin:/bin",
+        "GOPATH": "/home/vscode/go",
+        "GOCACHE": "/home/vscode/.cache/go-build",
+        "GOMODCACHE": "/home/vscode/go/pkg/mod"
+      }
+    },
+    "python-server": {
+      "command": "/home/vscode/go/bin/mcp-language-server",
+      "args": [
+        "--workspace", "/workspace/dev/python",
+        "--lsp", "/home/vscode/.nvm/versions/node/v22.17.0/bin/pyright-langserver",
+        "--", "--stdio"
+      ],
+      "env": {
+        "PATH": "/home/vscode/.nvm/versions/node/v22.17.0/bin:/usr/bin:/bin",
+        "NODE_PATH": "/home/vscode/.nvm/versions/node/v22.17.0/lib/node_modules"
+      }
+    }
+  }
+}

@@ -17,23 +17,23 @@
 
 ## 3. 주요 구현 과업 (Key Implementation Tasks)
 
-1. **Develop High-Performance C++ Engine:**
+1. **Develop High-Performance Rust Engine:**
 
-    - Develop the C++ batch processing tool to perform heavy data aggregation from the raw `matches` and `match_events` tables collected in Phase 1.
-    - This engine will be responsible for parsing raw data and calculating complex, large-scale statistics efficiently.
+    - Develop the Rust batch processing tool to perform heavy data aggregation from the raw `matches` and `match_events` tables collected in Phase 1.
+    - This engine will be responsible for parsing raw data and calculating complex, large-scale statistics efficiently and safely.
 
 2. **Python for Higher-Level Analysis:**
 
-    - Use Python with `Pandas`, `SciPy`, and `Statsmodels` on the **pre-aggregated data** produced by the C++ engine.
+    - Use Python with `Pandas`, `SciPy`, and `Statsmodels` on the **pre-aggregated data** produced by the Rust engine.
     - This allows for rapid development of the final correlation analysis, feature engineering, and pattern discovery logic without being bottlenecked by raw data processing.
 
 3. **패턴 DB 스키마 설계:**
     
-    - 아이템 빌드별 통계를 위한 `item_build_stats` 테이블, 발견된 패턴을 저장할 `discovered_patterns` 테이블 등을 새롭게 설계한다. The C++ engine will populate these tables.
+    - 아이템 빌드별 통계를 위한 `item_build_stats` 테이블, 발견된 패턴을 저장할 `discovered_patterns` 테이블 등을 새롭게 설계한다. The Rust engine will populate these tables.
         
 4. **분석 파이프라인 통합:**
     
-    - The daily pipeline (`run_daily_pipeline.py`) will be updated to orchestrate the execution of the C++ engine first, and then run subsequent Python scripts for higher-level analysis.
+    - The daily pipeline (`run_daily_pipeline.py`) will be updated to orchestrate the execution of the Rust engine first, and then run subsequent Python scripts for higher-level analysis.
         
 
 ## 4. 분석할 패턴 예시
@@ -47,95 +47,85 @@
 - **시야 점수와 생존율의 관계:** 포지션별로 분당 시야 점수와 평균 데스 수의 상관관계.
 
 
-## 4. C++ Engine Detailed Specifications
+## 4. Rust Engine Detailed Specifications
 
-### Core C++ Engine Architecture
+### Core Rust Engine Architecture
 
-```cpp
-// High-level C++ engine structure
-namespace gaming_analytics {
+```rust
+// High-level Rust engine structure
+mod gaming_analytics {
+    use polars::prelude::*;
     
-class BatchProcessor {
-public:
-    // Main batch processing functions
-    void ProcessMatchDataBatch(const std::vector<MatchData>& matches);
-    void ProcessTimelineEventsBatch(const std::vector<TimelineEvent>& events);
-    void CalculateCorrelations(const std::string& analysis_type);
-    
-    // Pattern discovery functions
-    std::vector<Pattern> DiscoverItemBuildPatterns();
-    std::vector<Pattern> DiscoverSkillOrderPatterns();
-    std::vector<Pattern> DiscoverObjectivePatterns();
-    
-private:
-    std::unordered_map<std::string, StatisticalData> aggregated_stats_;
-    std::vector<Pattern> discovered_patterns_;
-};
+    pub struct BatchProcessor {
+        aggregated_stats: DataFrame,
+        discovered_patterns: Vec<Pattern>,
+    }
 
-class PerformanceOptimizer {
-public:
-    // Memory-efficient data structures
-    void OptimizeMemoryLayout();
-    void BuildLookupTables();
-    void CacheFrequentQueries();
-    
-private:
-    std::unordered_map<int, ChampionBenchmark> champion_cache_;
-    std::unordered_map<std::string, ItemBuildStats> item_build_cache_;
-};
-
+    impl BatchProcessor {
+        // Main batch processing functions
+        pub fn process_match_data_batch(&mut self, matches: DataFrame) -> Result<()>;
+        pub fn process_timeline_events_batch(&mut self, events: DataFrame) -> Result<()>;
+        pub fn calculate_correlations(&self, analysis_type: &str) -> Result<DataFrame>;
+        
+        // Pattern discovery functions
+        pub fn discover_item_build_patterns(&self) -> Result<Vec<Pattern>>;
+        pub fn discover_skill_order_patterns(&self) -> Result<Vec<Pattern>>;
+        pub fn discover_objective_patterns(&self) -> Result<Vec<Pattern>>;
+    }
 }
 ```
 
-### C++ Engine Responsibilities in Phase 2
+### Rust Engine Responsibilities in Phase 2
 
 **1. Timeline Data Processing:**
-- Parse `MatchTimelineDTO` events at scale
-- Extract item purchase sequences and timing
-- Analyze skill level-up patterns
-- Process objective acquisition timing and team coordination
+- Parse `MatchTimelineDTO` events at scale using `serde_json`.
+- Extract item purchase sequences and timing.
+- Analyze skill level-up patterns.
+- Process objective acquisition timing and team coordination.
 
 **2. Statistical Correlation Engine:**
-- Calculate Pearson/Spearman correlations between game variables
-- Identify statistically significant patterns (p-value < 0.05)
-- Build multi-dimensional correlation matrices
-- Perform regression analysis for predictive modeling
+- Calculate Pearson/Spearman correlations between game variables.
+- Identify statistically significant patterns (p-value < 0.05).
+- Build multi-dimensional correlation matrices.
+- Perform regression analysis for predictive modeling.
 
 **3. Pattern Discovery Algorithms:**
-- **Item Build Analysis:** Sequence mining for optimal item paths
-- **Skill Order Analysis:** N-gram analysis of skill leveling patterns
-- **Objective Priority Analysis:** Decision tree analysis for objective choices
-- **Team Coordination Analysis:** Synchronization analysis of team actions
+- **Item Build Analysis:** Sequence mining for optimal item paths.
+- **Skill Order Analysis:** N-gram analysis of skill leveling patterns.
+- **Objective Priority Analysis:** Decision tree analysis for objective choices.
+- **Team Coordination Analysis:** Synchronization analysis of team actions.
 
 ### Performance Benchmarks & Specifications
 
 **Processing Capacity:**
-- Timeline Events: 50,000+ events per second
-- Match Data: 10,000+ matches per batch
-- Correlation Analysis: 1,000+ variable pairs per minute
-- Pattern Discovery: Complete analysis of 100K+ matches in under 10 minutes
+- Timeline Events: 100,000+ events per second.
+- Match Data: 20,000+ matches per batch.
+- Correlation Analysis: 5,000+ variable pairs per minute.
+- Pattern Discovery: Complete analysis of 100K+ matches in under 5 minutes.
 
 **Memory Optimization:**
-- Custom memory pools for frequent allocations
-- SIMD instructions for vectorized calculations
-- Cache-friendly data structures (Structure of Arrays)
-- Streaming algorithms for large dataset processing
+- Zero-copy data manipulation with Apache Arrow & Polars.
+- Efficient memory management through Rust's ownership model.
+- Streaming algorithms for large dataset processing.
 
 ### Integration with Python Analysis Layer
 
 ```python
 # Python orchestration layer
+import rust_gaming_analytics as rga
+
 class AnalysisPipeline:
     def __init__(self):
-        self.cpp_engine = CppBatchProcessor()
+        self.rust_engine = rga.BatchProcessor()
         
     def run_phase2_analysis(self):
-        # Step 1: C++ engine processes raw data
-        self.cpp_engine.process_raw_matches()
+        # Step 1: Rust engine processes raw data
+        self.rust_engine.process_raw_matches()
         
-        # Step 2: Python performs high-level analysis
-        aggregated_data = self.cpp_engine.get_aggregated_stats()
-        patterns = self.analyze_patterns_with_scipy(aggregated_data)
+        # Step 2: Python performs high-level analysis on dataframes from Rust
+        aggregated_data_arrow = self.rust_engine.get_aggregated_stats()
+        df = polars.from_arrow(aggregated_data_arrow)
+        patterns = self.analyze_patterns_with_scipy(df)
         
         # Step 3: Store results in database
         self.store_discovered_patterns(patterns)
