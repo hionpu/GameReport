@@ -23,13 +23,13 @@
         "--workspace",
         "/workspace/dev/python",
         "--lsp",
-        "pyright",
+        "/usr/local/share/nvm/versions/node/v22.17.1/bin/pyright-langserver",
         "--",
         "--stdio"
       ],
       "env": {
-        "PATH": "/home/vscode/.nvm/versions/node/v22.17.0/bin:/usr/bin:/bin",
-        "NODE_PATH": "/home/vscode/.nvm/versions/node/v22.17.0/lib/node_modules"
+        "PATH": "/usr/local/share/nvm/versions/node/v22.17.1/bin:/usr/bin:/bin:/usr/local/go/bin",
+        "NODE_PATH": "/usr/local/share/nvm/versions/node/v22.17.1/lib/node_modules"
       }
     },
     "elixir-server": {

@@ -29,6 +29,19 @@ chmod +x "$HOME/.local/elixir-ls/language_server.sh"
 ln -sf "$HOME/.local/elixir-ls/language_server.sh" "$HOME/.local/bin/elixir-ls"
 rm -f elixir-ls-v0.21.0.zip
 
+# Find the pyright-langserver executable and related Node.js paths
+echo "Finding pyright-langserver and Node.js paths..."
+PYRIGHT_PATH=$(find /usr/local/share/nvm/versions/node -name pyright-langserver | head -n 1)
+if [ -z "$PYRIGHT_PATH" ]; then
+    echo "ERROR: pyright-langserver not found under /usr/local/share/nvm/versions/node"
+    exit 1
+fi
+echo "Found pyright-langserver at: $PYRIGHT_PATH"
+
+NODE_BIN_DIR=$(dirname "$PYRIGHT_PATH")
+NODE_VERSION_DIR=$(dirname "$NODE_BIN_DIR")
+NODE_MODULES_PATH="$NODE_VERSION_DIR/lib/node_modules"
+
 # --- Configure Claude Code MCP Servers ---
 echo "--- Configuring Claude Code MCP servers using 'claude mcp add'... ---"
 
@@ -44,8 +57,8 @@ if [ ! -f "/home/vscode/go/bin/gopls" ]; then
     exit 1
 fi
 
-if [ ! -f "/usr/local/share/nvm/versions/node/v22.17.1/bin/pyright-langserver" ]; then
-    echo "ERROR: pyright-langserver not found at /usr/local/share/nvm/versions/node/v22.17.1/bin/pyright-langserver"
+if [ ! -f "$PYRIGHT_PATH" ]; then
+    echo "ERROR: pyright-langserver not found at $PYRIGHT_PATH"
     exit 1
 fi
 
@@ -74,7 +87,7 @@ echo "Adding Python server MCP for Claude..."
 claude mcp add python-server \
     -- /home/vscode/go/bin/mcp-language-server \
     --workspace /workspace/dev/python \
-    --lsp /usr/local/share/nvm/versions/node/v22.17.1/bin/pyright-langserver \
+    --lsp "$PYRIGHT_PATH" \
     -- --stdio
 
 # Elixir Server for Claude
@@ -103,7 +116,7 @@ if [ ! -f "$SETTINGS_FILE" ]; then
 fi
 
 # Use jq to add/update the mcpServers key in ~/.gemini/settings.json
-jq '.mcpServers =
+jq --arg pyright_path "$PYRIGHT_PATH" --arg node_bin_dir "$NODE_BIN_DIR" --arg node_modules_path "$NODE_MODULES_PATH" '.mcpServers =
 {
     "go-server": {
       "command": "/home/vscode/go/bin/mcp-language-server",
@@ -112,8 +125,8 @@ jq '.mcpServers =
     },
     "python-server": {
       "command": "/home/vscode/go/bin/mcp-language-server",
-      "args": ["--workspace", "/workspace/dev/python", "--lsp", "/usr/local/share/nvm/versions/node/v22.17.1/bin/pyright-langserver", "--", "--stdio"],
-      "env": {"PATH": "/usr/bin:/bin:/usr/local/go/bin:/home/vscode/.nvm/versions/node/v22.17.1/bin", "NODE_PATH": "/home/vscode/.nvm/versions/node/v22.17.1/lib/node_modules"}
+      "args": ["--workspace", "/workspace/dev/python", "--lsp", $pyright_path, "--", "--stdio"],
+      "env": {"PATH": ($node_bin_dir + ":/usr/bin:/bin:/usr/local/go/bin"), "NODE_PATH": $node_modules_path}
     },
     "elixir-server": {
         "command": "/home/vscode/go/bin/mcp-language-server",

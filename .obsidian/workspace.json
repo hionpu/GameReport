@@ -173,6 +173,7 @@
   },
   "active": "241b281932638510",
   "lastOpenFiles": [
+    "dev/elixir_test/erl_crash.dump",
     "elixir-ls-v0.21.0.zip",
     "elixir-ls-v0.21.0.zip.1",
     "adsf.txt",
@@ -183,7 +184,6 @@
     "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9i8k49lsp-031tig7-working/dep-graph.part.bin",
     "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9i8k49lsp-031tig7-working",
     "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9i8k49lsp-031tig7.lock",
-    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl",
     "01-기획/002-Technical Implementation Plan - Updated.md",
     "venv/lib/python3.12/site-packages/idna-3.10.dist-info/LICENSE.md",
     "09-Data/Phase 2.md",
