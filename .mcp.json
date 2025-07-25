@@ -1,6 +1,4 @@
 {
-  "selectedAuthType": "oauth-personal",
-  "theme": "Default",
   "mcpServers": {
     "go-server": {
       "type": "stdio",

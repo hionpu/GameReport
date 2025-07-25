@@ -7,6 +7,7 @@
   // Add this 'features' block to install Node.js and npm
   "features": {
     "ghcr.io/devcontainers/features/node:1": {}
+    
   },
   
   // VScode extensions to install
@@ -26,14 +27,19 @@
         "python.linting.enabled": true,
         "python.linting.pylintEnabled": true,
         "go.gopath": "/home/vscode/go",
-        "go.goroot": "/usr/local/go"
+        "go.goroot": "/usr/local/go",
+        "elixirLS.projectDir": "/workspace/dev/elixir",
+        "elixirLS.dialyzerEnabled": false,
+        "elixirLS.fetchDeps": false
       }
     }
   },
 
   "containerEnv": {
     "GOPATH": "/home/vscode/go",
-    "GOROOT": "/usr/local/go"
+    "GOROOT": "/usr/local/go",
+    "ELS_CACHE_DIR": "/home/vscode/.cache/elixir-ls",
+    "ELS_ELIXIR_PATH": "/usr/local/bin/elixir"
   },
   
   // Updated command to use npm for gemini-cli

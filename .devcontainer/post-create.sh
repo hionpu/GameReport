@@ -1,33 +1,94 @@
 #!/bin/bash
 set -e
 
+
+
 echo "--- Starting Post-Create Command ---"
 
 # Ensure HOME is set correctly for subsequent operations in the container
 export HOME="/home/vscode" 
 
-# Install global npm packages
+# Install global npm packages (latest versions)
 echo "--- Installing npm packages (gemini-cli, pyright)... ---"
-npm install -g @google/gemini-cli pyright @anthropic-ai/claude-code
+npm install -g npm@latest
+npm install -g @google/gemini-cli@latest pyright@latest @anthropic-ai/claude-code@latest
 
-# Install Go tools
+# Install Go tools with version logging
 echo "--- Installing Go packages (mcp-language-server, gopls)... ---"
+echo "Go version: $(go version)"
 go install github.com/isaacphi/mcp-language-server@latest
 go install golang.org/x/tools/gopls@latest
+echo "Installed Go tools to: $(go env GOPATH)/bin"
 
 # Install Rust tools
 echo "--- Installing Rust components (rust-analyzer)... ---"
 rustup component add rust-analyzer
 
-# Install ElixirLS
+# Install ElixirLS (latest version with retry logic)
 echo "--- Installing ElixirLS... ---"
-mkdir -p "$HOME/.local/elixir-ls"
-mkdir -p "$HOME/.local/bin"
-wget https://github.com/elixir-lsp/elixir-ls/releases/download/v0.21.0/elixir-ls-v0.21.0.zip
-unzip elixir-ls-v0.21.0.zip -d "$HOME/.local/elixir-ls"
-chmod +x "$HOME/.local/elixir-ls/language_server.sh"
-ln -sf "$HOME/.local/elixir-ls/language_server.sh" "$HOME/.local/bin/elixir-ls"
-rm -f elixir-ls-v0.21.0.zip
+
+install_elixir_ls() {
+    local max_retries=3
+    local retry_count=0
+    
+    while [ $retry_count -lt $max_retries ]; do
+        echo "Attempt $((retry_count + 1)) of $max_retries to install ElixirLS..."
+        
+        LATEST_ELIXIR_INFO=$(curl -s --connect-timeout 10 --max-time 30 https://api.github.com/repos/elixir-lsp/elixir-ls/releases/latest)
+        
+        if [ $? -ne 0 ] || [ -z "$LATEST_ELIXIR_INFO" ]; then
+            echo "Failed to fetch ElixirLS release info, retrying..."
+            retry_count=$((retry_count + 1))
+            sleep 5
+            continue
+        fi
+        
+        DOWNLOAD_URL=$(echo "$LATEST_ELIXIR_INFO" | jq -r '.assets[] | select(.name | endswith(".zip")) | .browser_download_url')
+        
+        if [ -z "$DOWNLOAD_URL" ] || [ "$DOWNLOAD_URL" = "null" ]; then
+            echo "Failed to find ElixirLS download URL, retrying..."
+            retry_count=$((retry_count + 1))
+            sleep 5
+            continue
+        fi
+        
+        echo "Downloading ElixirLS from: $DOWNLOAD_URL"
+        if wget -qO elixir-ls.zip "$DOWNLOAD_URL"; then
+            mkdir -p /home/vscode/.local/elixir-ls /home/vscode/.local/bin
+            if unzip -o elixir-ls.zip -d "$HOME/.local/elixir-ls"; then
+                rm -f elixir-ls.zip
+                chmod +x "$HOME/.local/elixir-ls/language_server.sh"
+                ln -sf "$HOME/.local/elixir-ls/language_server.sh" "$HOME/.local/bin/elixir-ls"
+                echo "ElixirLS installed successfully"
+                return 0
+            fi
+        fi
+        
+        retry_count=$((retry_count + 1))
+        echo "Installation failed, retrying in 5 seconds..."
+        sleep 5
+    done
+    
+    echo "ERROR: Failed to install ElixirLS after $max_retries attempts"
+    return 1
+}
+
+install_elixir_ls || exit 1
+
+# echo "--- Installing ElixirLS... ---"
+# mkdir -p "$HOME/.local/elixir-ls"
+# mkdir -p "$HOME/.local/bin"
+# mkdir -p "$HOME/.cache/elixir-ls"
+# ELIXIR_LS_VERSION=$(curl -s https://api.github.com/repos/elixir-lsp/elixir-ls/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+# wget "https://github.com/elixir-lsp/elixir-ls/releases/download/${ELIXIR_LS_VERSION}/elixir-ls-${ELIXIR_LS_VERSION}.zip"
+# unzip "elixir-ls-${ELIXIR_LS_VERSION}.zip" -d "$HOME/.local/elixir-ls"
+# chmod +x "$HOME/.local/elixir-ls/language_server.sh"
+# ln -sf "$HOME/.local/elixir-ls/language_server.sh" "$HOME/.local/bin/elixir-ls"
+# rm -f "elixir-ls-${ELIXIR_LS_VERSION}.zip"
+
+# Set ElixirLS environment variables
+# export ELS_CACHE_DIR="$HOME/.cache/elixir-ls"
+# export ELS_ELIXIR_PATH="/usr/local/bin/elixir"
 
 # Find the pyright-langserver executable and related Node.js paths
 echo "Finding pyright-langserver and Node.js paths..."
@@ -73,18 +134,18 @@ if [ ! -f "/home/vscode/.cargo/bin/rust-analyzer" ]; then
 fi
 
 # Create workspace directories if they don't exist
-mkdir -p /workspace/dev/go /workspace/dev/python /workspace/dev/elixir_test /workspace/dev/rust
+mkdir -p /workspace/dev/go /workspace/dev/python /workspace/dev/elixir /workspace/dev/rust
 
 # Go Server for Claude
 echo "Adding Go server MCP for Claude..."
-claude mcp add go-server \
+claude mcp add go-server -s project\
     -- /home/vscode/go/bin/mcp-language-server \
     --workspace /workspace/dev/go \
     --lsp /home/vscode/go/bin/gopls
 
 # Python Server for Claude
 echo "Adding Python server MCP for Claude..."
-claude mcp add python-server \
+claude mcp add python-server -s project\
     -- /home/vscode/go/bin/mcp-language-server \
     --workspace /workspace/dev/python \
     --lsp "$PYRIGHT_PATH" \
@@ -92,52 +153,42 @@ claude mcp add python-server \
 
 # Elixir Server for Claude
 echo "Adding Elixir server MCP for Claude..."
-claude mcp add elixir-server \
+claude mcp add elixir-server -s project\
     -- /home/vscode/go/bin/mcp-language-server \
-    --workspace /workspace/dev/elixir_test \
+    --workspace /workspace/dev/elixir \
     --lsp /home/vscode/.local/bin/elixir-ls
 
 # Rust Server for Claude
 echo "Adding Rust server MCP for Claude..."
-claude mcp add rust-server \
+claude mcp add rust-server -s project\
     -- /home/vscode/go/bin/mcp-language-server \
     --workspace /workspace/dev/rust \
     --lsp /home/vscode/.cargo/bin/rust-analyzer
 
 # --- Configure Gemini Code Assist MCP Servers ---
-echo "--- Configuring Gemini Code Assist MCP servers via ~/.gemini/settings.json... ---"
+echo "--- Configuring Gemini Code Assist MCP servers via /workspace/.gemini/settings.json... ---"
 
-# Ensure ~/.gemini/settings.json exists
-SETTINGS_DIR="$HOME/.gemini"
-SETTINGS_FILE="$SETTINGS_DIR/settings.json"
-mkdir -p "$SETTINGS_DIR"
-if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "{}" > "$SETTINGS_FILE"
+# Ensure /workspace/.gemini/settings.json exists
+GEMINI_SETTINGS_DIR="/workspace/.gemini"
+GEMINI_SETTINGS_FILE="$GEMINI_SETTINGS_DIR/settings.json"
+CLAUDE_MCP_SETTINGS_FILE="/workspace/.mcp.json"
+
+mkdir -p "$GEMINI_SETTINGS_DIR"
+if [ ! -f "$GEMINI_SETTINGS_FILE" ]; then
+    echo "{}" > "$GEMINI_SETTINGS_FILE"
 fi
 
-# Use jq to add/update the mcpServers key in ~/.gemini/settings.json
-jq --arg pyright_path "$PYRIGHT_PATH" --arg node_bin_dir "$NODE_BIN_DIR" --arg node_modules_path "$NODE_MODULES_PATH" '.mcpServers =
-{
-    "go-server": {
-      "command": "/home/vscode/go/bin/mcp-language-server",
-      "args": ["--workspace", "/workspace/dev/go", "--lsp", "gopls"],
-      "env": {"PATH": "/home/vscode/go/bin:/usr/local/go/bin:/usr/bin:/bin", "GOPATH": "/home/vscode/go", "GOCACHE": "/home/vscode/.cache/go-build", "GOMODCACHE": "/home/vscode/go/pkg/mod"}
-    },
-    "python-server": {
-      "command": "/home/vscode/go/bin/mcp-language-server",
-      "args": ["--workspace", "/workspace/dev/python", "--lsp", $pyright_path, "--", "--stdio"],
-      "env": {"PATH": ($node_bin_dir + ":/usr/bin:/bin:/usr/local/go/bin"), "NODE_PATH": $node_modules_path}
-    },
-    "elixir-server": {
-        "command": "/home/vscode/go/bin/mcp-language-server",
-        "args": ["--workspace", "/workspace/dev/elixir_test", "--lsp", "/home/vscode/.local/bin/elixir-ls"],
-        "env": {"PATH": "/home/vscode/.local/bin:/usr/bin:/bin"}
-    },
-    "rust-server": {
-        "command": "/home/vscode/go/bin/mcp-language-server",
-        "args": ["--workspace", "/workspace/dev/rust", "--lsp", "rust-analyzer"],
-        "env": {"PATH": "$HOME/.cargo/bin:$PATH"}
-    }
-}' "$SETTINGS_FILE" > "$SETTINGS_FILE".tmp && mv "$SETTINGS_FILE".tmp "$SETTINGS_FILE"
+# Check if .mcp.json exists
+if [ ! -f "$CLAUDE_MCP_SETTINGS_FILE" ]; then
+    echo "ERROR: /workspace/.mcp.json not found. Cannot configure Gemini MCP servers."
+    exit 1
+fi
+
+# Use jq to copy mcpServers from .mcp.json to settings.json
+jq --slurp '.[1] * {mcpServers: .[0].mcpServers}' "$CLAUDE_MCP_SETTINGS_FILE" "$GEMINI_SETTINGS_FILE" > "$GEMINI_SETTINGS_FILE".tmp && mv "$GEMINI_SETTINGS_FILE".tmp "$GEMINI_SETTINGS_FILE"
+
+# Run version check
+echo "--- Running version check... ---"
+/workspace/.devcontainer/version-check.sh
 
 echo "--- Dev container is ready! ---"
