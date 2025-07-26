@@ -17,10 +17,10 @@
         "golang.go",
         "ms-python.python",
         "ms-python.pylint",
-        "elixir-lsp.vscode-elixir-ls",
+
         "rust-lang.rust-analyzer",
-        "ms-vscode.vscode-json",
-        "ms-vscode-remote.remote-containers"
+
+        "JakeBecker.elixir-ls"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
@@ -43,7 +43,7 @@
   },
   
   // Updated command to use npm for gemini-cli
-  "postCreateCommand": "/workspace/.devcontainer/post-create.sh",
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
   
   // Port forwarding
   "forwardPorts": [3000, 4000, 8000],

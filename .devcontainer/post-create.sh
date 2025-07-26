@@ -24,56 +24,15 @@ echo "Installed Go tools to: $(go env GOPATH)/bin"
 echo "--- Installing Rust components (rust-analyzer)... ---"
 rustup component add rust-analyzer
 
-# Install ElixirLS (latest version with retry logic)
+# Install ElixirLS
 echo "--- Installing ElixirLS... ---"
-
-install_elixir_ls() {
-    local max_retries=3
-    local retry_count=0
-    
-    while [ $retry_count -lt $max_retries ]; do
-        echo "Attempt $((retry_count + 1)) of $max_retries to install ElixirLS..."
-        
-        LATEST_ELIXIR_INFO=$(curl -s --connect-timeout 10 --max-time 30 https://api.github.com/repos/elixir-lsp/elixir-ls/releases/latest)
-        
-        if [ $? -ne 0 ] || [ -z "$LATEST_ELIXIR_INFO" ]; then
-            echo "Failed to fetch ElixirLS release info, retrying..."
-            retry_count=$((retry_count + 1))
-            sleep 5
-            continue
-        fi
-        
-        DOWNLOAD_URL=$(echo "$LATEST_ELIXIR_INFO" | jq -r '.assets[] | select(.name | endswith(".zip")) | .browser_download_url')
-        
-        if [ -z "$DOWNLOAD_URL" ] || [ "$DOWNLOAD_URL" = "null" ]; then
-            echo "Failed to find ElixirLS download URL, retrying..."
-            retry_count=$((retry_count + 1))
-            sleep 5
-            continue
-        fi
-        
-        echo "Downloading ElixirLS from: $DOWNLOAD_URL"
-        if wget -qO elixir-ls.zip "$DOWNLOAD_URL"; then
-            mkdir -p /home/vscode/.local/elixir-ls /home/vscode/.local/bin
-            if unzip -o elixir-ls.zip -d "$HOME/.local/elixir-ls"; then
-                rm -f elixir-ls.zip
-                chmod +x "$HOME/.local/elixir-ls/language_server.sh"
-                ln -sf "$HOME/.local/elixir-ls/language_server.sh" "$HOME/.local/bin/elixir-ls"
-                echo "ElixirLS installed successfully"
-                return 0
-            fi
-        fi
-        
-        retry_count=$((retry_count + 1))
-        echo "Installation failed, retrying in 5 seconds..."
-        sleep 5
-    done
-    
-    echo "ERROR: Failed to install ElixirLS after $max_retries attempts"
-    return 1
-}
-
-install_elixir_ls || exit 1
+mkdir -p /home/vscode/.local/elixir-ls /home/vscode/.local/bin
+ELIXIR_LS_VERSION=$(curl -s https://api.github.com/repos/elixir-lsp/elixir-ls/releases/latest | jq -r '.tag_name')
+wget -q "https://github.com/elixir-lsp/elixir-ls/releases/download/${ELIXIR_LS_VERSION}/elixir-ls-${ELIXIR_LS_VERSION}.zip"
+unzip -q "elixir-ls-${ELIXIR_LS_VERSION}.zip" -d "/home/vscode/.local/elixir-ls"
+chmod +x "/home/vscode/.local/elixir-ls/language_server.sh"
+ln -sf "/home/vscode/.local/elixir-ls/language_server.sh" "/home/vscode/.local/bin/elixir-ls"
+rm -f "elixir-ls-${ELIXIR_LS_VERSION}.zip"
 
 # echo "--- Installing ElixirLS... ---"
 # mkdir -p "$HOME/.local/elixir-ls"
@@ -105,6 +64,12 @@ NODE_MODULES_PATH="$NODE_VERSION_DIR/lib/node_modules"
 
 # --- Configure Claude Code MCP Servers ---
 echo "--- Configuring Claude Code MCP servers using 'claude mcp add'... ---"
+
+# Remove existing .mcp.json if it exists
+if [ -f "/workspace/.mcp.json" ]; then
+    echo "Removing existing .mcp.json..."
+    rm -f "/workspace/.mcp.json"
+fi
 
 # Verify required binaries exist before configuring MCP servers
 echo "Verifying language server binaries..."
@@ -189,6 +154,6 @@ jq --slurp '.[1] * {mcpServers: .[0].mcpServers}' "$CLAUDE_MCP_SETTINGS_FILE" "$
 
 # Run version check
 echo "--- Running version check... ---"
-/workspace/.devcontainer/version-check.sh
+.devcontainer/version-check.sh
 
 echo "--- Dev container is ready! ---"

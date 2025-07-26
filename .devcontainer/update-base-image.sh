@@ -33,7 +33,7 @@ get_latest_elixir_tag() {
 # Function to update Dockerfile
 update_dockerfile() {
     local new_tag="$1"
-    local dockerfile_path="/workspace/.devcontainer/Dockerfile"
+    local dockerfile_path=".devcontainer/Dockerfile"
     
     if [ ! -f "$dockerfile_path" ]; then
         echo "ERROR: Dockerfile not found at $dockerfile_path"
@@ -104,7 +104,7 @@ if [ "$1" = "--dry-run" ]; then
     LATEST_TAG=$(get_latest_elixir_tag)
     echo "Would update to: $LATEST_TAG"
     echo "Current Dockerfile FROM line:"
-    grep "^FROM hexpm/elixir:" /workspace/.devcontainer/Dockerfile 2>/dev/null || echo "Dockerfile not found"
+    grep "^FROM hexpm/elixir:" .devcontainer/Dockerfile 2>/dev/null || echo "Dockerfile not found"
     exit 0
 fi
 

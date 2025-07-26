@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "mcp__python-server__definition",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "mcp__go-server__definition",
+      "mcp__elixir-server__definition",
+      "mcp__rust-server__definition"
     ],
     "deny": []
   },
