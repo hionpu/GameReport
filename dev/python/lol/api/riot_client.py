@@ -19,5 +19,13 @@ class RiotAPIClient:
         response = requests.get(url, headers=self.headers, params=params)
         response.raise_for_status()
         return response.json() 
+    
+    def fetch_match_details(self, match_id: str) -> Optional[Dict]:
+        url = f"{self.base_url}/lol/match/v5/matches/{match_id}"
+        response = requests.get(url, headers=self.headers)
+        if response.status_code == 404:
+            return None
+        response.raise_for_status()
+        return response.json()
 
         

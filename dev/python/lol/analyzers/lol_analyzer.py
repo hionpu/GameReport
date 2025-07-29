@@ -1,12 +1,16 @@
-from time import time
-from ..shared.base import BaseAnalyzer
-from database.db_handler import DBHandler
+from shared.base.base_analyzer import BaseAnalyzer
+from shared.database.db_handler import DBHandler
+from lol.api.riot_client import RiotAPIClient
 
 class LolAnalyzer(BaseAnalyzer):
     def __init__(self, api_key: str, db_handler: DBHandler):
         self.api_key = api_key
         self.db_handler = db_handler
+        self.riot_client = self._initialize_riot_client()
 
+    def _initialize_riot_client(self):
+        return RiotAPIClient(api_key=self.api_key, region="kr")
+    
     def get_user_report(self):
         pass
     
@@ -53,6 +57,7 @@ class LolAnalyzer(BaseAnalyzer):
             return None
         
         last_match_id, last_match_timestamp = last_match
+        
 
         
         
@@ -66,16 +71,14 @@ class LolAnalyzer(BaseAnalyzer):
         This transforms the API response into a format that is ready for database insertion,
         ensuring all keys match the 'matches' table schema.
         """
-        processed_matches = []
-        
+        processed_matches = []  
         # Extract shared data points for the match
         match_id = raw_data['metadata']['matchId']
         game_version = raw_data['info']['gameVersion']
         duration_minutes = raw_data["info"]["gameDuration"] / 60.0
         if duration_minutes == 0:
             duration_minutes = 1.0
-            
-        for participant in raw_data['info']['participants']:
+            for participant in raw_data['info']['participants']:
             # --- KDA ---
             if participant['deaths'] == 0:
                 kda = float(participant['kills'] + participant['assists'])
@@ -131,8 +134,24 @@ class LolAnalyzer(BaseAnalyzer):
         Orchestrates the full analysis pipeline for a given user.
         """
         print(f"--- Starting analysis for user: {puuid} ---")
-        raw_data = self.fetch_data(puuid)
-        processed_data = self.process_data(raw_data)
-        self.save_data(processed_data)
-        print(f"--- Analysis completed ---")
-        return processed_data
+        
+        match_ids = self.riot_client.fetch_match_ids_by_puuid(puuid)
+        if not match_ids:
+            print(f"No matches found for user {puuid}.")
+            return None
+        
+        
+        all_processed_data = []
+        for match_id in match_ids:
+            raw_data = self.riot_client.fetch_match_details(match_id)
+            if raw_data:
+                processed_data = self.process_data(raw_data)
+                all_processed_data.extend(processed_data)
+
+        if not all_processed_data:
+            print(f"No new match data to process for user {puuid}.")
+            return None
+
+        self.save_data(all_processed_data)
+        print("--- Analysis completed ---")
+        return all_processed_data
