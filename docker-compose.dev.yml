@@ -9,6 +9,7 @@ services:
       - .:/workspace:cached
       - devcontainer-vscode-server:/home/vscode/.vscode-server
       - devcontainer-go-modules:/home/vscode/go
+      - ./.gemini_user:/home/vscode/.gemini
     environment:
       - PYTHONPATH=/workspace
       - MIX_ENV=dev
@@ -22,6 +23,9 @@ services:
     tty: true
     # Let the Dockerfile handle the command
     user: vscode
+    network_mode: host
+   
+  
 
 volumes:
   devcontainer-vscode-server:

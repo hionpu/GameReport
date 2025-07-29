@@ -1,6 +1,7 @@
 {
   "name": "GameReport",
   "dockerComposeFile": "../docker-compose.dev.yml",
+  
   "service": "devcontainer",
   "workspaceFolder": "/workspace",
 

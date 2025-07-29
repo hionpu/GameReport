@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-
-
 echo "--- Starting Post-Create Command ---"
 
 # Ensure HOME is set correctly for subsequent operations in the container

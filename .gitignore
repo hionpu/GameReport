@@ -3,3 +3,4 @@ venv/
 
 .smart-env/
 dev/rust/target/
+.gemini_user/
