@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-기획/002-Technical Implementation Plan - ELIXIR.md",
+                "file": "09-Data/001-League of Legends Match Data Structure.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "002-Technical Implementation Plan - ELIXIR"
+              "title": "001-League of Legends Match Data Structure"
             }
           }
         ]
@@ -173,17 +173,18 @@
   },
   "active": "241b281932638510",
   "lastOpenFiles": [
-    "elixir-ls-v0.28.0.zip",
-    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9np2fjch1-1hao41a-f1xrfp3u9v3mygi7xbmlsq4ai/work-products.bin",
-    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9np2fjch1-1hao41a-f1xrfp3u9v3mygi7xbmlsq4ai/dep-graph.bin",
-    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9np2fjch1-1hao41a-f1xrfp3u9v3mygi7xbmlsq4ai/query-cache.bin",
-    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9np2fjch1-1hao41a-f1xrfp3u9v3mygi7xbmlsq4ai",
-    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9np2fjch1-1hao41a-working/dep-graph.part.bin",
-    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9np2fjch1-1hao41a-working",
-    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9np2fjcpr-17s8f63-working/dep-graph.part.bin",
-    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9np2fjcpr-17s8f63-working",
-    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9np2fjch1-1hao41a.lock",
-    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9np2fjcpr-17s8f63.lock",
+    "CLAUDE.md.tmp.48245.1753949324082",
+    "CLAUDE.md.tmp.48245.1753949294296",
+    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9q12ihrmh-1yhmb7w-f1xrfp3u9v3mygi7xbmlsq4ai/work-products.bin",
+    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9q12ihrmh-1yhmb7w-f1xrfp3u9v3mygi7xbmlsq4ai/query-cache.bin",
+    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9q12ihrmh-1yhmb7w-f1xrfp3u9v3mygi7xbmlsq4ai/dep-graph.bin",
+    "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9q12ihrmh-1yhmb7w-f1xrfp3u9v3mygi7xbmlsq4ai",
+    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n/work-products.bin",
+    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n/query-cache.bin",
+    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n/dep-graph.bin",
+    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n",
+    "dev/rust/target/debug/deps/librust_analysis-d4d3d0a136c82d53.rmeta",
+    "01-기획/002-Technical Implementation Plan - ELIXIR.md",
     "99-Brainstrom/DevContainer 문제 해결 보고서.md",
     "01-기획/002-Technical Implementation Plan - Updated.md",
     "venv/lib/python3.12/site-packages/idna-3.10.dist-info/LICENSE.md",
@@ -193,7 +194,6 @@
     "01-기획/009-Proposed Order of Implementation.md",
     "01-기획/004-Launch Strategy & Business Model.md",
     "01-기획/003-Development Timeline & Milestones.md",
-    "01-기획/002-Technical Implementation Plan - ELIXIR.md",
     "01-기획/002-Technical Implementation Plan.md",
     "01-기획/001-Daily Gaming Report Card - Project Overview.md",
     "venv/lib/python3.12/site-packages/httpx-0.28.1.dist-info/licenses/LICENSE.md",

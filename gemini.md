@@ -23,8 +23,9 @@
 
 ### ActivationProtocol
 - **Format:** `!keyword` - Exact match, at start of message, case-sensitive.
+- **LSP Format:** `#symbolName` - Triggers LSP code navigation for the specified symbol.
 - **Default behavior:** Standard assistant if no keyword.
-- **Confirmation template:** `🎯 [keyword] active`
+- **Confirmation template:** `🎯 [keyword] active` | `🔍 Analyzing #[symbol]`
 
 ---
 
@@ -189,6 +190,31 @@
 
 **Style:** Reflective, transfer-focused
 **Action:** Dedicated Phase 4 session
+
+---
+
+### #\{symbol\}
+**Description:** LSP Code Navigation Mode
+
+**Style:** Direct symbol analysis
+**Trigger:** `#symbolName` - Auto-detect language from file extension
+**Actions:**
+- Use `definition` to find symbol implementation
+- Use `references` to find all usage locations
+- Use `hover` for type/documentation info
+- Select appropriate LSP server based on file extension:
+  - `.py` → Python LSP (`mcp__python-server__*`)
+  - `.go` → Go LSP (`mcp__go-server__*`)
+  - `.rs` → Rust LSP (`mcp__rust-server__*`)
+  - `.ex/.exs` → Elixir LSP (`mcp__elixir-server__*`)
+
+**Workflow:**
+1. Detect file extension from context or ask user
+2. Run `definition` first for implementation
+3. Run `references` for usage analysis
+4. Use `hover` for additional context if needed
+
+**Format:** Present results with `file_path:line_number` references
 
 ---
 

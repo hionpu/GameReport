@@ -23,7 +23,6 @@ services:
     tty: true
     # Let the Dockerfile handle the command
     user: vscode
-    network_mode: host
    
   
 

@@ -1,8 +1,18 @@
+"""
+League of Legends Analyzer Module
+"""
+
 from shared.base.base_analyzer import BaseAnalyzer
 from shared.database.db_handler import DBHandler
 from lol.api.riot_client import RiotAPIClient
 
+
+# LolAnalyzer is a concrete implementation of BaseAnalyzer
 class LolAnalyzer(BaseAnalyzer):
+    """
+    League of Legends Analyzer
+    """
+
     def __init__(self, api_key: str, db_handler: DBHandler):
         self.api_key = api_key
         self.db_handler = db_handler
@@ -10,29 +20,29 @@ class LolAnalyzer(BaseAnalyzer):
 
     def _initialize_riot_client(self):
         return RiotAPIClient(api_key=self.api_key, region="kr")
-    
-    def get_user_report(self):
+
+    def get_user_report(self, identifier: str, **kwargs):
+        """Generates a comprehensive report for a specific user."""
         pass
-    
-    def fetch_data(self, puuid):
+
+    def fetch_data(self, identifier: str, **kwargs):
         """
         Fetches match data for a given user.
         For MVP, this returns mock data with a structure that includes
         all necessary fields for processing.
         """
+        puuid = identifier
         print(f"Fetching data for user: {puuid}")
         # Mock structure based on Riot API Match-v5
         return {
-            "metadata": {
-                "matchId": "NA1_1234567890" # Added match_id
-            },
+            "metadata": {"matchId": "NA1_1234567890"},  # Added match_id
             "info": {
-                "gameVersion": "14.1.555", # Added game_version
+                "gameVersion": "14.1.555",  # Added game_version
                 "gameDuration": 1820,
                 "participants": [
                     {
                         "puuid": f"puuid_{i}",
-                        "championId": 103 + i, # Added champion_id
+                        "championId": 103 + i,  # Added champion_id
                         # "championName" is removed to align with normalized schema
                         "teamPosition": "MIDDLE",
                         "win": i % 2 == 0,
@@ -45,25 +55,33 @@ class LolAnalyzer(BaseAnalyzer):
                         "goldEarned": 12000 + i * 200,
                         "visionScore": 25 + i,
                         "controlWardsPlaced": 3 + i % 2,
-                    } for i in range(1, 11) # Simulating 10 players
-                ]
-            }
+                    }
+                    for i in range(1, 11)  # Simulating 10 players
+                ],
+            },
         }
-        
+
     def _fetch_match_ids(self, puuid: str) -> list[str] | None:
         last_match = self.db_handler.get_last_match(puuid)
         if last_match is None:
             print(f"No previous matches found for user {puuid}")
-            return None
-        
-        last_match_id, last_match_timestamp = last_match
-        
+            match_ids = self.riot_client.fetch_match_ids_by_puuid(
+                puuid=puuid, start_time=0, count = 20
+            )
+        else:
+            last_match_id, last_match_timestamp = last_match
 
-        
-        
-        
-        
-            
+            # Fetch matches using startTime = last_match_timestamp
+            match_ids = self.riot_client.fetch_match_ids_by_puuid(
+                puuid=puuid, start_time=last_match_timestamp
+            )
+            if not match_ids:
+                print(
+                    f"No new matches found for user {puuid} since last match {last_match_id}."
+                )
+                return None
+
+        return match_ids
 
     def process_data(self, raw_data):
         """
@@ -71,61 +89,69 @@ class LolAnalyzer(BaseAnalyzer):
         This transforms the API response into a format that is ready for database insertion,
         ensuring all keys match the 'matches' table schema.
         """
-        processed_matches = []  
-        # Extract shared data points for the match
-        match_id = raw_data['metadata']['matchId']
-        game_version = raw_data['info']['gameVersion']
+        processed_matches = []
+        # Extract shared data points for the matc
+        match_id = raw_data["metadata"]["matchId"]
+        game_version = raw_data["info"]["gameVersion"]
+        game_creation = raw_data["info"]["gameCreation"]  # Added game_creation
         duration_minutes = raw_data["info"]["gameDuration"] / 60.0
         if duration_minutes == 0:
             duration_minutes = 1.0
-            for participant in raw_data['info']['participants']:
-            # --- KDA ---
-            if participant['deaths'] == 0:
-                kda = float(participant['kills'] + participant['assists'])
-            else: 
-                kda = (participant['kills'] + participant['assists']) / float(participant['deaths'])
-            
-            # --- Per-Minute Stats ---
-            total_cs = participant['totalMinionsKilled'] + participant['neutralMinionsKilled']
-            cs_per_minute = total_cs / duration_minutes
-            damage_per_minute = participant['totalDamageDealtToChampions'] / duration_minutes
-            gold_per_minute = participant['goldEarned'] / duration_minutes
-            vision_score_per_minute = participant['visionScore'] / duration_minutes
+            for participant in raw_data["info"]["participants"]:
+                # --- KDA ---
+                if participant["deaths"] == 0:
+                    kda = float(participant["kills"] + participant["assists"])
+                else:
+                    kda = (participant["kills"] + participant["assists"]) / float(
+                        participant["deaths"]
+                    )
+                # --- Per-Minute Stats ---
+                total_cs = (
+                    participant["totalMinionsKilled"]
+                    + participant["neutralMinionsKilled"]
+                )
+                cs_per_minute = total_cs / duration_minutes
+                damage_per_minute = (
+                    participant["totalDamageDealtToChampions"] / duration_minutes
+                )
+                gold_per_minute = participant["goldEarned"] / duration_minutes
+                vision_score_per_minute = participant["visionScore"] / duration_minutes
 
-            # --- Corrected dictionary structure ---
-            # This now perfectly aligns with the 'matches' table schema.
-            # 'champion_name' has been removed.
-            structured_match = {
-                'match_id': match_id,
-                'user_puuid': participant['puuid'],
-                'game_version': game_version,
-                'game_duration': raw_data['info']['gameDuration'],
-                'champion_id': participant['championId'],
-                'team_position': participant['teamPosition'],
-                'win': participant['win'],
-                'kills': participant['kills'],
-                'deaths': participant['deaths'],
-                'assists': participant['assists'],
-                'kda': round(kda, 2),
-                'cs_per_min': round(cs_per_minute, 2),
-                'damage_per_min': round(damage_per_minute, 2),
-                'gold_per_min': round(gold_per_minute, 2),
-                'vision_score_per_min': round(vision_score_per_minute, 2),
-                'control_wards_placed': participant['controlWardsPlaced'],
-            }
+                # --- Corrected dictionary structure ---
+                # This now perfectly aligns with the 'matches' table schema.
+                # 'champion_name' has been removed.
+                structured_match = {
+                    "match_id": match_id,
+                    "user_puuid": participant["puuid"],
+                    "game_version": game_version,
+                    "game_creation": game_creation,
+                    "game_duration": raw_data["info"]["gameDuration"],
+                    "champion_id": participant["championId"],
+                    "team_position": participant["teamPosition"],
+                    "win": participant["win"],
+                    "kills": participant["kills"],
+                    "deaths": participant["deaths"],
+                    "assists": participant["assists"],
+                    "kda": round(kda, 2),
+                    "cs_per_min": round(cs_per_minute, 2),
+                    "damage_per_min": round(damage_per_minute, 2),
+                    "gold_per_min": round(gold_per_minute, 2),
+                    "vision_score_per_min": round(vision_score_per_minute, 2),
+                    "control_wards_placed": participant["controlWardsPlaced"],
+                }
 
-            processed_matches.append(structured_match)
+                processed_matches.append(structured_match)
 
         return processed_matches
 
     def save_data(self, processed_data):
         """
         Saves the processed data to the database
-        """            
+        """
         print("Saving data to database...")
         self.db_handler.bulk_insert_matches(processed_data)
         print("Data saved")
-            
+
     def generate_insights(self, processed_data):
         pass
 
@@ -134,13 +160,12 @@ class LolAnalyzer(BaseAnalyzer):
         Orchestrates the full analysis pipeline for a given user.
         """
         print(f"--- Starting analysis for user: {puuid} ---")
-        
-        match_ids = self.riot_client.fetch_match_ids_by_puuid(puuid)
+
+        match_ids = self._fetch_match_ids(puuid)
         if not match_ids:
             print(f"No matches found for user {puuid}.")
             return None
-        
-        
+
         all_processed_data = []
         for match_id in match_ids:
             raw_data = self.riot_client.fetch_match_details(match_id)
