@@ -173,6 +173,7 @@
   },
   "active": "241b281932638510",
   "lastOpenFiles": [
+    "00-context_history/checkpoint-0801.json",
     "dev/python/lol/test_run_pipeline.py",
     "dev/python/lol/run_pipeline.py",
     "09-Data/Phase 2.md",
@@ -190,7 +191,6 @@
     "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9q12ihrmh-1yhmb7w-f1xrfp3u9v3mygi7xbmlsq4ai/dep-graph.bin",
     "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9q12ihrmh-1yhmb7w-f1xrfp3u9v3mygi7xbmlsq4ai",
     "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n/work-products.bin",
-    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n/query-cache.bin",
     "99-Brainstrom/DevContainer 문제 해결 보고서.md",
     "venv/lib/python3.12/site-packages/idna-3.10.dist-info/LICENSE.md",
     "01-기획/009-Proposed Order of Implementation.md",
