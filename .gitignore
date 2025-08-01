@@ -4,3 +4,7 @@ venv/
 .smart-env/
 dev/rust/target/
 .gemini_user/
+
+.env
+__pycache__/
+*.pyc

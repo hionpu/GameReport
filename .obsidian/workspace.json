@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "09-Data/001-League of Legends Match Data Structure.md",
+                "file": "09-Data/Phase 3.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "001-League of Legends Match Data Structure"
+              "title": "Phase 3"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 495.5
   },
   "right": {
     "id": "39923b90f7e301a8",
@@ -173,6 +173,16 @@
   },
   "active": "241b281932638510",
   "lastOpenFiles": [
+    "dev/python/lol/test_run_pipeline.py",
+    "dev/python/lol/run_pipeline.py",
+    "09-Data/Phase 2.md",
+    "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
+    "09-Data/001-League of Legends Match Data Structure.md",
+    "01-기획/002-Technical Implementation Plan - ELIXIR.md",
+    "09-Data/001-League of Legends Match Data Structure.aicomp",
+    "01-기획/Chat/cursor_install_templ_software_package.md",
+    "01-기획/002-Technical Implementation Plan - Updated.md",
+    "01-기획/002-Technical Implementation Plan.md",
     "CLAUDE.md.tmp.48245.1753949324082",
     "CLAUDE.md.tmp.48245.1753949294296",
     "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9q12ihrmh-1yhmb7w-f1xrfp3u9v3mygi7xbmlsq4ai/work-products.bin",
@@ -181,20 +191,11 @@
     "dev/rust/target/debug/incremental/rust_analysis-039e3hffu2lez/s-h9q12ihrmh-1yhmb7w-f1xrfp3u9v3mygi7xbmlsq4ai",
     "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n/work-products.bin",
     "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n/query-cache.bin",
-    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n/dep-graph.bin",
-    "dev/rust/target/debug/incremental/rust_analysis-37rgwieb73zyl/s-h9q12ihrj7-0dxtsis-89mrdvs5fhqp89g5ptd2glr4n",
-    "dev/rust/target/debug/deps/librust_analysis-d4d3d0a136c82d53.rmeta",
-    "01-기획/002-Technical Implementation Plan - ELIXIR.md",
     "99-Brainstrom/DevContainer 문제 해결 보고서.md",
-    "01-기획/002-Technical Implementation Plan - Updated.md",
     "venv/lib/python3.12/site-packages/idna-3.10.dist-info/LICENSE.md",
-    "09-Data/Phase 2.md",
-    "09-Data/Phase 1-MVP 통계 파이프라인 구축 개요.md",
-    "09-Data/001-League of Legends Match Data Structure.md",
     "01-기획/009-Proposed Order of Implementation.md",
     "01-기획/004-Launch Strategy & Business Model.md",
     "01-기획/003-Development Timeline & Milestones.md",
-    "01-기획/002-Technical Implementation Plan.md",
     "01-기획/001-Daily Gaming Report Card - Project Overview.md",
     "venv/lib/python3.12/site-packages/httpx-0.28.1.dist-info/licenses/LICENSE.md",
     "venv/lib/python3.12/site-packages/httpcore-1.0.9.dist-info/licenses/LICENSE.md"
