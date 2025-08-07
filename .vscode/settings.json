@@ -4,7 +4,19 @@
       "_mcp" : true,
       ".Old" : true,
       ".smart-env" : true,
+
+      // Elixir
+      "**/.git": true,
+      "**/.elixir_ls": true,
+      "**/dev/elixir/_build": true,
+      "**/dev/elixir/deps": true,
+
+      // Python
+      "**/.venv": true,
+      "**/venv": true,
       
+
     },
-    "python.analysis.extraPaths": ["./dev/python"]
+    "python.analysis.extraPaths": ["./dev/python"],
+    "elixirLS.projectDir": "dev/elixir"
   }

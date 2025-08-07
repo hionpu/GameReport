@@ -13,15 +13,13 @@ class DBHandler:
     Handles all interactions with the Supabase database.
     """
 
-    def __init__(self):
-        url = os.getenv("SUPABASE_URL")
-        key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    def __init__(self, url: str, service_role_key : str):
         try:
-            if not url or not key:
+            if not url or not service_role_key:
                 raise ValueError(
                     "SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set in environment variables."
                 )
-            self.client: Client = create_client(url, key)
+            self.client: Client = create_client(url, service_role_key)
             print("✅ Supabase client initialized")
         except Exception as e:
             print(f"❌ Supabase client initialization failed: {e}")
@@ -72,7 +70,12 @@ class DBHandler:
 
 
 if __name__ == "__main__":
-    db_handler = DBHandler()
+    url =os.getenv("SUPABASE_URL")
+    key =os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    if not url or not key:
+        raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set in environment variables.")
+    
+    db_handler = DBHandler(url, key)
     if db_handler.get_client():
         print("Supabase client test successful.")
     else:

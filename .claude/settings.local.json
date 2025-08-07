@@ -5,7 +5,17 @@
       "Bash(find:*)",
       "mcp__go-server__definition",
       "mcp__elixir-server__definition",
-      "mcp__rust-server__definition"
+      "mcp__rust-server__definition",
+      "Bash(elixir:*)",
+      "Bash(mix --version)",
+      "Bash(mix archive:*)",
+      "Bash(mix phx.new:*)",
+      "Bash(cp:*)",
+      "Bash(mix compile)",
+      "Bash(mix phx.server:*)",
+      "Bash(pkill:*)",
+      "Bash(timeout 10s mix phx.server:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   },
